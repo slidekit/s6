@@ -7,16 +7,6 @@ without any plugin required because it includes its own slide show machinery in 
 S6 started as a rewrite of Eric Meyer's S5 using the jQuery JavaScript library - offering easier to understand and easier
 to extend code. Add plugins, effects and more. Contributions welcome!
 
-Keyboard controls:
-
-|_. Action             |_. Key |
-| Go to next slide     | Space Bar, Right Arrow Down Arrow, Page Down  |
-| Go to previous slide | Left Arrow, Up Arrow, Page Up |
-| Go to first slide    | Home |
-| Go to last slide     | End |
-| Toggle between slideshow and outline view (&#216;) | T |
-| Show/hide slide controls (&#216; &laquo; &raquo;)  | C, Move mouse to bottom right corner |
-
 h2. What's Slide Show (S9)? Slide Show Generator for S6 
 
 A Ruby gem that lets you create slide shows and author slides in plain text using
@@ -31,6 +21,16 @@ Try some slide show samples powered by S6:
 * "Prototype vs jQuery: To and from JavaScript Libraries":http://slideshow.rubyforge.org/jquery.html
 * "Adding Semantics to Your Web Site / RDF, RDFa, Microformats / Web 3.0 in Action":http://slideshow.rubyforge.org/friends.html
 * "Ruby 1.9: What to Expect":http://slideshow.rubyforge.org/ruby19.html
+
+Keyboard controls:
+
+|_. Action             |_. Key |
+| Go to next slide     | Space Bar, Right Arrow Down Arrow, Page Down  |
+| Go to previous slide | Left Arrow, Up Arrow, Page Up |
+| Go to first slide    | Home |
+| Go to last slide     | End |
+| Toggle between slideshow and outline view (&#216;) | T |
+| Show/hide slide controls (&#216; &laquo; &raquo;)  | C, Move mouse to bottom right corner |
 
 h2. About, License - Questions? Comments?
 
