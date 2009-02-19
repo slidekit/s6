@@ -30,6 +30,8 @@ $(document).ready(function(){
          /* opera is the only browser currently supporting css projection mode */ 
          /* if( !$.browser.opera ) */
            notOperaFix();
+					 
+					 steps = collectSteps();
          
          if( defaultView == 'outline' ) 
 		       toggle();
