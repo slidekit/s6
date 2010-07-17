@@ -1,6 +1,5 @@
  .slide { display: none; }
  #slide1 { display: block; }
- #microsoft { display: none; }
  
  .slide { position: absolute; }
   #header, #footer { position: fixed; }
@@ -44,11 +43,6 @@
 .slide { overflow-x: hidden; overflow-y: auto; }
 .slide { top: 0; width: 92%; padding: 2% 4% 0 4%; z-index: 2;  list-style: none;}
   
-  /* .step { visibility: hidden; } */
-
-/* enable svg backgrounds for gradient themes */
-div.background { position: fixed; left: 0px; right: 0px; top: 0px; bottom: 0px; z-index: -1; }
-body { opacity: .99; }
 
 html, body { margin: 0; padding: 0; }
 

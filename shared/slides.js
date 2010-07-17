@@ -12,17 +12,8 @@ $.ajaxSetup({async: false});
 $.getScript( 'shared/slides.core.js' );
 $.ajaxSetup({async: true});
 
-$(document).ready(function(){
+$(document).ready( function() {
         
-  if( $.browser.msie )
-        {
-          $( '.layout > *').hide();
-          $( '.presentation').hide();
-          
-          $( '#microsoft' ).show();          
-        }
-        else
-        {
          defaultCheck();
          addSlideIds();
          createControls();
@@ -31,11 +22,10 @@ $(document).ready(function(){
          /* if( !$.browser.opera ) */
            notOperaFix();
 					 
-					 steps = collectSteps();
+	  steps = collectSteps();
          
          if( defaultView == 'outline' ) 
 		       toggle();
            
          document.onkeyup = keys;
-        }
-     });
+} );

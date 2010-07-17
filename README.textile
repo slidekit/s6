@@ -1,17 +1,14 @@
+h1. Slide Show Package
+
 h2. What's S5? What's S6?
 
-Simple Standards-based Slide Show System (S5) is Eric Meyer's (of CSS fame) public domain (free, open source)
-slide show package inspired by Opera Show and others that works in all modern browsers
-without any plugin required because it includes its own slide show machinery in JavaScript. More "S5 Project Site &raquo;":http://meyerweb.com/eric/tools/s5
+Simple Standards-based Slide Show System (S5) is Eric Meyer's (of CSS fame) public domain (free, open source) slide show package inspired by Opera Show and others that works in all modern browsers without any plugin required because it includes its own slide show machinery in JavaScript. More "S5 Project Site &raquo;":http://meyerweb.com/eric/tools/s5
 
-S6 started as a rewrite of Eric Meyer's S5 using the jQuery JavaScript library - offering easier to understand and easier
-to extend code. Add plugins, effects and more. Contributions welcome!
+S6 started as a rewrite of Eric Meyer's S5 using the jQuery JavaScript library - offering easier to understand and easier to extend code. Add plugins, effects and more. Contributions welcome!
 
 h2. What's Slide Show (S9)? Slide Show Generator for S6 
 
-A Ruby gem that lets you create slide shows and author slides in plain text using
-a wiki-style markup language that's easy-to-write and easy-to-read and ships "out-of-the-gem"
-with S6 templates built-in. More "Slide Show ==(S9)== Project Site &raquo;":http://slideshow.rubyforge.org 
+A Ruby gem that lets you create slide shows and author slides in plain text using a wiki-style markup language that's easy-to-write and easy-to-read and ships "out-of-the-gem" with S6 templates built-in. More "Slide Show ==(S9)== Project Site &raquo;":http://slideshow.rubyforge.org 
 
 h2. S6 in Action - Sample Slide Shows Online
 
@@ -34,9 +31,6 @@ Keyboard controls:
 
 h2. About, License - Questions? Comments?
 
-License. The slide show scripts and templates are dedicated to the <a href='http://creativecommons.org/licenses/publicdomain'>public domain</a>.
-Use it as you please with no restrictions whatsoever.
+License. The slide show scripts and templates are dedicated to the <a href='http://creativecommons.org/licenses/publicdomain'>public domain</a>. Use it as you please with no restrictions whatsoever.
 
-Questions? Comments? Send them along to the
-"Free Web Slide Show Alternatives (S5, S6, S9, Slidy And Friends) Forum/Mailing List":http://groups.google.com/group/webslideshow.
-Thanks!
+Questions? Comments? Send them along to the "Free Web Slide Show Alternatives (S5, S6, S9, Slidy And Friends) Forum/Mailing List":http://groups.google.com/group/webslideshow. Thanks!

@@ -17,11 +17,3 @@
 .slide { margin: 1.5em 0 0; border-top: 1px solid #888; }
 .slide h1 { border-bottom: 1px solid #AAA; }
 
-#microsoft {
-        display: none;
-        border: red solid thick;
-        padding: 1em;
-        font-family: sans-serif;
-        font-weight: bold;
-        margin-bottom: 2em;
-}

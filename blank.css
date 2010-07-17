@@ -1,14 +1,18 @@
 @import url(shared/slides.css); /* required to make the slide show run at all */
      
-html, body { color: white;
-             font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; }
+body { font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; }
 
-a:link, a:visited { color: white; }
+a:link, a:visited { color: black; }
 
 h1 { font-size: 30pt;  }
 h2 { font-size: 28pt;  }
 h3 { font-size: 25pt;  }
-p, li, td, th { font-size: 18pt; }
+p, li, dt, dd, td, th { font-size: 18pt; }
+
+ul { list-style-type: square; }    
+
+.center { text-align: center; }
+
 
 pre { font-size: 16pt;  }
 
@@ -19,13 +23,8 @@ pre.code {
           -moz-border-radius: 11px;
       }
      
+
  
-div#header, div#footer {  color: silver; }
-
-#currentSlide { color: silver;}
-
-#controls #navLinks a { color: silver; }
-
-.step { color: gray; }
+.step { color: silver; }
 /* or hide next steps e.g.  .step { visibility: hidden; } */
-.stepcurrent { color: yellow; }
+.stepcurrent { color: black; }
