@@ -8,9 +8,10 @@
  * toogle between slideshow/outline mode using t-key
  */
 
-html, body { margin: 0; padding: 0; }
+html,
+body,
+.presentation { margin: 0; padding: 0; }
 
-.presentation { margin: 0; padding: 0; } 
 
 .slide { display: none; 
          position: absolute;
@@ -22,19 +23,22 @@ html, body { margin: 0; padding: 0; }
          z-index: 2;
        }
 
-.notes  { display: none; } /* handout notes/note (use note? handout? notes? */
-
 #slide1 { display: block; }
+
+.notes  { display: none; } /* handout notes/note (use note? handout? notes? */
 
 
 /********* format layout block
  *
  *  .layout
- *     #header
- *     #footer
- *     #controls      (holding navigation controls)
- *
- *     #currentSlide  (e.g. 1/7)
+ *    > #header
+ *    > #footer
+ *    > #controls      (holding navigation controls)
+ *       > #navLinks
+ *          > #toggle
+ *          > #navList
+ *            > #jumplist
+ *    > #currentSlide  (e.g. 1/7)
  *
  */
 
@@ -86,20 +90,21 @@ html, body { margin: 0; padding: 0; }
 
   #controls #navList #jumplist { background: white; color: black; }
 
-  /*************************
-   * format for 
-   * currentSlide block ( e.g. 2/20 )
-   */
+/*************************
+ * format for 
+ * currentSlide block ( e.g. 2/20 )
+ */
 
-  #currentSlide { position: fixed;
-                  left: 45%; bottom: 1em;
-                  width: 10%;
-                  z-index: 10;
-                  text-align: center;
-                  font-size: 0.8em;
-                }
+#currentSlide { position: fixed;
+                left: 45%; bottom: 1em;
+                width: 10%;
+                z-index: 10;
+                text-align: center;
+                font-size: 0.8em;
+              }
 
-  #currentSlide :link, #currentSlide :visited {  text-decoration: none; }
+#currentSlide :link,
+#currentSlide :visited {  text-decoration: none; }
 
 
 /** todo: use debug switch to toggle on/off using jquery */

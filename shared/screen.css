@@ -9,18 +9,36 @@
  */
 
 
-/* don't change this unless you want the layout stuff to show up in the outline view! */
+/****
+ * hide layout stuff (header, footer, navLinks, navList etc.)
+ */
 
-.layout > *, #controls *, #footer *, #navLinks * { display: none; }
+.layout * { display: none; }
 
-#controls, #navLinks, #toggle {
-  display: block; visibility: visible; margin: 0; padding: 0;}
+/*************
+ * make toggle button visible and reposition to upper right corner *
+ * note: toogle button is nested inside #controls > #navLinks > #toogle
+ */
 
-#toggle { position: fixed; top: 0; right: 0; padding: 0.5em; }
-#toggle {border: 1px solid; border-width: 0 0 1px 1px; background: #FFF;}
+#controls,
+#navLinks,
+#toggle    { display: block;
+             visibility: visible;
+             margin: 0; padding: 0;
+           }
+
+#toggle { position: fixed;
+          top: 0; right: 0;
+          padding: 0.5em; 
+          border-left: 1px solid;
+          border-bottom: 1px solid;
+          background: white;
+        }
 
 
-/* making the outline look pretty-ish */
+/*************
+ * making the outline look pretty-ish
+ */
 
 #slide1, #slide1 h1, #slide1 h2, #slide1 h3, #slide1 h4 {border: none; margin: 0;}
 #slide1 h1 {padding-top: 1.5em;}

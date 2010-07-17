@@ -4,26 +4,30 @@
   <meta http-equiv="content-type" content="text/html;charset=utf-8"> 
   <title>[your_title_here]</title>
 
-<!-- configuration parameters -->
-<meta name="defaultView" content="slideshow">
 <!-- style sheet links -->
-<link rel="stylesheet" href="blank.css"          type="text/css" media="projection" id="slideProj">
-<link rel="stylesheet" href="shared/screen.css"  type="text/css" media="screen" id="outlineStyle">
-<link rel="stylesheet" href="shared/print.css"   type="text/css" media="print" id="slidePrint">
+<link rel="stylesheet" href="blank.css"          type="text/css" media="projection" id="styleProjection">
+<link rel="stylesheet" href="shared/screen.css"  type="text/css" media="screen"     id="styleScreen">
+<link rel="stylesheet" href="shared/print.css"   type="text/css" media="print">
 
 <!-- S6 JS -->
 <script src="shared/jquery.js"></script>
-<script src="shared/jquery.slides.js"></script>
+<script src="shared/jquery.slideshow.js"></script>
+<script>
+  $(document).ready( function() {
+    Slideshow.init();
+    // Slideshow.init( { defaultView: 'outline' } );        
+  } );
+</script>
 
 <!-- Better Browser Banner for Microsoft Internet Explorer (IE) -->
 <!--[if IE]>
-<script src="shared/jquery.slides.microsoft.js"></script>
+<script src="shared/jquery.microsoft.js"></script>
 <![endif]-->
 
 </head>
 <body>
 
-<div class="layout">    
+<div class="layout">
   <div id="header"></div>
   <div id="footer">
     <h1>[your_footer_here]</h1>
