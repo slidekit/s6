@@ -9,11 +9,16 @@
 
 
 $.ajaxSetup({async: false});
-$.getScript( 'shared/slides.core.js' );
+$.getScript( 'shared/jquery.slides.core.js' );
 $.ajaxSetup({async: true});
 
 $(document).ready( function() {
         
+        $( '.layout' )
+	  .append( "<div id='controls'>" )
+	  .append( "<div id='currentSlide'>" );
+
+	
          defaultCheck();
          addSlideIds();
          createControls();

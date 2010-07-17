@@ -8,73 +8,61 @@
 <meta name="defaultView" content="slideshow">
 <!-- style sheet links -->
 <link rel="stylesheet" href="blank.css"          type="text/css" media="projection" id="slideProj">
-<link rel="stylesheet" href="shared/outline.css" type="text/css" media="screen" id="outlineStyle">
+<link rel="stylesheet" href="shared/screen.css"  type="text/css" media="screen" id="outlineStyle">
 <link rel="stylesheet" href="shared/print.css"   type="text/css" media="print" id="slidePrint">
 
 <!-- S6 JS -->
-<script src="shared/jquery.js" type="text/javascript"></script>
-<script src="shared/slides.js" type="text/javascript"></script>
+<script src="shared/jquery.js"></script>
+<script src="shared/jquery.slides.js"></script>
 
 <!-- Better Browser Banner for Microsoft Internet Explorer (IE) -->
 <!--[if IE]>
-   <script src='shared/jquery.slides.microsoft.js'></script>
+<script src="shared/jquery.slides.microsoft.js"></script>
 <![endif]-->
 
 </head>
 <body>
 
-<div class="layout">
-  
-  <div class="background">  
-    <object data="blank.svg" width="100%" height="100%">
-		</object>
-  </div>   
-  
-<div id="controls"><!-- DO NOT EDIT --></div>
-<div id="currentSlide"><!-- DO NOT EDIT --></div>
-<div id="header"></div>
-<div id="footer">
-<h1>[your_footer_here]</h1>
-<h2>[your_subfooter_here]</h2>
-</div>
+<div class="layout">    
+  <div id="header"></div>
+  <div id="footer">
+    <h1>[your_footer_here]</h1>
+    <h2>[your_subfooter_here]</h2>
+  </div>
 </div>
 
 <div class="presentation">
 
   <!-- add slides here; example -->
+  
+  <div class='slide title'>
+    <h1>Your Slide Title Here</h1>
+    <ul>
+      <li>Item One Here</li>
+      <li>Item Two Here</li>
+    </ul>
+  </div>
 
   <div class='slide'>
-		<h1>Your Slide Title Here</h1>
-		
-		<ul>
-		  <li>Item One Here</li>
-			<li>Item Two Here</li>
-		</ul>
-   </div>
+    <h1>Steps Demos</h1>
 
-  <div class='slide'>
-		<h1>Steps Demos</h1>
-
-		<!-- mark list with class step to mark all items at once -->
+    <!-- mark list with class step to mark all items at once -->
     <ul class='step'>
-		  <li>Item 1.1 Here</li>
-			<li>Item 1.2 Here</li>
-		</ul>
+      <li>Item 1.1 Here</li>
+      <li>Item 1.2 Here</li>
+    </ul>
 
     <!-- or mark individual list items -->
-		<ul>
-		  <li class='step'>Item 2.1 Here</li>
-			<li class='step'>Item 2.2 Here</li>
-		</ol>
-   </div>
-
+    <ul>
+      <li class='step'>Item 2.1 Here</li>
+      <li class='step'>Item 2.2 Here</li>
+    </ul>
+  </div>
 
   <div class='slide'>
-		<h1>Another Slide Title Here</h1>
-		
-		<p>yada yada yada</p>
-   </div>
-
+    <h1>Another Slide Title Here</h1>
+    <p>yada yada yada</p>
+  </div>
 
 </div> <!-- presentation -->
 </body>
