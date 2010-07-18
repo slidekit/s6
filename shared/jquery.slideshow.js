@@ -17,6 +17,16 @@ Slideshow.transition = function( $from, $to ) {
  * inspired by Karl Swedberg's Scroll Up Headline Reader jQuery Tutorial[1]
  * [1] http://docs.jquery.com/Tutorials:Scroll_Up_Headline_Reader
  */
+
+function transitionSlideUpSlideDown( $from, $to ) {
+   $from.slideUp( 500, function() { $to.slideDown( 1000 ); } );
+}
+	
+function transitionFadeOutFadeIn( $from, $to ) {
+	 $from.fadeOut( 500 );
+   $to.fadeIn( 500 );			
+}
+
 function transitionScrollUp( $from, $to ) {   
   var cheight = $from.outerHeight();
 
