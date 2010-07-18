@@ -1,4 +1,4 @@
-h1. Slide Show Templates Using HTML, CSS & JavaScript (w/ jQuery)
+h1. S6 Blank - Slide Show Templates Using HTML, CSS & JavaScript (w/ jQuery)
 
 h2. What's S5? What's S6?
 
