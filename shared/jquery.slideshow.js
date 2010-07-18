@@ -41,9 +41,10 @@ Slideshow.init = function( options ) {
      mode              : 'slideshow', // slideshow | outline | autoplay
      projectionStyleId : '#styleProjection',
 	   screenStyleId     : '#styleScreen',
+     titleSelector     : 'h1',      
      slideSelector     : '.slide',   // dummy (not yet working)
-     titleSelector     : 'h1',       // dummy (not yet working)
-     stepSelector      : '.step'    // dummy (not yet working)
+     stepSelector      : '.step',    // dummy (not yet working)
+     debug             :  false
   }, options || {});
 
   settings.isProjection = true; // are we in projection (slideshow) mode (in contrast to screen (outline) mode)?     
@@ -216,13 +217,13 @@ function toggle()
 	}
 }
  
- 
    function populateJumpList() {
     
      var list = $('#jumplist').get(0);
     
-     $( '.slide' ).each( function(i) {              
-       list.options[list.length] = new Option( (i+1)+' : '+ $(this).find('h1').text(), (i+1) );
+     $( '.slide' ).each( function(i) {
+       var text = $(this).find( settings.titleSelector ).text();
+       list.options[list.length] = new Option( (i+1)+' : '+ text, (i+1) );
      });
    } 
    
@@ -242,8 +243,7 @@ function toggle()
 	    + '<div id="navList"><select id="jumplist" /><\/div>' 
 	    + '<\/div>' ); 
       
-      $controls.mouseover( function() { showHide('s'); } );
-      $controls.mouseout( function()  { showHide('h'); } );
+      $controls.hover( function() { showHide('s') }, function() { showHide('h') });
       $('#toggle').click( function() { toggle(); } );
       $('#prev').click( function() { go(-1); } );
       $('#next').click( function() { go(1); } );
@@ -255,8 +255,12 @@ function toggle()
       updatePermaLink(); 
    }
       
-   
-   
+  function toggleFooter()
+  {
+     $( '#footer').toggle(); 
+  }
+  
+  
   function keys(key)
   {
 	if (!key) {
@@ -305,7 +309,10 @@ function toggle()
 			case 80: //p
 			case 83: //s
 				toggleAutoplay();
-				break;      
+				break;
+      case 70: //f
+        toggleFooter();
+        break;
 		}
 	}
 }
@@ -390,6 +397,22 @@ function collectSteps() {
   return steps;
 }
 
+
+function addClicker() {
+    // if you click on heading of slide -> go to next slide (or next step)
+   
+   $( settings.titleSelector, $slides ).click( function() { 
+      if( !settings.isProjection )  // suspend clicker in outline view (just slideshow view)
+	       return;
+     
+      var csteps = settings.steps[settings.snum-1]; // current slide steps array 
+			if ( !csteps || settings.incpos >= csteps.length ) 
+				 go(1);
+			else 
+				 subgo(1);
+   } ); 
+}
+
 function addSlideIds() {
      $slides.each( function(i) {
         this.id = 'slide'+(i+1);
@@ -412,6 +435,8 @@ function addSlideIds() {
    settings.steps = collectSteps();
      
    createControls();
+   
+   addClicker();
          
    /* opera is the only browser currently supporting css projection mode */ 
    /* if( !$.browser.opera ) */
@@ -427,7 +452,15 @@ function addSlideIds() {
      toggle();
    else if( settings.mode == 'autoplay' )
      toggleAutoplay();
-           
+     
+   if( settings.debug == true )
+   {
+      $( '#header' ).css( 'background', '#FCC' );
+      $( '#footer' ).css( 'background', '#CCF' );
+      $( '#controls' ).css( 'background', '#BBD' );
+      $( '#currentSlide' ).css( 'background', '#FFC' ); 
+   }
+                
    document.onkeyup = keys;
 
 } // end Slideshow

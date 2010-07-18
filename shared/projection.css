@@ -107,10 +107,3 @@ body,
 #currentSlide :visited {  text-decoration: none; }
 
 
-/** todo: use debug switch to toggle on/off using jquery */
-/*
-div#header {background: #FCC;}
-div#footer {background: #CCF;}
-div#controls {background: #BBD;}
-div#currentSlide {background: #FFC;}
-*/
