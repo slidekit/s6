@@ -1,10 +1,44 @@
 
 var Slideshow = {};
 
+
+/************************************
+ * lets you define your own "global" transition function
+ *   passes in a reference to from and to slide wrapped in jQuery wrapper
+ */
+
+Slideshow.transition = function( $from, $to ) {
+  $from.hide();
+  $to.show();
+}
+
+/***********************
+ * sample custom transition using scrollUp effect
+ * inspired by Karl Swedberg's Scroll Up Headline Reader jQuery Tutorial[1]
+ * [1] http://docs.jquery.com/Tutorials:Scroll_Up_Headline_Reader
+ */
+function transitionScrollUp( $from, $to ) {   
+  var cheight = $from.outerHeight();
+
+  // hide scrollbar during animation
+  $( 'body' ).css( 'overflow-y', 'hidden' );
+
+  $to.css( 'top', cheight+'px' );
+  $to.show();
+
+  $from.animate( {top: -cheight}, 'slow' );
+  $to.animate( {top: 0}, 'slow', function() {
+     $from.hide().css( 'top', '0px');
+
+     // restore possible scrollbar 
+     $( 'body' ).css( 'overflow-y', 'auto' );
+  }); 
+}
+
 Slideshow.init = function( options ) {
 
   var settings = $.extend({
-     defaultView       : 'slideshow', // slideshow | outline
+     mode              : 'slideshow', // slideshow | outline | autoplay
      projectionStyleId : '#styleProjection',
 	   screenStyleId     : '#styleScreen',
      slideSelector     : '.slide',   // dummy (not yet working)
@@ -16,12 +50,13 @@ Slideshow.init = function( options ) {
   settings.snum = 1;      // current slide # (non-zero based index e.g. starting with 1)
   settings.smax = 1;      // max number of slides 
   settings.incpos = 0;    // current step in slide  
-  settings.steps  = null;    
+  settings.steps  = null;
+  settings.autoplayInterval = null; 
    
   function debug( msg ) 
   {
     if( window.console && window.console.log )
-      console.log( '[debug] ' + msg ); 
+      window.console.log( '[debug] ' + msg ); 
   }   
 
   function showHide( action )
@@ -57,6 +92,9 @@ Slideshow.init = function( options ) {
   function updatePermaLink()
   {
       $('#plink').get(0).href = window.location.pathname + '#slide' + settings.snum;
+      
+      // todo: unify hash marks??; use #1 for div ids instead of #slide1? 
+      window.location.hash = '#'+settings.snum;
   }
 
   function goTo( target )
@@ -106,8 +144,10 @@ Slideshow.init = function( options ) {
 		}
 	}	
 	
-  $( cid ).hide();
-  $( nid ).show();
+  if( !(cid == nid) ) {
+    debug( "transition from " + cid + " to " + nid );
+    Slideshow.transition( $( cid ), $( nid ) );
+  }
   
   updateJumpList();
   updateCurrentSlideCounter();
@@ -212,20 +252,11 @@ function toggle()
   	
       populateJumpList();     
       updateCurrentSlideCounter();
+      updatePermaLink(); 
    }
+      
    
-   function addSlideIds() {
-     var $slides = $( '.slide' )  
-       
-     $slides.each( function(i) {
-        $(this).attr( 'id', 'slide'+(i+1) );
-        // todo: can we just use this.id = xxx
-     });
-       
-     settings.smax = $slides.length;
-   }
    
-     
   function keys(key)
   {
 	if (!key) {
@@ -265,14 +296,53 @@ function toggle()
 				goTo(1);
 				break;
 			case 35: // end
-				goTo(smax);
+				goTo(settings.smax);
 				break;   
 			case 67: // c
 				showHide('c');
 				break;
+      case 65: //a
+			case 80: //p
+			case 83: //s
+				toggleAutoplay();
+				break;      
 		}
 	}
 }
+
+function autoplay()
+{
+	// suspend autoplay in outline view (just slideshow view)
+	if( !settings.isProjection )
+	  return;
+
+     // next slide/step, please
+     var csteps = settings.steps[settings.snum-1]; // current slide steps array 
+     if( !csteps || settings.incpos >= csteps.length ) {
+			  if( settings.snum >= settings.smax )
+           goTo( 1 );   // reached end of show? start with 1st slide again (for endless cycle)
+        else
+           go(1);
+	   }
+     else {
+			  subgo(1);
+	   }
+}
+
+	 
+function toggleAutoplay()
+{
+  if( settings.autoplayInterval )
+	{
+		clearInterval( settings.autoplayInterval );
+		settings.autoplayInterval = null;
+	}
+	else
+	{
+	   settings.autoplayInterval = setInterval ( autoplay, 2000 );
+	}
+}
+
 
 
 function collectStepsWorker(obj) {
@@ -308,8 +378,8 @@ function collectSteps() {
 	
 	var steps = new Array();
 
-  $( '.slide' ).each(	function(i) {
-		debug ( $(this).attr( 'id' ) + ':' );
+  $slides.each(	function(i) {
+		debug ( 'collectSteps for ' + this.id + ':' );
 		steps[i] = collectStepsWorker( this );
   });
 	
@@ -320,19 +390,43 @@ function collectSteps() {
   return steps;
 }
 
+function addSlideIds() {
+     $slides.each( function(i) {
+        this.id = 'slide'+(i+1);
+     });
+   }
+   
    // init code here
    
+    // store possible slidenumber from hash */
+	  // todo: use regex to extract number
+	  //    might be #slide1 or just #1
+	 
+	  var gotoSlideNum = parseInt( window.location.hash.substring(1) );
+	  debug( "gotoSlideNum=" + gotoSlideNum );
+  
+   var $slides = $( '.slide' );  
+   settings.smax = $slides.length;
+   
    addSlideIds();
+   settings.steps = collectSteps();
+     
    createControls();
          
    /* opera is the only browser currently supporting css projection mode */ 
    /* if( !$.browser.opera ) */
    notOperaFix();
-					 
-   settings.steps = collectSteps();
-         
-   if( settings.defaultView == 'outline' ) 
+
+   if( !isNaN( gotoSlideNum ))
+   {
+	    debug( "restoring slide on (re)load #: " + gotoSlideNum );
+	    goTo( gotoSlideNum );
+	 }
+	           
+   if( settings.mode == 'outline' ) 
      toggle();
+   else if( settings.mode == 'autoplay' )
+     toggleAutoplay();
            
    document.onkeyup = keys;
 
