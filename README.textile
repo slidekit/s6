@@ -1,4 +1,4 @@
-h1. Slide Show Templates Using HTML, CSS, JavaScript (w/ jQuery)
+h1. Slide Show Templates Using HTML, CSS & JavaScript (w/ jQuery)
 
 h2. What's S5? What's S6?
 
@@ -22,7 +22,7 @@ Try some slide show samples powered by S6:
 Keyboard controls:
 
 |_. Action             |_. Key |
-| Go to next slide     | Space Bar, Right Arrow Down Arrow, Page Down  |
+| Go to next slide     | Space Bar, Right Arrow Down Arrow, Page Down, Click Heading |
 | Go to previous slide | Left Arrow, Up Arrow, Page Up |
 | Go to first slide    | Home |
 | Go to last slide     | End |
