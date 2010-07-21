@@ -5,9 +5,9 @@
   <title>[your_title_here]</title>
 
 <!-- style sheet links -->
-<link rel="stylesheet" href="blank.css"          type="text/css" media="projection" id="styleProjection">
-<link rel="stylesheet" href="shared/screen.css"  type="text/css" media="screen"     id="styleScreen">
-<link rel="stylesheet" href="shared/print.css"   type="text/css" media="print">
+<link rel="stylesheet" href="blank.css"         media="projection" id="styleProjection">
+<link rel="stylesheet" href="shared/screen.css" media="screen"     id="styleScreen">
+<link rel="stylesheet" href="shared/print.css"  media="print">
 
 <!-- S6 JS -->
 <script src="shared/jquery.js"></script>
@@ -49,7 +49,7 @@
 
   <!-- add slides here; example -->
   
-  <div class='slide title'>
+  <div class='slide cover'>
     <h1>Your Slide Title Here</h1>
     <ul>
       <li>Item One Here</li>
@@ -71,12 +71,27 @@
       <li class='step'>Item 2.1 Here</li>
       <li class='step'>Item 2.2 Here</li>
     </ul>
+
+    <!-- or mark paragraphs, div blocks or whatever -->
+    <p class='step'>Another Step</p>
+
   </div>
 
   <div class='slide'>
     <h1>Another Slide Title Here</h1>
     <p>yada yada yada</p>
   </div>
+
+  <!-- h1.fullscreen -> use only centered heading with no content/body -->
+  <div class='slide'>
+    <h1 class='fullscreen'>Another Slide - Using Fullscreen Heading</h1>
+  </div>
+
+  <!-- h1.hidden -> use heading just for table of contents (toc) -->
+  <div class='slide'>
+    <h1 class='hidden'>Another Slide - Using Hidden Heading</h1>
+    <p>Add Your Centered Image Here or Whatever</p>
+   </div>
 
 </div> <!-- presentation -->
 </body>
