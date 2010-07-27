@@ -54,7 +54,8 @@ Slideshow.init = function( options ) {
      titleSelector     : 'h1',      
      slideSelector     : '.slide',   // dummy (not yet working)
      stepSelector      : '.step',    // dummy (not yet working)
-     debug             :  false
+     debug             :  false,
+     change		   : null
   }, options || {});
 
   settings.isProjection = true; // are we in projection (slideshow) mode (in contrast to screen (outline) mode)?     
@@ -66,7 +67,7 @@ Slideshow.init = function( options ) {
    
   function debug( msg ) 
   {
-    if( window.console && window.console.log )
+    if( window.console && window.console.log && settings.debug )
       window.console.log( '[debug] ' + msg ); 
   }   
 
@@ -157,6 +158,8 @@ Slideshow.init = function( options ) {
   updateJumpList();
   updateCurrentSlideCounter();
   updatePermaLink(); 
+  
+  if (settings.change) { settings.change(); }
 }
 
  function subgo( dir )
