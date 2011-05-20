@@ -8,11 +8,12 @@ var Slideshow = {};
  */
 
 Slideshow.transition = function( $from, $to ) {
-  // $from.hide();
-  // $to.show();
   
-  $from.hide('fast');
-  $to.show('fast'); 
+  $from.hide();
+  $to.show();
+  
+  // $from.hide('fast');
+  // $to.show('fast'); 
 }
 
 /***********************
@@ -51,29 +52,91 @@ function transitionScrollUp( $from, $to ) {
 Slideshow.init = function( options ) {
 
   var settings = $.extend({
-     mode              : 'slideshow', // slideshow | outline | autoplay
-     projectionStyleId : '#styleProjection',
-	   screenStyleId     : '#styleScreen',
-     titleSelector     : 'h1',      
-     slideSelector     : '.slide',   // dummy (not yet working)
-     stepSelector      : '.step',    // dummy (not yet working)
-     debug             :  false,
-     change		   : null  //  todo: change to use a custom event and trigger
+    mode              : 'slideshow', // slideshow | outline | autoplay
+    titleSelector     : 'h1',      
+    slideSelector     : '.slide',   // dummy (not yet working)
+    stepSelector      : '.step',    // dummy (not yet working)
+    debug             :  false,
+    change	      : null  //  todo: change to use a custom event and trigger
   }, options || {});
 
-  settings.isProjection = true; // are we in projection (slideshow) mode (in contrast to screen (outline) mode)?     
+  settings.isProjection = false; // are we in projection (slideshow) mode (in contrast to screen (outline) mode)?     
   settings.snum = 1;      // current slide # (non-zero based index e.g. starting with 1)
   settings.smax = 1;      // max number of slides 
   settings.incpos = 0;    // current step in slide  
   settings.steps  = null;
   settings.autoplayInterval = null; 
-   
+  
   function debug( msg ) 
   {
     if( settings.debug && window.console && window.console.log  )
       window.console.log( '[debug] ' + msg ); 
   }   
+  
+  function notOperaFix()
+  {          
+   // 1) switch media type from projection to screen
 
+   $stylesProjection.each( function(i) {     
+     debug( "notOperaFix - stylesProjection["+i+"] switching media type from projection to screen" );
+     
+     var styleProjection = this;
+     styleProjection.media = 'screen';
+     styleProjection.disabled = true;
+   } );
+   
+   settings.isProjection = false;
+   
+   // 2) disable screen styles and enable projection styles (thus, switch into projection mode)
+   toggle();
+   
+   // now we should be in project mode
+  }    
+
+function toggle()
+{
+  // todo: use settings.isProjection for state tracking
+  //  and change disable accordingly (plus assert that all styles are in the state as expected)
+
+  // toggle between projection (slide show) mode
+  //   and screen (outline) mode
+
+  $stylesProjection.each( function(i) {          
+     var styleProjection = this;
+     
+     styleProjection.disabled = (styleProjection.disabled ? false : true);
+       
+     debug( "toggle - stylesProjection["+i+"] disabled? " + styleProjection.disabled );
+   });
+  
+  $stylesScreen.each( function(i) {          
+     var styleScreen = this;
+
+     styleScreen.disabled = (styleScreen.disabled ? false : true);
+       
+     debug( "toggle - stylesScreen["+i+"] disabled? " + styleScreen.disabled );
+     
+     // update isProjection flag 
+     settings.isProjection = styleScreen.disabled;
+   });
+  
+    
+  if( settings.isProjection )
+  {
+    $slides.each( function(i) {
+      if( i == (settings.snum-1) )
+        $(this).show();
+      else
+        $(this).hide();
+    });    
+  }
+  else
+  {
+    $slides.show();
+  }  
+}
+
+    
   function showHide( action )
   {
     var $navLinks = $( '#navLinks' )  
@@ -184,46 +247,6 @@ Slideshow.init = function( options ) {
 		$( csteps[settings.incpos] ).removeClass( 'stepcurrent' ).addClass( 'step' );
 		if( settings.incpos > 0 )
       $( csteps[settings.incpos-1] ).addClass( 'stepcurrent' );
-	}
-}
-
-
-function notOperaFix()
-{          
-   $( settings.projectionStyleId ).attr( 'media','screen' );
-              
-   var styleScreen = $( settings.screenStyleId ).get(0);
-   styleScreen.disabled = true;
-}    
-
-
-function toggle()
-{
-  // toggle between projection (slide show) mode
-  //   and screen (outline) mode
-
-  // get stylesheets 
-	var styleProjection  = $( settings.projectionStyleId ).get(0);
-	var styleScreen      = $( settings.screenStyleId ).get(0);
-	
-  if( !styleProjection.disabled )
-  {
-		styleProjection.disabled = true;
-		styleScreen.disabled     = false;
-		settings.isProjection    = false;
-    $('.slide').each( function() { $(this).show(); } );
-	}
-  else
-  {
-		styleProjection.disabled = false;
-		styleScreen.disabled     = true;
-		settings.isProjection    = true;
-    $('.slide').each( function(i) {
-      if( i == (settings.snum-1) )
-        $(this).show();
-      else
-        $(this).hide();
-    });
 	}
 }
  
@@ -500,7 +523,15 @@ function addSlideIds() {
 	  var gotoSlideNum = parseInt( window.location.hash.substring(1) );
 	  debug( "gotoSlideNum=" + gotoSlideNum );
   
-   var $slides = $( '.slide' );  
+   var $slides           = $( '.slide' );
+
+   // $stylesProjection  holds all styles (<link rel="stylesheet"> or <style> w/ media type projection)
+   // $stylesScreen      holds all styles (<link rel="stylesheet"> or <style> w/ media type screen)
+
+   var $stylesProjection = $( 'link[media*=projection], style[media*=projection]' ) ;
+   var $stylesScreen     = $( 'link[media*=screen], style[media*=screen]' ) ;
+      
+ 
    settings.smax = $slides.length;
    
    addSlideIds();

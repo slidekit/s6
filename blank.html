@@ -4,10 +4,22 @@
   <meta http-equiv="content-type" content="text/html;charset=utf-8"> 
   <title>[your_title_here]</title>
 
+<!-- 
+ * Notes on CSS media types used:
+ *
+ * 1) projection -> slideshow mode (display one slide at-a-time; hide all others)
+ * 2) screen     -> outline mode (display all slides-at-once on screen) 
+ * 3) print      -> print (and print preview)
+ *
+ * toggle between projection/screen (that is, slideshow/outline) mode using t-key
+ * -->
+
 <!-- style sheet links -->
-<link rel="stylesheet" href="blank.css"         media="projection" id="styleProjection">
-<link rel="stylesheet" href="shared/screen.css" media="screen"     id="styleScreen">
-<link rel="stylesheet" href="shared/print.css"  media="print">
+<link rel="stylesheet" href="shared/projection.css"  media="projection">
+<link rel="stylesheet" href="shared/screen.css"      media="screen">
+<link rel="stylesheet" href="shared/print.css"       media="print">
+
+<link rel="stylesheet" href="blank.css"              media="projection">
 
 <!-- S6 JS -->
 <script src="shared/jquery.js"></script>

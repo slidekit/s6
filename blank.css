@@ -1,5 +1,4 @@
-@import url(shared/projection.css); /* required to make the slide show run at all */
-     
+
 body { font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; }
 
 a:link, a:visited { color: black; }
@@ -90,19 +89,19 @@ p.tiny     { font-size: 82%; }
 /* example gradient background using css3 */
 
 .slide {
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%,
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%,
                  from(yellow), to(orange),
                  color-stop(0.33,orange), color-stop(0.66,yellow));
   
-  background: -moz-linear-gradient(top, yellow, orange, yellow, orange);     
+  background-image: -moz-linear-gradient(top, yellow, orange, yellow, orange);     
 }
 
 .cover,
 .title {
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%,
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%,
                  from(blue), to(aqua),
                  color-stop(0.33,blue), color-stop(0.66,aqua));
   
-  background: -moz-linear-gradient(top, blue, aqua, blue, aqua);             
+  background-image: -moz-linear-gradient(top, blue, aqua, blue, aqua);             
 }
 
