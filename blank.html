@@ -5,14 +5,17 @@
   <title>[your_title_here]</title>
 
 <!-- 
- * Notes on CSS media types used:
- *
- * 1) projection -> slideshow mode (display one slide at-a-time; hide all others)
- * 2) screen     -> outline mode (display all slides-at-once on screen) 
- * 3) print      -> print (and print preview)
- *
- * toggle between projection/screen (that is, slideshow/outline) mode using t-key
- * -->
+   Notes on CSS media types used:
+ 
+   1) projection -> slideshow mode (display one slide at-a-time; hide all others)
+   2) screen     -> outline mode (display all slides-at-once on screen) 
+   3) print      -> print (and print preview)
+  
+   Note: toggle between projection/screen (that is, slideshow/outline) mode using t-key
+
+   Questions, comments?
+   - send them along to the mailinglist/forum online @ http://groups.google.com/group/webslideshow    
+-->
 
 <!-- style sheet links -->
 <link rel="stylesheet/less" href="shared/projection.css.less"  media="projection">
@@ -21,9 +24,19 @@
 
 <link rel="stylesheet/less" href="blank.css.less"    media="projection">
 
+<!-- Notes about less css support
+     - all less stylesheets (*.css.less) need to get listed/loaded first (before the less.js script)
+     - find more info about less.js online @ http://lesscss.org
 
-<!-- less css support; note: all less stylesheets need to get loaded/listed first; more info @lesscss.org -->
-<script src="shared/less-1.1.0.min.js"></script>
+    ***** NOTE:
+   less.js browser script currently won’t work if you’re using Google Chrome
+    and the path to your page starts with "file:///" due to a known Chrome issue.
+   (In the developer/js console you will see:
+     XMLHttpRequest cannot load file:///../s6/shared/projection.css.less.
+     Cross origin requests are only supported for HTTP.)
+  -->
+<script src="shared/less-1.1.1.min.js"></script>
+
 <script src="shared/jquery-1.6.1.min.js"></script>
 
 <!-- S6 JS -->
