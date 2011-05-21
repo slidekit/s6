@@ -15,14 +15,18 @@
  * -->
 
 <!-- style sheet links -->
-<link rel="stylesheet" href="shared/projection.css"  media="projection">
-<link rel="stylesheet" href="shared/screen.css"      media="screen">
-<link rel="stylesheet" href="shared/print.css"       media="print">
+<link rel="stylesheet/less" href="shared/projection.css.less"  media="projection">
+<link rel="stylesheet/less" href="shared/screen.css.less"      media="screen">
+<link rel="stylesheet/less" href="shared/print.css.less"       media="print">
 
-<link rel="stylesheet" href="blank.css"              media="projection">
+<link rel="stylesheet/less" href="blank.css.less"    media="projection">
+
+
+<!-- less css support; note: all less stylesheets need to get loaded/listed first; more info @lesscss.org -->
+<script src="shared/less-1.1.0.min.js"></script>
+<script src="shared/jquery-1.6.1.min.js"></script>
 
 <!-- S6 JS -->
-<script src="shared/jquery.js"></script>
 <script src="shared/jquery.slideshow.js"></script>
 <script>
   $(document).ready( function() {

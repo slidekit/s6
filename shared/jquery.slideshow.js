@@ -77,12 +77,12 @@ Slideshow.init = function( options ) {
   {          
    // 1) switch media type from projection to screen
 
-   $stylesProjection.each( function(i) {     
-     debug( "notOperaFix - stylesProjection["+i+"] switching media type from projection to screen" );
-     
+   $stylesProjection.each( function(i) {          
      var styleProjection = this;
      styleProjection.media = 'screen';
      styleProjection.disabled = true;
+     
+      debug( "notOperaFix - stylesProjection["+i+"] switching media type from projection to screen" );
    } );
    
    settings.isProjection = false;
@@ -528,8 +528,8 @@ function addSlideIds() {
    // $stylesProjection  holds all styles (<link rel="stylesheet"> or <style> w/ media type projection)
    // $stylesScreen      holds all styles (<link rel="stylesheet"> or <style> w/ media type screen)
 
-   var $stylesProjection = $( 'link[media*=projection], style[media*=projection]' ) ;
-   var $stylesScreen     = $( 'link[media*=screen], style[media*=screen]' ) ;
+   var $stylesProjection = $( 'link[media*=projection], style[media*=projection]' ).not('[rel*=less]').not('[type*=less]');
+   var $stylesScreen     = $( 'link[media*=screen], style[media*=screen]' ).not('[rel*=less]').not('[type*=less]') ;
       
  
    settings.smax = $slides.length;
