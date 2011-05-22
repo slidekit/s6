@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8"> 
+  <title>[your_title_here]</title>
+
+<!-- more semantic version; using new html5 semantic tags
+     such as header,footer,article,section,nav,etc.
+-->
+
+<!-- 
+   Notes on CSS media types used:
+ 
+   1) projection -> slideshow mode (display one slide at-a-time; hide all others)
+   2) screen     -> outline mode (display all slides-at-once on screen) 
+   3) print      -> print (and print preview)
+  
+   Note: toggle between projection/screen (that is, slideshow/outline) mode using t-key
+
+   Questions, comments?
+   - send them along to the mailinglist/forum online @ http://groups.google.com/group/webslideshow    
+-->
+
+<!-- style sheet links -->
+<link rel="stylesheet/less" href="shared/projection.css.less"  media="projection">
+<link rel="stylesheet/less" href="shared/screen.css.less"      media="screen">
+<link rel="stylesheet/less" href="shared/print.css.less"       media="print">
+
+<link rel="stylesheet/less" href="blank.css.less"    media="projection">
+
+<!-- Notes about less css support
+     - all less stylesheets (*.css.less) need to get listed/loaded first (before the less.js script)
+     - find more info about less.js online @ http://lesscss.org
+
+    ***** NOTE:
+   less.js browser script currently won’t work if you’re using Google Chrome
+    and the path to your page starts with "file:///" due to a known Chrome issue.
+   (In the developer/js console you will see:
+     XMLHttpRequest cannot load file:///../s6/shared/projection.css.less.
+     Cross origin requests are only supported for HTTP.)
+  -->
+<script src="shared/less-1.1.1.min.js"></script>
+
+<script src="shared/jquery-1.6.1.min.js"></script>
+
+<!-- S6 JS -->
+<script src="shared/jquery.slideshow.js"></script>
+<script>
+  $(document).ready( function() {
+    Slideshow.init();
+    
+    // Example 2: Start Off in Outline Mode
+    // Slideshow.init( { mode: 'outline' } );
+    
+    // Example 3: Use Custom Transition
+    // Slideshow.transition = transitionScrollUp;
+    // Slideshow.init();
+
+    // Example 4: Start Off in Autoplay Mode with Custom Transition
+    // Slideshow.transition = transitionScrollUp;
+    // Slideshow.init( { mode: 'autoplay' } );
+  } );
+</script>
+
+<!-- Better Browser Banner for Microsoft Internet Explorer (IE) -->
+<!--[if IE]>
+<script src="shared/jquery.microsoft.js"></script>
+<![endif]-->
+
+</head>
+<body>
+
+<div class="layout">
+  <header></header>
+  <footer>
+    <hgroup>
+      <h1>[your_footer_here]</h1>
+      <h2>[your_subfooter_here]</h2>
+    </hgroup>
+  </footer>
+</div>
+
+<article class="presentation">
+
+  <!-- add slides here; example -->
+  
+  <section class='slide cover'>
+    <h1>Your Slide Title Here</h1>
+    <ul>
+      <li>Item One Here</li>
+      <li>Item Two Here</li>
+    </ul>
+  </section>
+
+  <section class='slide'>
+    <h1>Steps Demos</h1>
+
+    <!-- mark list with class step to mark all items at once -->
+    <ul class='step'>
+      <li>Item 1.1 Here</li>
+      <li>Item 1.2 Here</li>
+    </ul>
+
+    <!-- or mark individual list items -->
+    <ul>
+      <li class='step'>Item 2.1 Here</li>
+      <li class='step'>Item 2.2 Here</li>
+    </ul>
+
+    <!-- or mark paragraphs, div blocks or whatever -->
+    <p class='step'>Another Step</p>
+
+  </section>
+
+  <section class='slide'>
+    <h1>Another Slide Title Here</h1>
+    <p>yada yada yada</p>
+  </section>
+
+  <!-- h1.fullscreen -> use only centered heading with no content/body -->
+  <section class='slide'>
+    <h1 class='fullscreen'>Another Slide - Using Fullscreen Heading</h1>
+  </section>
+
+  <!-- h1.hidden -> use heading just for table of contents (toc) -->
+  <section class='slide'>
+    <h1 class='hidden'>Another Slide - Using Hidden Heading</h1>
+    <p>Add Your Centered Image Here or Whatever</p>
+   </section>
+
+</article> <!-- presentation -->
+</body>
+</html>

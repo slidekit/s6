@@ -25,7 +25,7 @@ body,
          z-index: 2;
        }
 
-#slide1 { display: block; }
+#slide1 { display: block; } /* todo: check if this is needed? already handled w/ js? */
 
 .notes  { display: none; } /* handout notes/note (use note? handout? notes? */
 
@@ -44,15 +44,16 @@ body,
  *
  */
 
-.layout { display: block; }
+.layout {
+   display: block; 
 
-#header {  position: fixed;
-           top: 0; left: 0;
-           width: 100%; height: 0.5em;
-           z-index: 1;
-        }
+  #header, header {  position: fixed;
+                     top: 0; left: 0;
+                     width: 100%; height: 0.5em;
+                     z-index: 1;
+                   }
    
-#footer {  position: fixed;
+  #footer, footer {  position: fixed;
            top: auto; bottom: 0;
            padding: 1em 0;   /* css note: order is => 1st top,bottom; 2nd right,left */
            width: 100%; height: 1em;
@@ -60,13 +61,13 @@ body,
     
            /* todo: move font-size and font-style to blank.css */    
            font-size: 100%; font-weight: bold; 
-        }
-  
-/* todo: move font-size and font-style to blank.css */
+ 
+        /* todo: move font-size and font-style to blank.css */
 
-  #footer h1 { display: block; margin: 0; padding: 0 1em; font-size: 0.5em; }
-  #footer h2 { display: block; margin: 0; padding: 0 1em; font-size: 0.5em; font-style: italic; }
-
+           h1 { display: block; margin: 0; padding: 0 1em; font-size: 0.5em; }
+           h2 { display: block; margin: 0; padding: 0 1em; font-size: 0.5em; font-style: italic; }
+   }
+} /* end .layout */
 
 /*************************
  * format for navigation controls 

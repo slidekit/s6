@@ -303,7 +303,7 @@ function toggle()
   
   function toggleFooter()
   {
-     $( '#footer').toggle(); 
+     $( '#footer, footer').toggle(); 
   }
   
   
@@ -401,15 +401,15 @@ function doDebug()
    
    if( settings.debug == true )
    {
-      $( '#header' ).css( 'background', '#FCC' );
-      $( '#footer' ).css( 'background', '#CCF' );
+      $( '#header,header' ).css( 'background', '#FCC' );
+      $( '#footer,footer' ).css( 'background', '#CCF' );
       $( '#controls' ).css( 'background', '#BBD' );
       $( '#currentSlide' ).css( 'background', '#FFC' ); 
    }
    else
    {
-      $( '#header' ).css( 'background', 'transparent' );
-      $( '#footer' ).css( 'background', 'transparent' );
+      $( '#header,header' ).css( 'background', 'transparent' );
+      $( '#footer,footer' ).css( 'background', 'transparent' );
       $( '#controls' ).css( 'background', 'transparent' );
       $( '#currentSlide' ).css( 'background', 'transparent' );       
    }
