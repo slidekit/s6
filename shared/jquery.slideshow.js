@@ -1,5 +1,20 @@
 
-var Slideshow = {};
+var Slideshow = {
+
+  // variables
+  settings: {},
+
+  isProjection: false,   // are we in projection (slideshow) mode (in contrast to screen (outline) mode)?     
+  snum:   1,             // current slide # (non-zero based index e.g. starting with 1)
+  smax:   1,             // max number of slides 
+  incpos: 0,             // current step in slide  
+  steps:   null,
+  autoplayInterval: null,
+
+  $slides: null,
+  $stylesProjection: null,
+  $stylesScreen: null
+};
 
 
 /************************************
@@ -16,6 +31,8 @@ Slideshow.transition = function( $from, $to ) {
   // $to.show('fast'); 
 }
 
+/* todo: move transitions code to jquery.slideshow.effects.js ?? */
+
 /***********************
  * sample custom transition using scrollUp effect
  * inspired by Karl Swedberg's Scroll Up Headline Reader jQuery Tutorial[1]
@@ -23,12 +40,12 @@ Slideshow.transition = function( $from, $to ) {
  */
 
 function transitionSlideUpSlideDown( $from, $to ) {
-   $from.slideUp( 500, function() { $to.slideDown( 1000 ); } );
+  $from.slideUp( 500, function() { $to.slideDown( 1000 ); } );
 }
-	
+
 function transitionFadeOutFadeIn( $from, $to ) {
-	 $from.fadeOut( 500 );
-   $to.fadeIn( 500 );			
+  $from.fadeOut( 500 );
+  $to.fadeIn( 500 );
 }
 
 function transitionScrollUp( $from, $to ) {   
@@ -42,89 +59,142 @@ function transitionScrollUp( $from, $to ) {
 
   $from.animate( {top: -cheight}, 'slow' );
   $to.animate( {top: 0}, 'slow', function() {
-     $from.hide().css( 'top', '0px');
+    $from.hide().css( 'top', '0px');
 
-     // restore possible scrollbar 
-     $( 'body' ).css( 'overflow-y', 'auto' );
+    // restore possible scrollbar 
+    $( 'body' ).css( 'overflow-y', 'auto' );
   }); 
 }
 
+
+
+Slideshow.debug = function( msg ) {
+  if( this.settings.debug && window.console && window.console.log  )
+      window.console.log( '[debug] ' + msg );
+}
+
+
 Slideshow.init = function( options ) {
 
-  var settings = $.extend({
+  this.settings = $.extend({
     mode              : 'slideshow', // slideshow | outline | autoplay
     titleSelector     : 'h1',      
     slideSelector     : '.slide',   // dummy (not yet working)
     stepSelector      : '.step',    // dummy (not yet working)
-    debug             :  false,
+    debug             :  true,
     change	      : null  //  todo: change to use a custom event and trigger
   }, options || {});
 
-  settings.isProjection = false; // are we in projection (slideshow) mode (in contrast to screen (outline) mode)?     
-  settings.snum = 1;      // current slide # (non-zero based index e.g. starting with 1)
-  settings.smax = 1;      // max number of slides 
-  settings.incpos = 0;    // current step in slide  
-  settings.steps  = null;
-  settings.autoplayInterval = null; 
+  this.isProjection = false; // are we in projection (slideshow) mode (in contrast to screen (outline) mode)?     
+  this.snum = 1;      // current slide # (non-zero based index e.g. starting with 1)
+  this.smax = 1;      // max number of slides 
+  this.incpos = 0;    // current step in slide  
+  this.steps  = null;
+  this.autoplayInterval = null;
+
+  this.$slides           = $( '.slide' );
+
+  // $stylesProjection  holds all styles (<link rel="stylesheet"> or <style> w/ media type projection)
+  // $stylesScreen      holds all styles (<link rel="stylesheet"> or <style> w/ media type screen)
+
+  this.$stylesProjection = $( 'link[media*=projection], style[media*=projection]' ).not('[rel*=less]').not('[type*=less]');
+  this.$stylesScreen     = $( 'link[media*=screen], style[media*=screen]' ).not('[rel*=less]').not('[type*=less]') ;
+      
+  this.smax = this.$slides.length;
   
-  function debug( msg ) 
+   
+  this.addSlideIds();
+  this.steps = this.collectSteps();
+     
+  this.createControls();
+   
+  this.addClicker();
+         
+  // opera is the only browser currently supporting css projection mode 
+  this.notOperaFix();
+
+  // store possible slidenumber from hash */
+  // todo: use regex to extract number
+  //    might be #slide1 or just #1
+ 
+  var gotoSlideNum = parseInt( window.location.hash.substring(1) );
+  this.debug( "gotoSlideNum=" + gotoSlideNum );
+
+  if( !isNaN( gotoSlideNum ))
   {
-    if( settings.debug && window.console && window.console.log  )
-      window.console.log( '[debug] ' + msg ); 
-  }   
+    this.debug( "restoring slide on (re)load #: " + gotoSlideNum );
+    this.goTo( gotoSlideNum );
+  }
+
+  if( this.settings.mode == 'outline' ) 
+    this.toggle();
+  else if( this.settings.mode == 'autoplay' )
+    this.toggleAutoplay();
   
-  function notOperaFix()
-  {          
+  
+  if( this.settings.debug == true )
+    this.doDebug();
+      
+  $('html').bind( 'keyup', $.proxy( this, 'keys'));
+} // end init() 
+ 
+ 
+  
+Slideshow.notOperaFix = function() {
    // 1) switch media type from projection to screen
 
-   $stylesProjection.each( function(i) {          
+   var self = this;   // NOTE: jquery binds this in .each to element
+
+   this.$stylesProjection.each( function(i) {          
      var styleProjection = this;
      styleProjection.media = 'screen';
      styleProjection.disabled = true;
      
-      debug( "notOperaFix - stylesProjection["+i+"] switching media type from projection to screen" );
+     self.debug( "notOperaFix - stylesProjection["+i+"] switching media type from projection to screen" );
    } );
    
-   settings.isProjection = false;
+   this.isProjection = false;
    
    // 2) disable screen styles and enable projection styles (thus, switch into projection mode)
-   toggle();
+   this.toggle();
    
    // now we should be in project mode
-  }    
+} // end notOperatFix()    
 
-function toggle()
-{
+
+Slideshow.toggle = function() {
   // todo: use settings.isProjection for state tracking
   //  and change disable accordingly (plus assert that all styles are in the state as expected)
 
   // toggle between projection (slide show) mode
   //   and screen (outline) mode
 
-  $stylesProjection.each( function(i) {          
+  var self = this;   // NOTE: jquery binds this in .each to element
+
+  this.$stylesProjection.each( function(i) {          
      var styleProjection = this;
      
-     styleProjection.disabled = (styleProjection.disabled ? false : true);
+     styleProjection.disabled = !styleProjection.disabled;
        
-     debug( "toggle - stylesProjection["+i+"] disabled? " + styleProjection.disabled );
+     self.debug( "toggle - stylesProjection["+i+"] disabled? " + styleProjection.disabled );
    });
   
-  $stylesScreen.each( function(i) {          
+  this.$stylesScreen.each( function(i) {          
      var styleScreen = this;
 
-     styleScreen.disabled = (styleScreen.disabled ? false : true);
+     styleScreen.disabled = !styleScreen.disabled;
        
-     debug( "toggle - stylesScreen["+i+"] disabled? " + styleScreen.disabled );
+     self.debug( "toggle - stylesScreen["+i+"] disabled? " + styleScreen.disabled );
      
      // update isProjection flag 
-     settings.isProjection = styleScreen.disabled;
+     self.isProjection = styleScreen.disabled;
    });
   
     
-  if( settings.isProjection )
+  if( this.isProjection )
   {
-    $slides.each( function(i) {
-      if( i == (settings.snum-1) )
+    this.$slides.each( function(i) {
+      if( i == (self.snum-1) )
         $(this).show();
       else
         $(this).hide();
@@ -132,13 +202,12 @@ function toggle()
   }
   else
   {
-    $slides.show();
+    this.$slides.show();
   }  
-}
+} // end toggle()
 
-    
-  function showHide( action )
-  {
+Slideshow.showHide = function( action )
+{
     var $navLinks = $( '#navLinks' )  
        
     switch( action ) {
@@ -151,64 +220,66 @@ function toggle()
              $navLinks.css( 'visibility', 'hidden' );
           break; 
     }
-  }  
+}   // end showHide
    
-  function updateCurrentSlideCounter()
-  { 
-      $( '#currentSlide' ).html( settings.snum + '/' + settings.smax );
-  }
+Slideshow.updateCurrentSlideCounter = function()
+{ 
+  $( '#currentSlide' ).html( this.snum + '/' + this.smax );
+}
   
-  function updateJumpList()
-  {
-      $('#jumplist').get(0).selectedIndex = (settings.snum-1);
-  }
+Slideshow.updateJumpList = function()
+{
+  $('#jumplist').get(0).selectedIndex = (this.snum-1);
+}
   
-  function updatePermaLink()
-  {
-      // todo: unify hash marks??; use #1 for div ids instead of #slide1? 
-      window.location.hash = '#'+settings.snum;
-  }
+Slideshow.updatePermaLink = function()
+{
+  // todo: unify hash marks??; use #1 for div ids instead of #slide1? 
+  window.location.hash = '#'+ this.snum;
+}
 
-  function goTo( target )
-  {
-       if( target > settings.smax || target == settings.snum ) return;
-       go( target - settings.snum );
-  }
+Slideshow.goTo = function( target )
+{
+ if( target > this.smax || target == this.snum )
+   return;
+
+ go( target - this.snum );
+}
  
-  function go( dir )
-  {
-    debug( 'go: ' + dir );
+Slideshow.go = function( dir )
+{
+  this.debug( 'go: ' + dir );
   
-    if( dir == 0 ) return;  /* same slide; nothing to do */
+  if( dir == 0 ) return;  /* same slide; nothing to do */
 
-    var cid = '#slide' + settings.snum;   /* current slide (selector) id */
-    var csteps = settings.steps[settings.snum-1];  /* current slide steps array */
+  var cid = '#slide' + this.snum;   /* current slide (selector) id */
+  var csteps = this.steps[ this.snum-1 ];  /* current slide steps array */
 
-    /* remove all step and stepcurrent classes from current slide */
-   if( csteps.length > 0) {
+  /* remove all step and stepcurrent classes from current slide */
+  if( csteps.length > 0) {
      $( csteps ).each( function() {
        $(this).removeClass( 'step' ).removeClass( 'stepcurrent' );
      } );
    }
 
   /* set snum to next slide */
-  settings.snum += dir;
-  if( settings.snum > settings.smax ) settings.snum = settings.smax;
-  if( settings.snum < 1 ) settings.snum = 1;
+  this.snum += dir;
+  if( this.snum > this.smax ) this.snum = this.smax;
+  if( this.snum < 1 ) this.snum = 1;
   
-  var nid = '#slide' + settings.snum;  /* next slide (selector) id */
-  var nsteps = settings.steps[settings.snum-1]; /* next slide steps array */															  
+  var nid = '#slide' + this.snum;  /* next slide (selector) id */
+  var nsteps = this.steps[this.snum-1]; /* next slide steps array */															  
   
 	if( dir < 0 ) /* go backwards? */
 	{
-		settings.incpos = nsteps.length;
+		this.incpos = nsteps.length;
 		/* mark last step as current step */
 		if( nsteps.length > 0 ) 
-			$( nsteps[settings.incpos-1] ).addClass( 'stepcurrent' );		
+			$( nsteps[this.incpos-1] ).addClass( 'stepcurrent' );		
 	}
 	else /* go forwards? */
 	{
-		settings.incpos = 0;
+		this.incpos = 0;
 	  if( nsteps.length > 0 ) {
 		  $( nsteps ).each( function() {
 				$(this).addClass( 'step' ).removeClass( 'stepcurrent' );
@@ -217,53 +288,59 @@ function toggle()
 	}	
 	
   if( !(cid == nid) ) {
-    debug( "transition from " + cid + " to " + nid );
-    Slideshow.transition( $( cid ), $( nid ) );
+    this.debug( "transition from " + cid + " to " + nid );
+    this.transition( $( cid ), $( nid ) );
   }
   
-  updateJumpList();
-  updateCurrentSlideCounter();
-  updatePermaLink(); 
+  this.updateJumpList();
+  this.updateCurrentSlideCounter();
+  this.updatePermaLink(); 
   
-  if (settings.change) { settings.change(); }
-}
+  if( this.settings.change ) { this.settings.change(); }
+} // end go()
 
- function subgo( dir )
- {
-	debug( 'subgo: ' + dir + ', incpos before: ' + settings.incpos + ', after: ' + (settings.incpos+dir) );
+
+Slideshow.subgo = function( dir )
+{
+   this.debug( 'subgo: ' + dir + ', incpos before: ' + this.incpos + ', after: ' + (this.incpos+dir) );
 	
-	var csteps = settings.steps[settings.snum-1]; /* current slide steps array */
+	var csteps = this.steps[this.snum-1]; /* current slide steps array */
 	
 	if( dir > 0)
   {  /* go forward? */
-		if( settings.incpos > 0 )
-      $( csteps[settings.incpos-1] ).removeClass( 'stepcurrent' );
-		$( csteps[settings.incpos] ).removeClass( 'step').addClass( 'stepcurrent' ); 
-		settings.incpos++;
+		if( this.incpos > 0 )
+      $( csteps[this.incpos-1] ).removeClass( 'stepcurrent' );
+		$( csteps[this.incpos] ).removeClass( 'step').addClass( 'stepcurrent' ); 
+		this.incpos++;
 	}
   else
   { /* go backwards? */
-		settings.incpos--;
-		$( csteps[settings.incpos] ).removeClass( 'stepcurrent' ).addClass( 'step' );
-		if( settings.incpos > 0 )
-      $( csteps[settings.incpos-1] ).addClass( 'stepcurrent' );
+		this.incpos--;
+		$( csteps[this.incpos] ).removeClass( 'stepcurrent' ).addClass( 'step' );
+		if( this.incpos > 0 )
+      $( csteps[this.incpos-1] ).addClass( 'stepcurrent' );
 	}
-}
+} // end subgo()
  
-   function populateJumpList() {
+Slideshow.populateJumpList = function()
+{    
+  var self = this;   // NOTE: jquery binds this in .each to element
+
+  var list = $('#jumplist').get(0);
     
-     var list = $('#jumplist').get(0);
-    
-     $( '.slide' ).each( function(i) {
-       var text = $(this).find( settings.titleSelector ).text();
-       list.options[list.length] = new Option( (i+1)+' : '+ text, (i+1) );
-     });
-   } 
+  this.$slides.each( function(i) {
+    var text = $(this).find( self.settings.titleSelector ).text();
+    list.options[list.length] = new Option( (i+1)+' : '+ text, (i+1) );
+  });
+} // end populateJumList 
    
-   function createControls()
-   {	  
-     // todo: make layout into an id (not class?)
-     //  do we need or allow more than one element?
+   
+Slideshow.createControls = function()
+{	  
+  var self = this;   // NOTE: jquery binds this in .each,.click, etc to element
+
+  // todo: make layout into an id (not class?)
+  //  do we need or allow more than one element?
      
   
      // if no div.layout exists, create one
@@ -283,123 +360,125 @@ function toggle()
 	    + '<div id="navList"><select id="jumplist" /><\/div>' 
 	    + '<\/div>' ); 
       
-      $controls.hover( function() { showHide('s') }, function() { showHide('h') });
-      $('#toggle').click( function() { toggle(); } );
-      $('#prev').click( function() { go(-1); } );
-      $('#next').click( function() { go(1); } );
+      $controls.hover( function() { self.showHide('s') }, function() { self.showHide('h') });
+      $('#toggle').click( function() { self.toggle(); } );
+      $('#prev').click( function() { self.go(-1); } );
+      $('#next').click( function() { self.go(1); } );
        
-      $('#jumplist').change( function() { goTo( parseInt( $( '#jumplist' ).val() )); } );
+      $('#jumplist').change( function() { self.goTo( parseInt( $( '#jumplist' ).val() )); } );
   	
-      populateJumpList();     
-      updateCurrentSlideCounter();
-      updatePermaLink(); 
-   }
+      this.populateJumpList();     
+      this.updateCurrentSlideCounter();
+      this.updatePermaLink(); 
+} // end createControls()
+
+Slideshow.toggleSlideNumber = function()
+{
+  // toggle slide number/counter
+  $( '#currentSlide' ).toggle();
+}
   
-  function toggleSlideNumber()
-  {
-     // toggle slide number/counter
-     $( '#currentSlide' ).toggle();
+Slideshow.toggleFooter = function()
+{
+  $( '#footer, footer').toggle(); 
+}
+
+Slideshow.keys = function( key )
+{  
+  this.debug( "enter keys()" );
+  
+  if( !key ) {
+    key = event;
+    key.which = key.keyCode;
   }
-  
-  function toggleFooter()
-  {
-     $( '#footer, footer').toggle(); 
+  if( key.which == 84 ) {
+    this.toggle();  // toggle between project and screen css media mode 
+    return;
   }
-  
-  
-  function keys(key)
-  {
-	if (!key) {
-		key = event;
-		key.which = key.keyCode;
-	}
-	if (key.which == 84) {
-		toggle();  // toggle between project and screen css media mode 
-		return;
-	}
-	if( settings.isProjection ) {
-		switch (key.which) {
-			case 32: // spacebar
-			case 34: // page down
-			case 39: // rightkey
-			case 40: // downkey
-				
-        var csteps = settings.steps[settings.snum-1]; /* current slide steps array */
+  if( this.isProjection ) {
+    switch( key.which ) {
+      case 32: // spacebar
+      case 34: // page down
+      case 39: // rightkey
+      case 40: // downkey
+
+      var csteps = this.steps[this.snum-1]; /* current slide steps array */
         
-				if ( !csteps || settings.incpos >= csteps.length ) {
-					go(1);
+      if( !csteps || this.incpos >= csteps.length ) {
+					this.go(1);
 				} else {
-					subgo(1);
+					this.subgo(1);
 				}
 				break;
 			case 33: // page up
 			case 37: // leftkey
 			case 38: // upkey
 					
-					if( !settings.steps[settings.snum-1] || settings.incpos <= 0 ) {
-					  go(-1);
+					if( !this.steps[this.snum-1] || this.incpos <= 0 ) {
+					  this.go(-1);
 				  } else {
-					  subgo(-1);
+					  this.subgo(-1);
 					}
 				  break;
       case 36: // home
-				goTo(1);
+				this.goTo(1);
 				break;
 			case 35: // end
-				goTo(settings.smax);
+				this.goTo( this.smax );
 				break;   
 			case 67: // c
-				showHide('c');  // toggle controls (navlinks,navlist)
+				this.showHide('c');  // toggle controls (navlinks,navlist)
 				break;
       case 65: //a
 			case 80: //p
 			case 83: //s
-				toggleAutoplay();
+				this.toggleAutoplay();
 				break;
       case 70: //f
-        toggleFooter();
+        this.toggleFooter();
         break;
       case 78: // n
-        toggleSlideNumber();
+        this.toggleSlideNumber();
         break;
       case 68: // d
-        toggleDebug();
+        this.toggleDebug();
         break;
 		}
 	}
-}
+} // end keys()
 
-function autoplay()
+Slideshow.autoplay = function()
 {
-	// suspend autoplay in outline view (just slideshow view)
-	if( !settings.isProjection )
-	  return;
+  // suspend autoplay in outline view (just slideshow view)
+  if( !this.isProjection )
+    return;
 
-     // next slide/step, please
-     var csteps = settings.steps[settings.snum-1]; // current slide steps array 
-     if( !csteps || settings.incpos >= csteps.length ) {
-			  if( settings.snum >= settings.smax )
-           goTo( 1 );   // reached end of show? start with 1st slide again (for endless cycle)
-        else
-           go(1);
-	   }
-     else {
-			  subgo(1);
-	   }
-}
+  // next slide/step, please
+  var csteps = this.steps[this.snum-1]; // current slide steps array 
+  
+  if( !csteps || this.incpos >= csteps.length ) {
+    if( this.snum >= this.smax )
+      this.goTo( 1 );   // reached end of show? start with 1st slide again (for endless cycle)
+    else
+      this.go(1);
+  }
+  else {
+    this.subgo(1);
+  }
+} // end autoplay()
 
-function toggleDebug()
+Slideshow.toggleDebug = function()
 {
-   settings.debug = !settings.debug;
-   doDebug();
+   this.settings.debug = !this.settings.debug;
+   this.doDebug();
 }
 
-function doDebug()
+Slideshow.doDebug = function()
 {
    // fix/todo: save background into oldbackground
    //  so we can restore later 
    
-   if( settings.debug == true )
+   if( this.settings.debug == true )
    {
       $( '#header,header' ).css( 'background', '#FCC' );
       $( '#footer,footer' ).css( 'background', '#CCF' );
@@ -413,153 +492,108 @@ function doDebug()
       $( '#controls' ).css( 'background', 'transparent' );
       $( '#currentSlide' ).css( 'background', 'transparent' );       
    }
-}
+} // end doDebug()
 
 	 
-function toggleAutoplay()
+Slideshow.toggleAutoplay = function()
 {
-  if( settings.autoplayInterval )
-	{
-		clearInterval( settings.autoplayInterval );
-		settings.autoplayInterval = null;
-	}
-	else
-	{
-	   settings.autoplayInterval = setInterval ( autoplay, 2000 );
-	}
+  if( this.autoplayInterval )
+  {
+    clearInterval( this.autoplayInterval );
+    this.autoplayInterval = null;
+  }
+  else
+  {
+   this.autoplayInterval = setInterval( this.autoplay, 2000 );
+  }
 }
 
-
-
-function collectStepsWorker(obj) {
+Slideshow.collectStepsWorker = function(obj)
+{
+  var self = this;   // NOTE: jquery binds this in .each,.click, etc to element
+  
+  var steps = []; 
+  if( !obj ) 
+    return steps;
 	
-	var steps = new Array();
-	if( !obj ) 
-		return steps;
-	
-	$(obj).children().each( function() {
-	  if( $(this).hasClass( 'step' ) ) {
-			
-			debug( 'step found for ' + this.tagName );
-			$(this).removeClass( 'step' );
+  $(obj).children().each( function() {
+    if( $(this).hasClass( 'step' ) ) {
+		
+      self.debug( 'step found for ' + this.tagName );
+      $(this).removeClass( 'step' );
 
-			/* don't add enclosing list; instead add step class to all list items/children */
-			if( $(this).is( 'ol,ul' ) ) {
-				debug( '  ol or ul found; adding auto steps' );
-				$(this).children().addClass( 'step' );
-			}
-			else
-			{
-				steps.push( this )
-			}
-		}
-	 	
-		steps = steps.concat( collectStepsWorker(this) );
-	});
-	
-  return steps;
-}
-
-function collectSteps() {
-	
-	var steps = new Array();
-
-  $slides.each(	function(i) {
-		debug ( 'collectSteps for ' + this.id + ':' );
-		steps[i] = collectStepsWorker( this );
+      /* don't add enclosing list; instead add step class to all list items/children */
+      if( $(this).is( 'ol,ul' ) ) {
+	self.debug( '  ol or ul found; adding auto steps' );
+	$(this).children().addClass( 'step' );
+      }
+      else
+      {
+	steps.push( this )
+      }
+    }
+    steps = steps.concat( self.collectStepsWorker( this ) );
   });
 	
-	$( steps ).each( function(i) {
-	  debug( 'slide ' + (i+1) + ': found ' + this.length + ' steps' );	
-	});
+  return steps;
+} // end collectStepWorkers
+
+Slideshow.collectSteps = function()
+{
+  var self = this;   // NOTE: jquery binds this in .each,.click, etc to element
+	
+  var steps = [];
+
+  this.$slides.each( function(i) {
+    self.debug ( 'collectSteps for ' + this.id + ':' );
+    steps[i] = self.collectStepsWorker( this );
+  });
+	
+  $( steps ).each( function(i) {
+    self.debug( 'slide ' + (i+1) + ': found ' + this.length + ' steps' );	
+  });
        
   return steps;
-}
+} // end collectSteps()
 
 
-function addClicker() {
-    // if you click on heading of slide -> go to next slide (or next step)
+Slideshow.addClicker = function()
+{
+  var self = this;   // NOTE: jquery binds this in .each,.click, etc to element
+
+  // if you click on heading of slide -> go to next slide (or next step)
    
-   $( settings.titleSelector, $slides ).click( function( ev ) {
-      if(ev.which != 1) return;  // only process left clicks (e.g 1; middle and rightclick use 2 and 3)
+  $( this.settings.titleSelector, this.$slides ).click( function( ev ) {
+    if(ev.which != 1) return;  // only process left clicks (e.g 1; middle and rightclick use 2 and 3)
 
-      if( !settings.isProjection )  // suspend clicker in outline view (just slideshow view)
-	       return;
+    if( !self.isProjection )  // suspend clicker in outline view (just slideshow view)
+      return;
      
-      var csteps = settings.steps[settings.snum-1]; // current slide steps array 
-			if ( !csteps || settings.incpos >= csteps.length ) 
-				 go(1);
-			else 
-				 subgo(1);
-   } );
+    var csteps = self.steps[self.snum-1]; // current slide steps array 
+    if ( !csteps || self.incpos >= csteps.length ) 
+      self.go(1);
+    else 
+      self.subgo(1);
+  });
    
    
-   $( settings.titleSelector, $slides ).bind('contextmenu', function() { 
-      if( !settings.isProjection )  // suspend clicker in outline view (just slideshow view)
+   $( this.settings.titleSelector, this.$slides ).bind('contextmenu', function() { 
+      if( !self.isProjection )  // suspend clicker in outline view (just slideshow view)
         return;
 
-      var csteps = settings.steps[settings.snum-1]; // current slide steps array 
-      if ( !csteps || settings.incpos >= csteps.length ) 
-         go(-1);
+      var csteps = self.steps[self.snum-1]; // current slide steps array 
+      if ( !csteps || self.incpos >= csteps.length ) 
+         self.go(-1);
       else 
-         subgo(-1);
+         self.subgo(-1);
 
       return false;
    } );       
+} // end addClicker()
+
+
+Slideshow.addSlideIds = function() {   
+  this.$slides.each( function(i) {
+    this.id = 'slide'+(i+1);
+  });
 }
-
-function addSlideIds() {
-     $slides.each( function(i) {
-        this.id = 'slide'+(i+1);
-     });
-   }
-   
-   // init code here
-   
-    // store possible slidenumber from hash */
-	  // todo: use regex to extract number
-	  //    might be #slide1 or just #1
-	 
-	  var gotoSlideNum = parseInt( window.location.hash.substring(1) );
-	  debug( "gotoSlideNum=" + gotoSlideNum );
-  
-   var $slides           = $( '.slide' );
-
-   // $stylesProjection  holds all styles (<link rel="stylesheet"> or <style> w/ media type projection)
-   // $stylesScreen      holds all styles (<link rel="stylesheet"> or <style> w/ media type screen)
-
-   var $stylesProjection = $( 'link[media*=projection], style[media*=projection]' ).not('[rel*=less]').not('[type*=less]');
-   var $stylesScreen     = $( 'link[media*=screen], style[media*=screen]' ).not('[rel*=less]').not('[type*=less]') ;
-      
- 
-   settings.smax = $slides.length;
-   
-   addSlideIds();
-   settings.steps = collectSteps();
-     
-   createControls();
-   
-   addClicker();
-         
-   /* opera is the only browser currently supporting css projection mode */ 
-   /* if( !$.browser.opera ) */
-   notOperaFix();
-
-   if( !isNaN( gotoSlideNum ))
-   {
-	    debug( "restoring slide on (re)load #: " + gotoSlideNum );
-	    goTo( gotoSlideNum );
-	 }
-	           
-   if( settings.mode == 'outline' ) 
-     toggle();
-   else if( settings.mode == 'autoplay' )
-     toggleAutoplay();
-  
-  
-   if( settings.debug == true )
-     doDebug();
-                
-   document.onkeyup = keys;
-
-} // end Slideshow
