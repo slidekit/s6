@@ -11,37 +11,12 @@
  */
 
 
-/****
- * hide layout stuff (header, footer, navLinks, navList etc.)
- */
-
-.layout * { display: none; }
-
-.projection { display: none; }
-
-/*************
- * make toggle button visible and reposition to upper right corner *
- * note: toogle button is nested inside #controls > #navLinks > #toogle
- */
-
-#controls,
-#navLinks,
-#toggle    { display: block;
-             visibility: visible;
-             margin: 0; padding: 0;
-           }
-
-#toggle { position: fixed;
-          top: 0; right: 0;
-          padding: 0.5em; 
-          border-left: 1px solid;
-          border-bottom: 1px solid;
-          background: white;
-        }
-
 
 /*************
  * making the outline look pretty-ish
+ */
+
+/* todo: use  :first selector or similar and not #slide1 (let user change slide ids)
  */
 
 #slide1, #slide1 h1, #slide1 h2, #slide1 h3, #slide1 h4 {border: none; margin: 0;}

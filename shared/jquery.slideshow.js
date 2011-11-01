@@ -93,12 +93,6 @@ Slideshow.init = function( options ) {
   this.autoplayInterval = null;
 
   this.$slides           = $( '.slide' );
-
-  // $stylesProjection  holds all styles (<link rel="stylesheet"> or <style> w/ media type projection)
-  // $stylesScreen      holds all styles (<link rel="stylesheet"> or <style> w/ media type screen)
-
-  this.$stylesProjection = $( 'link[media*=projection], style[media*=projection]' ).not('[rel*=less]').not('[type*=less]');
-  this.$stylesScreen     = $( 'link[media*=screen], style[media*=screen]' ).not('[rel*=less]').not('[type*=less]') ;
       
   this.smax = this.$slides.length;
   
@@ -106,7 +100,15 @@ Slideshow.init = function( options ) {
   this.addSlideIds();
   this.steps = this.collectSteps();
      
-  this.createControls();
+  this.createControls();   // note: adds style elements (thus, find $styles queries need to go afterwards)
+
+  // $stylesProjection  holds all styles (<link rel="stylesheet"> or <style> w/ media type projection)
+  // $stylesScreen      holds all styles (<link rel="stylesheet"> or <style> w/ media type screen)
+
+  this.$stylesProjection = $( 'link[media*=projection], style[media*=projection]' ).not('[rel*=less]').not('[type*=less]');
+  this.$stylesScreen     = $( 'link[media*=screen], style[media*=screen]' ).not('[rel*=less]').not('[type*=less]') ;
+
+
    
   this.addClicker();
          
@@ -243,7 +245,7 @@ Slideshow.goTo = function( target )
  if( target > this.smax || target == this.snum )
    return;
 
- go( target - this.snum );
+ this.go( target - this.snum );
 }
  
 Slideshow.go = function( dir )
@@ -336,7 +338,9 @@ Slideshow.populateJumpList = function()
    
    
 Slideshow.createControls = function()
-{	  
+{
+  this.debug( 'createControls plus add internal css via style elements' );
+
   var self = this;   // NOTE: jquery binds this in .each,.click, etc to element
 
   // todo: make layout into an id (not class?)
@@ -346,6 +350,8 @@ Slideshow.createControls = function()
      // if no div.layout exists, create one
      if( $( '.layout' ).length == 0 )
         $( 'body' ).append( "<div class='layout'></div>");
+
+     // add css styles for controls
   
 /*********  layout block structure
  *
@@ -359,8 +365,6 @@ Slideshow.createControls = function()
  *            > #jumplist
  *    > #currentSlide  (e.g. 1/7)
  */
-
-     // add css styles for controls
 
     // -- format for (navigation) #controls block
     // -- format for #currentSlide block 
@@ -388,8 +392,9 @@ Slideshow.createControls = function()
 " #controls #navList #jumplist { background: white; color: black; } \n"+
 "                                                \n"+
 "                                                \n"+
-" ////////////////////////////////////////////   \n"+
-" // format for currentSlide block ( e.g. 2/20 ) \n"+
+" /*******                                       \n"+
+" /* format for currentSlide block ( e.g. 2/20 ) \n"+
+"  */                                            \n"+
 "                                                \n"+
 " #currentSlide { position: fixed;               \n"+
 "                 left: 45%; bottom: 1em;        \n"+
@@ -403,9 +408,39 @@ Slideshow.createControls = function()
 " #currentSlide :visited {  text-decoration: none; } \n"+
 "</style>";
 
+   var ctrlStyleScreen =
+"<style media='screen'>                      \n"+
+"/****                                           \n"+
+" * hide layout stuff (header, footer, navLinks, navList etc.) \n"+
+" */                                             \n"+
+"                                                \n"+
+" .layout * { display: none; }                   \n"+
+"                                                \n"+
+" .projection { display: none; }                 \n"+
+"                                                \n"+
+"/*********                                      \n"+
+" * make toggle button visible and reposition to upper right corner  \n"+
+" *   note: toogle button is nested inside #controls > #navLinks > #toogle \n"+
+" */                                             \n"+
+"                                                \n"+
+" #controls,                                     \n"+
+" #navLinks,                                     \n"+
+" #toggle    { display: block;                   \n"+
+"             visibility: visible;               \n"+
+"             margin: 0; padding: 0;             \n"+
+"          }                                     \n"+
+"                                                \n"+
+" #toggle { position: fixed;                     \n"+
+"          top: 0; right: 0;                     \n"+
+"          padding: 0.5em;                       \n"+
+"          border-left: 1px solid;               \n"+
+"          border-bottom: 1px solid;             \n"+
+"          background: white;                    \n"+
+"        }                                       \n"+
+"</style>";
 
     $( 'body' ).append( ctrlStyleProjection );
-
+    $( 'body' ).append( ctrlStyleScreen );
 
      $( '.layout' )
 	    .append( "<div id='controls'>" )
