@@ -1,6 +1,6 @@
-= S6 Blank/Boilerplate - Slide Show Templates Using HTML, CSS & JavaScript (w/ jQuery)
+# S6 Blank/Boilerplate - Slide Show Templates Using HTML, CSS & JavaScript (w/ jQuery)
 
-== What's S5? What's S6?
+## What's S5? What's S6?
 
 Simple Standards-based Slide Show System (S5) is Eric Meyer's (of CSS fame) public domain
 (free, open source) slide show package inspired by Opera Show and others that works
@@ -12,14 +12,14 @@ S6 started as a rewrite of Eric Meyer's S5 using the jQuery JavaScript library -
 easier to understand and easier to extend code. Add plugins, effects and more.
 Contributions welcome!
 
-== What's Slide Show (S9)? Slide Show Generator for S6 
+## What's Slide Show (S9)? Slide Show Generator for S6 
 
 A Ruby gem that lets you create slide shows and author slides in plain text
 using a wiki-style markup language that's easy-to-write and easy-to-read
 and ships "out-of-the-gem" with S6 templates built-in.
 More [Slide Show (S9) Project Site &raquo;](http://slideshow.rubyforge.org)
 
-== S6 in Action - Sample Slide Shows Online
+## S6 in Action - Sample Slide Shows Online
 
 Try some slide show samples powered by S6:
 
@@ -30,15 +30,16 @@ Try some slide show samples powered by S6:
 
 Keyboard controls:
 
-| Action               | Key |
-| Go to next slide     | Space Bar, Right Arrow Down Arrow, Page Down, Click Heading |
-| Go to previous slide | Left Arrow, Up Arrow, Page Up |
-| Go to first slide    | Home |
-| Go to last slide     | End |
-| Toggle between slideshow and outline view (&#216;) | T |
-| Show/hide slide controls (&#216; &laquo; &raquo;)  | C, Move mouse to bottom right corner |
+| Action                                             | Key                                                         |
+| -------------------------------------------------- | ----------------------------------------------------------- |
+| Go to next slide                                   | Space Bar, Right Arrow Down Arrow, Page Down, Click Heading |
+| Go to previous slide                               | Left Arrow, Up Arrow, Page Up                               |
+| Go to first slide                                  | Home                                                        |
+| Go to last slide                                   | End                                                         |
+| Toggle between slideshow and outline view (&#216;) | T                                                           |
+| Show/hide slide controls (&#216; &laquo; &raquo;)  | C, Move mouse to bottom right corner                        |
 
-== About, License - Questions? Comments?
+## About, License - Questions? Comments?
 
 License. The slide show scripts and templates are dedicated
 to the [public domain](http://creativecommons.org/licenses/publicdomain).
