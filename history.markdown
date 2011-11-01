@@ -1,3 +1,11 @@
+### r2011-11-01
+
+* Clean up styles; move all styles (projection, screen, print) for controls into slideshow.js
+* shared folder now split into js and css folders
+* Update jquery.js to 1.6.4
+* Update less.js to 1.1.4
+* Minor fixes
+
 ### r2011-05-22
 
 * Adding blank5.html template (using more semantic tags e.g. header, footer, article, etc.) [Thanks Ryan McIlmoyl]

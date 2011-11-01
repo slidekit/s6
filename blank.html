@@ -18,9 +18,9 @@
 -->
 
 <!-- style sheet links -->
-<link rel="stylesheet/less" href="shared/projection.css.less"  media="projection">
-<link rel="stylesheet/less" href="shared/screen.css.less"      media="screen">
-<link rel="stylesheet/less" href="shared/print.css.less"       media="print">
+<link rel="stylesheet/less" href="css/projection.css.less"  media="projection">
+<link rel="stylesheet/less" href="css/screen.css.less"      media="screen">
+<link rel="stylesheet/less" href="css/print.css.less"       media="print">
 
 <link rel="stylesheet/less" href="blank.css.less"    media="projection">
 
@@ -35,12 +35,13 @@
      XMLHttpRequest cannot load file:///../s6/shared/projection.css.less.
      Cross origin requests are only supported for HTTP.)
   -->
-<script src="shared/less-1.1.1.min.js"></script>
 
-<script src="shared/jquery-1.6.1.min.js"></script>
+<!-- add js libs (less, jquery) -->
+<script src="js/less-1.1.4.min.js"></script>
+<script src="js/jquery-1.6.4.min.js"></script>
 
 <!-- S6 JS -->
-<script src="shared/jquery.slideshow.js"></script>
+<script src="js/jquery.slideshow.js"></script>
 <script>
   $(document).ready( function() {
     Slideshow.init();
@@ -60,7 +61,7 @@
 
 <!-- Better Browser Banner for Microsoft Internet Explorer (IE) -->
 <!--[if IE]>
-<script src="shared/jquery.microsoft.js"></script>
+<script src="js/jquery.microsoft.js"></script>
 <![endif]-->
 
 </head>
