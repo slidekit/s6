@@ -15,7 +15,7 @@ body,
 .presentation { margin: 0; padding: 0; }
 
 
-.slide { display: none; 
+.slide { display: block; 
          position: absolute;
          top: 0; left: 0; 
          margin: 0;
@@ -25,23 +25,15 @@ body,
          z-index: 2;
        }
 
-#slide1 { display: block; } /* todo: check if this is needed? already handled w/ js? */
 
 .notes  { display: none; } /* handout notes/note (use note? handout? notes? */
 
 
-/********* format layout block
+/***** layout block structure
  *
  *  .layout
  *    > #header
  *    > #footer
- *    > #controls      (holding navigation controls)
- *       > #navLinks
- *          > #toggle
- *          > #navList
- *            > #jumplist
- *    > #currentSlide  (e.g. 1/7)
- *
  */
 
 .layout {
@@ -67,46 +59,4 @@ body,
            h1 { display: block; margin: 0; padding: 0 1em; font-size: 0.5em; }
            h2 { display: block; margin: 0; padding: 0 1em; font-size: 0.5em; font-style: italic; }
    }
-} /* end .layout */
-
-/*************************
- * format for navigation controls 
- */
-
-
-#controls { position: fixed;
-              left: 60%; bottom: 0;
-              width: 40%;
-              z-index: 100;
-              text-align: right;
-              font: bold 1.2em Verdana, Helvetica, sans-serif;
-            }
-  
-  #controls :focus { outline: 1px dotted white;}
-  
-  #controls #navLinks { text-align: right; margin: 0; visibility: hidden; } 
-   
-  #controls #navLinks a { padding: 0; margin: 0 0.5em; cursor: pointer; border: none; }
-  
-  #controls #navLinks :link,
-  #controls #navLinks :visited {text-decoration: none; }
-
-  #controls #navList #jumplist { background: white; color: black; }
-
-/*************************
- * format for 
- * currentSlide block ( e.g. 2/20 )
- */
-
-#currentSlide { position: fixed;
-                left: 45%; bottom: 1em;
-                width: 10%;
-                z-index: 10;
-                text-align: center;
-                font-size: 0.8em;
-              }
-
-#currentSlide :link,
-#currentSlide :visited {  text-decoration: none; }
-
-
+}

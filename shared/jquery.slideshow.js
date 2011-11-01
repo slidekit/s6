@@ -345,8 +345,68 @@ Slideshow.createControls = function()
   
      // if no div.layout exists, create one
      if( $( '.layout' ).length == 0 )
-        $( "<div class='layout'></div>").appendTo( 'body' );
+        $( 'body' ).append( "<div class='layout'></div>");
   
+/*********  layout block structure
+ *
+ *  .layout
+ *    > #header
+ *    > #footer
+ *    > #controls      (holding navigation controls)
+ *       > #navLinks
+ *          > #toggle
+ *          > #navList
+ *            > #jumplist
+ *    > #currentSlide  (e.g. 1/7)
+ */
+
+     // add css styles for controls
+
+    // -- format for (navigation) #controls block
+    // -- format for #currentSlide block 
+
+   var ctrlStyleProjection =
+"<style media='projection'>                      \n"+
+"  #controls { position: fixed;                  \n"+
+"              left: 60%; bottom: 0;             \n"+
+"              width: 40%;                       \n"+
+"              z-index: 100;                     \n"+
+"              text-align: right;                \n"+
+"              font: bold 1.2em Verdana, Helvetica, sans-serif; \n"+
+"            }                                   \n"+
+"                                                \n"+
+" #controls :focus { outline: 1px dotted white;} \n"+
+"                                                \n"+  
+" #controls #navLinks { text-align: right; margin: 0; visibility: hidden; } \n"+
+
+"                                                \n"+
+" #controls #navLinks a { padding: 0; margin: 0 0.5em; cursor: pointer; border: none; }  \n"+
+"                                                \n"+
+" #controls #navLinks :link,                     \n"+
+" #controls #navLinks :visited {text-decoration: none; } \n"+
+"                                                \n"+
+" #controls #navList #jumplist { background: white; color: black; } \n"+
+"                                                \n"+
+"                                                \n"+
+" ////////////////////////////////////////////   \n"+
+" // format for currentSlide block ( e.g. 2/20 ) \n"+
+"                                                \n"+
+" #currentSlide { position: fixed;               \n"+
+"                 left: 45%; bottom: 1em;        \n"+
+"                width: 10%;                     \n"+
+"                z-index: 10;                    \n"+
+"                text-align: center;             \n"+
+"                font-size: 0.8em;               \n"+
+"              }                                 \n"+
+"                                                \n"+
+" #currentSlide :link,                           \n"+
+" #currentSlide :visited {  text-decoration: none; } \n"+
+"</style>";
+
+
+    $( 'body' ).append( ctrlStyleProjection );
+
+
      $( '.layout' )
 	    .append( "<div id='controls'>" )
 	    .append( "<div id='currentSlide'>" );
