@@ -406,6 +406,12 @@ Slideshow.createControls = function()
 "                                                \n"+
 " #currentSlide :link,                           \n"+
 " #currentSlide :visited {  text-decoration: none; } \n"+
+"                                                \n"+
+" /*******                                       \n"+
+" /* handout, notes (use note? handout? notes?)  \n"+
+"  */                                            \n"+
+"                                                \n"+
+" .notes  { display: none; }                     \n"+
 "</style>";
 
    var ctrlStyleScreen =
@@ -439,8 +445,41 @@ Slideshow.createControls = function()
 "        }                                       \n"+
 "</style>";
 
+   var ctrlStylePrint =
+"<style media='print'>                      \n"+
+"/******                                    \n"+
+" * Turn on print-specific stuff/classes    \n"+
+" */                                        \n"+
+"                                           \n"+
+" .extra { background: transparent !important; }  \n"+
+" div.extra, pre.extra, .example { font-size: 10pt; color: #333; } \n"+
+" ul.extra a { font-weight: bold; }         \n"+
+"                                           \n"+
+"/*****                                     \n"+
+" * Turn off online (screen/projection)-specific stuff/classes \n"+
+" */                                        \n"+
+"                                           \n"+
+" p.example { display: none; }              \n"+
+"                                           \n"+
+"                                           \n"+
+"/***********                               \n"+
+" * The following rule keeps the layout stuff out of print. \n"+
+" * Remove at your own risk!                \n"+
+" */                                        \n"+
+"                                           \n"+
+" .layout, .layout * {display: none !important;}  \n"+
+"                                           \n"+
+"/***********                               \n"+
+" * More stuff                              \n"+
+" */                                        \n"+
+"                                           \n"+
+" .projection { display: none; }            \n"+
+"</style>";
+
+
     $( 'body' ).append( ctrlStyleProjection );
     $( 'body' ).append( ctrlStyleScreen );
+    $( 'body' ).append( ctrlStylePrint );
 
      $( '.layout' )
 	    .append( "<div id='controls'>" )
