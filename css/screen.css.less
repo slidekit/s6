@@ -11,21 +11,20 @@
  */
 
 
-
-/*************
- * making the outline look pretty-ish
- */
-
-/* todo: use  :first selector or similar and not #slide1 (let user change slide ids)
- */
-
-#slide1, #slide1 h1, #slide1 h2, #slide1 h3, #slide1 h4 {border: none; margin: 0;}
-#slide1 h1 {padding-top: 1.5em;}
-
 .slide
 {
   margin: 1.5em 0 0;
   border-top: 1px solid #888;
 
   h1 { border-bottom: 1px solid #AAA; }
+  
+  
+  &:first-child {
+    margin: 0;
+    border: none;
+    
+    h1 {
+      border: none;
+      padding-top: 1.5em; }
+  }
 }
