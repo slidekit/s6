@@ -1,7 +1,8 @@
 ### r2011-11-01
 
+* Add minimalistic.html template; all styles (projection, screen, print) inline plus no less.js used
 * Clean up styles; move all styles (projection, screen, print) for controls into slideshow.js
-* shared folder now split into js and css folders
+* /shared folder now split into /js and /css folders
 * Update jquery.js to 1.6.4
 * Update less.js to 1.1.4
 * Minor fixes

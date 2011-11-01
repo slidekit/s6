@@ -43,6 +43,9 @@ a:visited { color: @color; }
   h2 { font-size: 28pt;  }
 
   h3 { font-size: 25pt;  }
+
+  .stepcurrent { color: @color; }  
+  .step        { color: @step-hidden-color; }  /* or hide next steps e.g. .step { visibility: hidden; } */
 }
 
 
@@ -110,10 +113,6 @@ p.tiny     { font-size: 82%; }
 .help td  { font-size: 88%; }
 
  
-.step { color: @step-hidden-color; }
-/* or hide next steps e.g.  .step { visibility: hidden; } */
-.stepcurrent { color: @color; }
-
 /* example gradient background using css3 */
 
 .slide {
