@@ -21,28 +21,30 @@
 
 body { font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;  }
 
-a:link, a:visited { color: @color; }
+a:link,
+a:visited { color: @color; }
 
-// note: lets use nested selector for .slide (thanks to less)
 
 .slide {
 
   color: @color;
   
   h1 { font-size: 30pt;
-       text-align: center; }
+       text-align: center;
 
-  h1.fullscreen { position: absolute;
-                  top: 40%;
-                  width: 100%; }
+       &.fullscreen { position: absolute;
+                      top: 40%;
+                      width: 100%; }
 
-  // lets you create slides with no heading (because heading is hidden but gets included in toc) 
-  h1.hidden     { display: none; }
-
+       // lets you create slides with no heading (because heading is hidden but gets included in toc) 
+       &.hidden     { display: none; }
+      }
+  
   h2 { font-size: 28pt;  }
 
   h3 { font-size: 25pt;  }
 }
+
 
 
 /* todo: add special formating for .cover slide
@@ -115,11 +117,10 @@ p.tiny     { font-size: 82%; }
 /* example gradient background using css3 */
 
 .slide {
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%,
-                 from(@background-gradient-color1),
-                 to(@background-gradient-color2),
-                 color-stop(0.33,@background-gradient-color1),
-                 color-stop(0.66,@background-gradient-color2));
+  background-image: -webkit-linear-gradient(top, @background-gradient-color1,
+                                                 @background-gradient-color2,
+                                                 @background-gradient-color1,
+                                                 @background-gradient-color2);
   
   background-image: -moz-linear-gradient(top, @background-gradient-color1,
                                               @background-gradient-color2,
@@ -127,13 +128,12 @@ p.tiny     { font-size: 82%; }
                                               @background-gradient-color2);
 }
 
-.cover,
-.title {
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%,
-                 from(@cover-background-gradient-color1),
-                 to(@cover-background-gradient-color2),
-                 color-stop(0.33,@cover-background-gradient-color1),
-                 color-stop(0.66,@cover-background-gradient-color2));
+.slide.cover,
+.slide.title {
+  background-image: -webkit-linear-gradient(top, @cover-background-gradient-color1,
+                                                 @cover-background-gradient-color2,
+                                                 @cover-background-gradient-color1,
+                                                 @cover-background-gradient-color2);
   
   background-image: -moz-linear-gradient(top, @cover-background-gradient-color1,
                                               @cover-background-gradient-color2,
