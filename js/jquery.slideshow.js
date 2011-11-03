@@ -105,8 +105,13 @@ Slideshow.init = function( options ) {
   // $stylesProjection  holds all styles (<link rel="stylesheet"> or <style> w/ media type projection)
   // $stylesScreen      holds all styles (<link rel="stylesheet"> or <style> w/ media type screen)
 
+  // add workaround for chrome
+	//  use screen,projection instead of projection
+	//  (without projection inline style tag gets not parsed into a styleSheet accesible via JavaScript)
+
+
   this.$stylesProjection = $( 'link[media*=projection], style[media*=projection]' ).not('[rel*=less]').not('[type*=less]');
-  this.$stylesScreen     = $( 'link[media*=screen], style[media*=screen]' ).not('[rel*=less]').not('[type*=less]') ;
+  this.$stylesScreen     = $( 'link[media*=screen], style[media*=screen]' ).not('[media*=projection]').not('[rel*=less]').not('[type*=less]') ;
 
 
    
@@ -339,147 +344,14 @@ Slideshow.populateJumpList = function()
    
 Slideshow.createControls = function()
 {
-  this.debug( 'createControls plus add internal css via style elements' );
-
   var self = this;   // NOTE: jquery binds this in .each,.click, etc to element
 
   // todo: make layout into an id (not class?)
   //  do we need or allow more than one element?
-     
-  
+       
      // if no div.layout exists, create one
      if( $( '.layout' ).length == 0 )
         $( 'body' ).append( "<div class='layout'></div>");
-
-     // add css styles for controls
-  
-/*********  layout block structure
- *
- *  .layout
- *    > #header
- *    > #footer
- *    > #controls      (holding navigation controls)
- *       > #navLinks
- *          > #toggle
- *          > #navList
- *            > #jumplist
- *    > #currentSlide  (e.g. 1/7)
- */
-
-    // -- format for (navigation) #controls block
-    // -- format for #currentSlide block 
-
-   var ctrlStyleProjection =
-"<style media='projection'>                      \n"+
-"  #controls { position: fixed;                  \n"+
-"              left: 60%; bottom: 0;             \n"+
-"              width: 40%;                       \n"+
-"              z-index: 100;                     \n"+
-"              text-align: right;                \n"+
-"              font: bold 1.2em Verdana, Helvetica, sans-serif; \n"+
-"            }                                   \n"+
-"                                                \n"+
-" #controls :focus { outline: 1px dotted white;} \n"+
-"                                                \n"+  
-" #controls #navLinks { text-align: right; margin: 0; visibility: hidden; } \n"+
-
-"                                                \n"+
-" #controls #navLinks a { padding: 0; margin: 0 0.5em; cursor: pointer; border: none; }  \n"+
-"                                                \n"+
-" #controls #navLinks :link,                     \n"+
-" #controls #navLinks :visited {text-decoration: none; } \n"+
-"                                                \n"+
-" #controls #navList #jumplist { background: white; color: black; } \n"+
-"                                                \n"+
-"                                                \n"+
-" /*******                                       \n"+
-" /* format for currentSlide block ( e.g. 2/20 ) \n"+
-"  */                                            \n"+
-"                                                \n"+
-" #currentSlide { position: fixed;               \n"+
-"                 left: 45%; bottom: 1em;        \n"+
-"                width: 10%;                     \n"+
-"                z-index: 10;                    \n"+
-"                text-align: center;             \n"+
-"                font-size: 0.8em;               \n"+
-"              }                                 \n"+
-"                                                \n"+
-" #currentSlide :link,                           \n"+
-" #currentSlide :visited {  text-decoration: none; } \n"+
-"                                                \n"+
-" /*******                                       \n"+
-" /* handout, notes (use note? handout? notes?)  \n"+
-"  */                                            \n"+
-"                                                \n"+
-" .notes  { display: none; }                     \n"+
-"</style>";
-
-   var ctrlStyleScreen =
-"<style media='screen'>                      \n"+
-"/****                                           \n"+
-" * hide layout stuff (header, footer, navLinks, navList etc.) \n"+
-" */                                             \n"+
-"                                                \n"+
-" .layout * { display: none; }                   \n"+
-"                                                \n"+
-" .projection { display: none; }                 \n"+
-"                                                \n"+
-"/*********                                      \n"+
-" * make toggle button visible and reposition to upper right corner  \n"+
-" *   note: toogle button is nested inside #controls > #navLinks > #toogle \n"+
-" */                                             \n"+
-"                                                \n"+
-" #controls,                                     \n"+
-" #navLinks,                                     \n"+
-" #toggle    { display: block;                   \n"+
-"             visibility: visible;               \n"+
-"             margin: 0; padding: 0;             \n"+
-"          }                                     \n"+
-"                                                \n"+
-" #toggle { position: fixed;                     \n"+
-"          top: 0; right: 0;                     \n"+
-"          padding: 0.5em;                       \n"+
-"          border-left: 1px solid;               \n"+
-"          border-bottom: 1px solid;             \n"+
-"          background: white;                    \n"+
-"        }                                       \n"+
-"</style>";
-
-   var ctrlStylePrint =
-"<style media='print'>                      \n"+
-"/******                                    \n"+
-" * Turn on print-specific stuff/classes    \n"+
-" */                                        \n"+
-"                                           \n"+
-" .extra { background: transparent !important; }  \n"+
-" div.extra, pre.extra, .example { font-size: 10pt; color: #333; } \n"+
-" ul.extra a { font-weight: bold; }         \n"+
-"                                           \n"+
-"/*****                                     \n"+
-" * Turn off online (screen/projection)-specific stuff/classes \n"+
-" */                                        \n"+
-"                                           \n"+
-" p.example { display: none; }              \n"+
-"                                           \n"+
-"                                           \n"+
-"/***********                               \n"+
-" * The following rule keeps the layout stuff out of print. \n"+
-" * Remove at your own risk!                \n"+
-" */                                        \n"+
-"                                           \n"+
-" .layout, .layout * {display: none !important;}  \n"+
-"                                           \n"+
-"/***********                               \n"+
-" * More stuff                              \n"+
-" */                                        \n"+
-"                                           \n"+
-" .projection { display: none; }            \n"+
-"</style>";
-
-
-    $( 'body' ).append( ctrlStyleProjection );
-    $( 'body' ).append( ctrlStyleScreen );
-    $( 'body' ).append( ctrlStylePrint );
 
      $( '.layout' )
 	    .append( "<div id='controls'>" )
@@ -726,8 +598,145 @@ Slideshow.addClicker = function()
 } // end addClicker()
 
 
-Slideshow.addSlideIds = function() {   
+Slideshow.addSlideIds = function() {
   this.$slides.each( function(i) {
     this.id = 'slide'+(i+1);
   });
 }
+
+
+Slideshow.addStyles = function() {
+  this.debug( 'add internal css via style elements' );
+
+     // add css styles for controls
+  
+/*********  layout block structure
+ *
+ *  .layout
+ *    > #header
+ *    > #footer
+ *    > #controls      (holding navigation controls)
+ *       > #navLinks
+ *          > #toggle
+ *          > #navList
+ *            > #jumplist
+ *    > #currentSlide  (e.g. 1/7)
+ */
+
+    // -- format for (navigation) #controls block
+    // -- format for #currentSlide block 
+
+   var ctrlStyleProjection =
+"<style media='screen,projection'>               \n"+
+"  #controls { position: fixed;                  \n"+
+"              left: 60%; bottom: 0;             \n"+
+"              width: 40%;                       \n"+
+"              z-index: 100;                     \n"+
+"              text-align: right;                \n"+
+"              font: bold 1.2em Verdana, Helvetica, sans-serif; \n"+
+"            }                                   \n"+
+"                                                \n"+
+" #controls :focus { outline: 1px dotted white;} \n"+
+"                                                \n"+  
+" #controls #navLinks { text-align: right; margin: 0; visibility: hidden; } \n"+
+
+"                                                \n"+
+" #controls #navLinks a { padding: 0; margin: 0 0.5em; cursor: pointer; border: none; }  \n"+
+"                                                \n"+
+" #controls #navLinks :link,                     \n"+
+" #controls #navLinks :visited {text-decoration: none; } \n"+
+"                                                \n"+
+" #controls #navList #jumplist { background: white; color: black; } \n"+
+"                                                \n"+
+"                                                \n"+
+" /*******                                       \n"+
+" /* format for currentSlide block ( e.g. 2/20 ) \n"+
+"  */                                            \n"+
+"                                                \n"+
+" #currentSlide { position: fixed;               \n"+
+"                 left: 45%; bottom: 1em;        \n"+
+"                width: 10%;                     \n"+
+"                z-index: 10;                    \n"+
+"                text-align: center;             \n"+
+"                font-size: 0.8em;               \n"+
+"              }                                 \n"+
+"                                                \n"+
+" #currentSlide :link,                           \n"+
+" #currentSlide :visited {  text-decoration: none; } \n"+
+"                                                \n"+
+" /*******                                       \n"+
+" /* handout, notes (use note? handout? notes?)  \n"+
+"  */                                            \n"+
+"                                                \n"+
+" .notes  { display: none; }                     \n"+
+"</style>";
+
+   var ctrlStyleScreen =
+"<style media='screen'>                      \n"+
+"/****                                           \n"+
+" * hide layout stuff (header, footer, navLinks, navList etc.) \n"+
+" */                                             \n"+
+"                                                \n"+
+" .layout * { display: none; }                   \n"+
+"                                                \n"+
+" .projection { display: none; }                 \n"+
+"                                                \n"+
+"/*********                                      \n"+
+" * make toggle button visible and reposition to upper right corner  \n"+
+" *   note: toogle button is nested inside #controls > #navLinks > #toogle \n"+
+" */                                             \n"+
+"                                                \n"+
+" #controls,                                     \n"+
+" #navLinks,                                     \n"+
+" #toggle    { display: block;                   \n"+
+"             visibility: visible;               \n"+
+"             margin: 0; padding: 0;             \n"+
+"          }                                     \n"+
+"                                                \n"+
+" #toggle { position: fixed;                     \n"+
+"          top: 0; right: 0;                     \n"+
+"          padding: 0.5em;                       \n"+
+"          border-left: 1px solid;               \n"+
+"          border-bottom: 1px solid;             \n"+
+"          background: white;                    \n"+
+"        }                                       \n"+
+"</style>";
+
+   var ctrlStylePrint =
+"<style media='print'>                      \n"+
+"/******                                    \n"+
+" * Turn on print-specific stuff/classes    \n"+
+" */                                        \n"+
+"                                           \n"+
+" .extra { background: transparent !important; }  \n"+
+" div.extra, pre.extra, .example { font-size: 10pt; color: #333; } \n"+
+" ul.extra a { font-weight: bold; }         \n"+
+"                                           \n"+
+"/*****                                     \n"+
+" * Turn off online (screen/projection)-specific stuff/classes \n"+
+" */                                        \n"+
+"                                           \n"+
+" p.example { display: none; }              \n"+
+"                                           \n"+
+"                                           \n"+
+"/***********                               \n"+
+" * The following rule keeps the layout stuff out of print. \n"+
+" * Remove at your own risk!                \n"+
+" */                                        \n"+
+"                                           \n"+
+" .layout, .layout * {display: none !important;}  \n"+
+"                                           \n"+
+"/***********                               \n"+
+" * More stuff                              \n"+
+" */                                        \n"+
+"                                           \n"+
+" .projection { display: none; }            \n"+
+"</style>";
+
+    $( 'head' ).append( ctrlStyleProjection );
+    $( 'head' ).append( ctrlStyleScreen );
+    $( 'head' ).append( ctrlStylePrint );
+}
+
+
+Slideshow.addStyles();
