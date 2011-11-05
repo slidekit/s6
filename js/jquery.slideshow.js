@@ -19,56 +19,19 @@ var Slideshow = {
 /************************************
  * lets you define your own "global" transition function
  *   passes in a reference to from and to slide wrapped in jQuery wrapper
+ *
+ *  see jquery.slideshow.transition.js for more examples
  */
 
 Slideshow.transition = function( $from, $to ) {
   
   $from.hide();
   $to.show();
-  
-  // $from.hide('fast');
-  // $to.show('fast'); 
 }
-
-/* todo: move transitions code to jquery.slideshow.effects.js ?? */
-
-/***********************
- * sample custom transition using scrollUp effect
- * inspired by Karl Swedberg's Scroll Up Headline Reader jQuery Tutorial[1]
- * [1] http://docs.jquery.com/Tutorials:Scroll_Up_Headline_Reader
- */
-
-function transitionSlideUpSlideDown( $from, $to ) {
-  $from.slideUp( 500, function() { $to.slideDown( 1000 ); } );
-}
-
-function transitionFadeOutFadeIn( $from, $to ) {
-  $from.fadeOut( 500 );
-  $to.fadeIn( 500 );
-}
-
-function transitionScrollUp( $from, $to ) {   
-  var cheight = $from.outerHeight();
-
-  // hide scrollbar during animation
-  $( 'body' ).css( 'overflow-y', 'hidden' );
-
-  $to.css( 'top', cheight+'px' );
-  $to.show();
-
-  $from.animate( {top: -cheight}, 'slow' );
-  $to.animate( {top: 0}, 'slow', function() {
-    $from.hide().css( 'top', '0px');
-
-    // restore possible scrollbar 
-    $( 'body' ).css( 'overflow-y', 'auto' );
-  }); 
-}
-
 
 
 Slideshow.debug = function( msg ) {
-  if( this.settings.debug && window.console && window.console.log  )
+  if( window.console && window.console.log  )
       window.console.log( '[debug] ' + msg );
 }
 
@@ -80,7 +43,7 @@ Slideshow.init = function( options ) {
     titleSelector     : 'h1',      
     slideSelector     : '.slide',   // dummy (not yet working)
     stepSelector      : '.step',    // dummy (not yet working)
-    debug             :  true
+    debug             :  false
   }, options || {});
 
   this.isProjection = false; // are we in projection (slideshow) mode (in contrast to screen (outline) mode)?     
@@ -89,20 +52,20 @@ Slideshow.init = function( options ) {
   this.incpos = 0;    // current step in slide  
   this.steps  = null;
 
-  this.$slides           = $( '.slide' );
+  this.$slides = $( '.slide' );
       
   this.smax = this.$slides.length;
   
   this.addSlideIds();
   this.steps = this.collectSteps();
      
+
   // $stylesProjection  holds all styles (<link rel="stylesheet"> or <style> w/ media type projection)
   // $stylesScreen      holds all styles (<link rel="stylesheet"> or <style> w/ media type screen)
 
   // add workaround for chrome
-	//  use screen,projection instead of projection
-	//  (without projection inline style tag gets not parsed into a styleSheet accesible via JavaScript)
-
+  //  use screen,projection instead of projection
+  //  (without projection inline style tag gets not parsed into a styleSheet accesible via JavaScript)
 
   this.$stylesProjection = $( 'link[media*=projection], style[media*=projection]' ).not('[rel*=less]').not('[type*=less]');
   this.$stylesScreen     = $( 'link[media*=screen], style[media*=screen]' ).not('[media*=projection]').not('[rel*=less]').not('[type*=less]') ;
@@ -242,7 +205,7 @@ Slideshow.go = function( dir )
   if( this.snum < 1 ) this.snum = 1;
   
   var nid = '#slide' + this.snum;  /* next slide (selector) id */
-  var nsteps = this.steps[this.snum-1]; /* next slide steps array */															  
+  var nsteps = this.steps[this.snum-1]; /* next slide steps array */
   
 	if( dir < 0 ) /* go backwards? */
 	{
@@ -293,14 +256,7 @@ Slideshow.subgo = function( dir )
       $( csteps[this.incpos-1] ).addClass( 'stepcurrent' );
 	}
 } // end subgo()
- 
-   
-   
-  
-Slideshow.toggleFooter = function()
-{
-  $( '#footer, footer').toggle(); 
-}
+
 
 Slideshow.keys = function( key )
 {  
@@ -345,9 +301,6 @@ Slideshow.keys = function( key )
 			case 35: // end
 				this.goTo( this.smax );
 				break;   
-      case 70: //f
-        this.toggleFooter();
-        break;
       case 68: // d
         this.toggleDebug();
         break;
@@ -365,21 +318,12 @@ Slideshow.toggleDebug = function()
 
 Slideshow.doDebug = function()
 {
-   // fix/todo: save background into oldbackground
-   //  so we can restore later 
-   
    if( this.settings.debug == true )
    {
-      $( '#header,header' ).css( 'background', '#FCC' );
-      $( '#footer,footer' ).css( 'background', '#CCF' );
-
       $( document ).trigger( 'slideshow.debug.on' );
    }
    else
    {
-      $( '#header,header' ).css( 'background', 'transparent' );
-      $( '#footer,footer' ).css( 'background', 'transparent' );
-
       $( document ).trigger( 'slideshow.debug.off' );
    }
 }

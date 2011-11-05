@@ -1,3 +1,15 @@
+### r2011-11-05
+
+* Add chrome fix/workaround for inline styles (projection media needs to get set to screen,projection)
+* Move code to addons using new slideshow triggers; new addons include:
+  * counter (slide counter e.g. 1/7)
+  * controls (toggle, next, prev buttons, jumplist)
+  * autoplay
+  * footer/header
+* Moved sample transitions to jquery.slideshow.transitions.js
+* Changed .slide box-sizing to border-box (lets you use width: 100%; height: 100%;)
+* Minor fixes
+
 ### r2011-11-01
 
 * Add minimalistic.html template; all styles (projection, screen, print) inline plus no less.js used
@@ -28,7 +40,7 @@
 ### r2010-07-18
 
 * Adding custom slide transitions plus some sample animations (e.g. slide up/down, fade out/in)
-* Adding auto clicker (click on title to go to next slide)
+* Adding clicker (click on title to go to next slide)
 * Adding autoplay (press a/p/s-key to toggle autoplay)
 
 ### r2010-07-17
