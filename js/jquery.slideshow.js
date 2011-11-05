@@ -9,7 +9,6 @@ var Slideshow = {
   smax:   1,             // max number of slides 
   incpos: 0,             // current step in slide  
   steps:   null,
-  autoplayInterval: null,
 
   $slides: null,
   $stylesProjection: null,
@@ -89,13 +88,11 @@ Slideshow.init = function( options ) {
   this.smax = 1;      // max number of slides 
   this.incpos = 0;    // current step in slide  
   this.steps  = null;
-  this.autoplayInterval = null;
 
   this.$slides           = $( '.slide' );
       
   this.smax = this.$slides.length;
   
-   
   this.addSlideIds();
   this.steps = this.collectSteps();
      
@@ -133,8 +130,8 @@ Slideshow.init = function( options ) {
 
   if( this.settings.mode == 'outline' ) 
     this.toggle();
-  else if( this.settings.mode == 'autoplay' )
-    this.toggleAutoplay();
+
+  $( document ).trigger( 'slideshow.start' );  // fire start for addons
       
   $( document ).bind( 'keyup', $.proxy( Slideshow.keys, this ));
 } // end init() 
@@ -348,11 +345,6 @@ Slideshow.keys = function( key )
 			case 35: // end
 				this.goTo( this.smax );
 				break;   
-      case 65: //a
-			case 80: //p
-			case 83: //s
-				this.toggleAutoplay();
-				break;
       case 70: //f
         this.toggleFooter();
         break;
@@ -364,25 +356,6 @@ Slideshow.keys = function( key )
 	}
 } // end keys()
 
-Slideshow.autoplay = function()
-{
-  // suspend autoplay in outline view (just slideshow view)
-  if( !this.isProjection )
-    return;
-
-  // next slide/step, please
-  var csteps = this.steps[this.snum-1]; // current slide steps array 
-  
-  if( !csteps || this.incpos >= csteps.length ) {
-    if( this.snum >= this.smax )
-      this.goTo( 1 );   // reached end of show? start with 1st slide again (for endless cycle)
-    else
-      this.go(1);
-  }
-  else {
-    this.subgo(1);
-  }
-} // end autoplay()
 
 Slideshow.toggleDebug = function()
 {
@@ -409,19 +382,6 @@ Slideshow.doDebug = function()
 
       $( document ).trigger( 'slideshow.debug.off' );
    }
-}
-
-Slideshow.toggleAutoplay = function()
-{
-  if( this.autoplayInterval )
-  {
-    clearInterval( this.autoplayInterval );
-    this.autoplayInterval = null;
-  }
-  else
-  {
-   this.autoplayInterval = setInterval( this.autoplay, 2000 );
-  }
 }
 
 Slideshow.collectStepsWorker = function(obj)
