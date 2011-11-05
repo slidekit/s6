@@ -8,7 +8,7 @@
  *   layout structure:
  *
  *  .layout
- *    > #currentSlide  (e.g. 1/7)
+ *    > #counter  (e.g. 1/7)
  */
 
 
@@ -20,7 +20,7 @@ Slideshow.counterInit = function()
   if( $( '.layout' ).length == 0 )
     $( 'body' ).append( "<div class='layout'></div>");
 
-  $( '.layout' ).append( "<div id='currentSlide'>" );
+  $( '.layout' ).append( "<div id='counter'>" );
  
   this.counterUpdate();
 }
@@ -28,13 +28,13 @@ Slideshow.counterInit = function()
 Slideshow.counterDebugOn = function()
 {
   this.debug( 'calling counterDebugOn()' );
-  $( '#currentSlide' ).css( 'background', '#FFC' );
+  $( '#counter' ).css( 'background', '#FFC' );
 }
 
 Slideshow.counterDebugOff = function()
 {
   this.debug( 'calling counterDebugOff()' );
-  $( '#currentSlide' ).css( 'background', 'transparent' );
+  $( '#counter' ).css( 'background', 'transparent' );
 }
 
 Slideshow.counterKeys = function( event, key )
@@ -58,7 +58,7 @@ Slideshow.counterChange = function()
 
 Slideshow.counterUpdate = function()
 { 
-  $( '#currentSlide' ).html( this.snum + '/' + this.smax );
+  $( '#counter' ).html( this.snum + '/' + this.smax );
 }
 
 
@@ -70,7 +70,7 @@ Slideshow.counterToggle = function()
   //   but css won't get scoped for media (e.g. projection, screen, etc)
   //   thus, css changes "spill over" to all media types
   
-  $( '#currentSlide' ).toggle();
+  $( '#counter' ).toggle();
 }
 
 // ------------------------------------------------
@@ -90,7 +90,7 @@ Slideshow.counterAddStyles = function() {
    var styleProjection =
 "<style media='screen,projection'>                   \n"+
 "                                                    \n"+
-" #currentSlide { position: fixed;                   \n"+
+" #counter      { position: fixed;                   \n"+
 "                 left: 45%; bottom: 1em;            \n"+
 "                width: 10%;                         \n"+
 "                z-index: 10;                        \n"+
@@ -98,14 +98,14 @@ Slideshow.counterAddStyles = function() {
 "                font-size: 80%;                     \n"+
 "              }                                     \n"+
 "                                                    \n"+
-" #currentSlide :link,                               \n"+
-" #currentSlide :visited {  text-decoration: none; } \n"+
+" #counter :link,                                    \n"+
+" #counter :visited {  text-decoration: none; }      \n"+
 "                                                    \n"+
 "</style>";
 
    var styleScreen =
-"<style media='screen'>                         \n"+
-" #currentSlide { display: none !important; }   \n"+
+"<style media='screen'>                    \n"+
+" #counter { display: none !important; }   \n"+
 "</style>";
 
   $( 'head' ).append( styleProjection );

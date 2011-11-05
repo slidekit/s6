@@ -109,8 +109,6 @@ Slideshow.init = function( options ) {
 
   this.$stylesProjection = $( 'link[media*=projection], style[media*=projection]' ).not('[rel*=less]').not('[type*=less]');
   this.$stylesScreen     = $( 'link[media*=screen], style[media*=screen]' ).not('[media*=projection]').not('[rel*=less]').not('[type*=less]') ;
-
-  this.createControls();
    
   $( document ).trigger( 'slideshow.init' );  // fire init for addons
  
@@ -210,27 +208,6 @@ Slideshow.toggle = function() {
   }  
 } // end toggle()
 
-Slideshow.showHide = function( action )
-{
-    var $navLinks = $( '#navLinks' )  
-       
-    switch( action ) {
-      case 's': $navLinks.css( 'visibility', 'visible' );  break;
-      case 'h': $navLinks.css( 'visibility', 'hidden' );   break;
-      case 'c':  /* toggle control panel */
-          if( $navLinks.css( 'visibility' ) != 'visible' )
-             $navLinks.css( 'visibility', 'visible' );
-          else
-             $navLinks.css( 'visibility', 'hidden' );
-          break; 
-    }
-}   // end showHide
-   
-  
-Slideshow.updateJumpList = function()
-{
-  $('#jumplist').get(0).selectedIndex = (this.snum-1);
-}
   
 Slideshow.updatePermaLink = function()
 {
@@ -292,7 +269,6 @@ Slideshow.go = function( dir )
     this.transition( $( cid ), $( nid ) );
   }
   
-  this.updateJumpList();
   this.updatePermaLink(); 
   
   $( document ).trigger( 'slideshow.change' );
@@ -321,51 +297,8 @@ Slideshow.subgo = function( dir )
 	}
 } // end subgo()
  
-Slideshow.populateJumpList = function()
-{    
-  var self = this;   // NOTE: jquery binds this in .each to element
-
-  var list = $('#jumplist').get(0);
-    
-  this.$slides.each( function(i) {
-    var text = $(this).find( self.settings.titleSelector ).text();
-    list.options[list.length] = new Option( (i+1)+' : '+ text, (i+1) );
-  });
-} // end populateJumList 
    
    
-Slideshow.createControls = function()
-{
-  var self = this;   // NOTE: jquery binds this in .each,.click, etc to element
-
-  // todo: make layout into an id (not class?)
-  //  do we need or allow more than one element?
-       
-     // if no div.layout exists, create one
-     if( $( '.layout' ).length == 0 )
-        $( 'body' ).append( "<div class='layout'></div>");
-
-     $( '.layout' ).append( "<div id='controls'>" );
- 
-      var $controls = $( '#controls' )
-    
-   $controls.html(  '<div id="navLinks">' 
-     + '<a accesskey="t" id="toggle" href="#">&#216;<\/a>' 
-    + '<a accesskey="z" id="prev" href="#">&laquo;<\/a>' 
-    + '<a accesskey="x" id="next" href="#">&raquo;<\/a>' 
-    + '<div id="navList"><select id="jumplist" /><\/div>' 
-    + '<\/div>' ); 
-      
-      $controls.hover( function() { self.showHide('s') }, function() { self.showHide('h') });
-      $('#toggle').click( function() { self.toggle(); } );
-      $('#prev').click( function() { self.go(-1); } );
-      $('#next').click( function() { self.go(1); } );
-       
-      $('#jumplist').change( function() { self.goTo( parseInt( $( '#jumplist' ).val() )); } );
-
-      this.populateJumpList();
-      this.updatePermaLink();
-} // end createControls()
   
 Slideshow.toggleFooter = function()
 {
@@ -415,9 +348,6 @@ Slideshow.keys = function( key )
 			case 35: // end
 				this.goTo( this.smax );
 				break;   
-			case 67: // c
-				this.showHide('c');  // toggle controls (navlinks,navlist)
-				break;
       case 65: //a
 			case 80: //p
 			case 83: //s
@@ -469,21 +399,18 @@ Slideshow.doDebug = function()
    {
       $( '#header,header' ).css( 'background', '#FCC' );
       $( '#footer,footer' ).css( 'background', '#CCF' );
-      $( '#controls' ).css( 'background', '#BBD' );
-			
-			$( document ).trigger( 'slideshow.debug.on' );
+
+      $( document ).trigger( 'slideshow.debug.on' );
    }
    else
    {
       $( '#header,header' ).css( 'background', 'transparent' );
       $( '#footer,footer' ).css( 'background', 'transparent' );
-      $( '#controls' ).css( 'background', 'transparent' );
-			
-			$( document ).trigger( 'slideshow.debug.off' );
-   }
-} // end doDebug()
 
-	 
+      $( document ).trigger( 'slideshow.debug.off' );
+   }
+}
+
 Slideshow.toggleAutoplay = function()
 {
   if( this.autoplayInterval )
@@ -590,58 +517,15 @@ Slideshow.addSlideIds = function() {
 
 Slideshow.addStyles = function() {
   this.debug( 'add builtin css via inline style elements' );
-
-     // add css styles for controls
   
-/*********  layout block structure
- *
- *  .layout
- *    > #header
- *    > #footer
- *    > #controls      (holding navigation controls)
- *       > #navLinks
- *          > #toggle
- *          > #navList
- *            > #jumplist
- *    > #currentSlide  (e.g. 1/7)
- */
-
-
-   var ctrlStyleProjection =
+   var styleProjection =
 "<style media='screen,projection'>               \n"+
-"                                                \n"+
 " .slide { display: block;  }                    \n"+
 " .notes, .note, .handout { display: none;   }   \n"+
 " .layout { display: block; }                    \n"+
-"                                                \n"+
-" /*******                                       \n"+
-"  * format controls block                       \n"+
-"  */                                            \n"+
-"                                                \n"+
-" #controls { position: fixed;                   \n"+
-"              left: 60%; bottom: 0;             \n"+
-"              width: 40%;                       \n"+
-"              z-index: 100;                     \n"+
-"              text-align: right;                \n"+
-"              font-weight: bold;                \n"+
-"              font-size: 120%;                  \n"+
-"            }                                   \n"+
-"                                                \n"+
-" #controls :focus { outline: 1px dotted white;} \n"+
-"                                                \n"+  
-" #controls #navLinks { text-align: right; margin: 0; visibility: hidden; } \n"+
-
-"                                                \n"+
-" #controls #navLinks a { padding: 0; margin: 0 0.5em; cursor: pointer; border: none; }  \n"+
-"                                                \n"+
-" #controls #navLinks :link,                     \n"+
-" #controls #navLinks :visited {text-decoration: none; } \n"+
-"                                                \n"+
-" #controls #navList #jumplist { background: white; color: black; } \n"+
-"                                                \n"+
 "</style>";
 
-   var ctrlStyleScreen =
+   var styleScreen =
 "<style media='screen'>                      \n"+
 "/****                                           \n"+
 " * hide layout stuff (header, footer, navLinks, navList etc.) \n"+
@@ -650,29 +534,9 @@ Slideshow.addStyles = function() {
 " .layout * { display: none; }                   \n"+
 "                                                \n"+
 " .projection { display: none; }                 \n"+
-"                                                \n"+
-"/*********                                      \n"+
-" * make toggle button visible and reposition to upper right corner  \n"+
-" *   note: toogle button is nested inside #controls > #navLinks > #toogle \n"+
-" */                                             \n"+
-"                                                \n"+
-" #controls,                                     \n"+
-" #navLinks,                                     \n"+
-" #toggle    { display: block;                   \n"+
-"             visibility: visible;               \n"+
-"             margin: 0; padding: 0;             \n"+
-"          }                                     \n"+
-"                                                \n"+
-" #toggle { position: fixed;                     \n"+
-"          top: 0; right: 0;                     \n"+
-"          padding: 0.5em;                       \n"+
-"          border-left: 1px solid;               \n"+
-"          border-bottom: 1px solid;             \n"+
-"          background: white;                    \n"+
-"        }                                       \n"+
 "</style>";
 
-   var ctrlStylePrint =
+   var stylePrint =
 "<style media='print'>                              \n"+
 "                                                   \n"+
 " .slide { display: block !important; }             \n"+
@@ -695,10 +559,9 @@ Slideshow.addStyles = function() {
 "                                           \n"+
 "</style>";
 
-    $( 'head' ).append( ctrlStyleProjection );
-    $( 'head' ).append( ctrlStyleScreen );
-    $( 'head' ).append( ctrlStylePrint );
+    $( 'head' ).append( styleProjection );
+    $( 'head' ).append( styleScreen );
+    $( 'head' ).append( stylePrint );
 }
-
 
 Slideshow.addStyles();
