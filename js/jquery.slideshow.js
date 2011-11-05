@@ -137,10 +137,6 @@ Slideshow.init = function( options ) {
     this.toggle();
   else if( this.settings.mode == 'autoplay' )
     this.toggleAutoplay();
-  
-  
-  if( this.settings.debug == true )
-    this.doDebug();
       
   $('html').bind( 'keyup', $.proxy( this, 'keys'));
 } // end init() 
@@ -152,9 +148,10 @@ Slideshow.notOperaFix = function() {
 
    var self = this;   // NOTE: jquery binds this in .each to element
 
-   this.$stylesProjection.each( function(i) {          
+   this.$stylesProjection.each( function(i) {
      var styleProjection = this;
-     styleProjection.media = 'screen';
+     // note: no longer used; workaround for chrome needs screen,projection to make it work (thus, no need to switch to screen)
+     // styleProjection.media = 'screen';
      styleProjection.disabled = true;
      
      self.debug( "notOperaFix - stylesProjection["+i+"] switching media type from projection to screen" );
@@ -166,7 +163,7 @@ Slideshow.notOperaFix = function() {
    this.toggle();
    
    // now we should be in project mode
-} // end notOperatFix()    
+} // end notOperatFix()
 
 
 Slideshow.toggle = function() {
@@ -623,17 +620,25 @@ Slideshow.addStyles = function() {
  *    > #currentSlide  (e.g. 1/7)
  */
 
-    // -- format for (navigation) #controls block
-    // -- format for #currentSlide block 
 
    var ctrlStyleProjection =
 "<style media='screen,projection'>               \n"+
-"  #controls { position: fixed;                  \n"+
+"                                                \n"+
+" .slide { display: block;  }                    \n"+
+" .notes, .note, .handout { display: none;   }   \n"+
+" .layout { display: block; }                    \n"+
+"                                                \n"+
+" /*******                                       \n"+
+"  * format controls block                       \n"+
+"  */                                            \n"+
+"                                                \n"+
+" #controls { position: fixed;                   \n"+
 "              left: 60%; bottom: 0;             \n"+
 "              width: 40%;                       \n"+
 "              z-index: 100;                     \n"+
 "              text-align: right;                \n"+
-"              font: bold 1.2em Verdana, Helvetica, sans-serif; \n"+
+"              font-weight: bold;                \n"+
+"              font-size: 120%;                  \n"+
 "            }                                   \n"+
 "                                                \n"+
 " #controls :focus { outline: 1px dotted white;} \n"+
@@ -658,17 +663,12 @@ Slideshow.addStyles = function() {
 "                width: 10%;                     \n"+
 "                z-index: 10;                    \n"+
 "                text-align: center;             \n"+
-"                font-size: 0.8em;               \n"+
+"                font-size: 80%;                 \n"+
 "              }                                 \n"+
 "                                                \n"+
 " #currentSlide :link,                           \n"+
 " #currentSlide :visited {  text-decoration: none; } \n"+
 "                                                \n"+
-" /*******                                       \n"+
-" /* handout, notes (use note? handout? notes?)  \n"+
-"  */                                            \n"+
-"                                                \n"+
-" .notes  { display: none; }                     \n"+
 "</style>";
 
    var ctrlStyleScreen =
@@ -703,7 +703,12 @@ Slideshow.addStyles = function() {
 "</style>";
 
    var ctrlStylePrint =
-"<style media='print'>                      \n"+
+"<style media='print'>                              \n"+
+"                                                   \n"+
+" .slide { display: block !important; }             \n"+
+" .projection { display: none; }                    \n"+
+" .layout, .layout * { display: none !important; }  \n"+
+"                                                   \n"+
 "/******                                    \n"+
 " * Turn on print-specific stuff/classes    \n"+
 " */                                        \n"+
@@ -718,19 +723,6 @@ Slideshow.addStyles = function() {
 "                                           \n"+
 " p.example { display: none; }              \n"+
 "                                           \n"+
-"                                           \n"+
-"/***********                               \n"+
-" * The following rule keeps the layout stuff out of print. \n"+
-" * Remove at your own risk!                \n"+
-" */                                        \n"+
-"                                           \n"+
-" .layout, .layout * {display: none !important;}  \n"+
-"                                           \n"+
-"/***********                               \n"+
-" * More stuff                              \n"+
-" */                                        \n"+
-"                                           \n"+
-" .projection { display: none; }            \n"+
 "</style>";
 
     $( 'head' ).append( ctrlStyleProjection );

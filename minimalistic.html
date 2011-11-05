@@ -24,13 +24,15 @@ html,
 body,
 .presentation { margin: 0; padding: 0; }
 
-.slide { display: block; 
-         position: absolute;
+.slide { position: absolute;
          top: 0; left: 0; 
          margin: 0;
          border: none;
-         padding: 2% 4% 0% 4%;      /* css note: order is => top right bottom left  */
-         width: 92%; height: 96%;    /* css note: to get to 100% add padding/border/margin */
+         padding: 2% 4% 0% 4%;         /* css note: order is => top right bottom left  */
+         -moz-box-sizing: border-box;
+         -webkit-box-sizing: border-box;
+         box-sizing: border-box;
+         width: 100%; height: 100%;    /* css note: lets use border-box; no need to add padding+border to get to 100% */
          overflow-x: hidden; overflow-y: auto;
          z-index: 2;
        }
@@ -42,8 +44,6 @@ body,
   background-image: -webkit-linear-gradient(top, blue, aqua, blue, aqua);
   background-image: -moz-linear-gradient(top, blue, aqua, blue, aqua);
 }
-
-.layout { display: block; }
 
 .layout #header {  position: fixed;
                     top: 0; left: 0;
@@ -59,21 +59,18 @@ body,
                   font-size: 100%; font-weight: bold;
                 }
 
-.layout #footer h1 { display: block; margin: 0; padding: 0 1em; font-size: 0.5em; }
-.layout #footer h2 { display: block; margin: 0; padding: 0 1em; font-size: 0.5em; font-style: italic; }
+.layout #footer h1 { display: block; margin: 0; padding: 0 1em; font-size: 50%; }
+.layout #footer h2 { display: block; margin: 0; padding: 0 1em; font-size: 50%; font-style: italic; }
 </style>
 
 <style media="screen">
-.slide  {  border-top: 1px solid #888; }
+.slide             { border-top: 1px solid #888; }
 .slide:first-child { border: none;  }
 </style>
 
 <style media="print">
-.slide { display: block !important;
-         page-break-inside: avoid;
-       }
-
-.slide h1 { page-break-after: avoid; }
+.slide    { page-break-inside: avoid; }
+.slide h1 { page-break-after:  avoid; }
 .slide ul { page-break-inside: avoid; }
 </style>
 
