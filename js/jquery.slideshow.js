@@ -81,8 +81,7 @@ Slideshow.init = function( options ) {
     titleSelector     : 'h1',      
     slideSelector     : '.slide',   // dummy (not yet working)
     stepSelector      : '.step',    // dummy (not yet working)
-    debug             :  true,
-    change	      : null  //  todo: change to use a custom event and trigger
+    debug             :  true
   }, options || {});
 
   this.isProjection = false; // are we in projection (slideshow) mode (in contrast to screen (outline) mode)?     
@@ -100,8 +99,6 @@ Slideshow.init = function( options ) {
   this.addSlideIds();
   this.steps = this.collectSteps();
      
-  this.createControls();   // note: adds style elements (thus, find $styles queries need to go afterwards)
-
   // $stylesProjection  holds all styles (<link rel="stylesheet"> or <style> w/ media type projection)
   // $stylesScreen      holds all styles (<link rel="stylesheet"> or <style> w/ media type screen)
 
@@ -113,10 +110,13 @@ Slideshow.init = function( options ) {
   this.$stylesProjection = $( 'link[media*=projection], style[media*=projection]' ).not('[rel*=less]').not('[type*=less]');
   this.$stylesScreen     = $( 'link[media*=screen], style[media*=screen]' ).not('[media*=projection]').not('[rel*=less]').not('[type*=less]') ;
 
-
+  this.createControls();
    
+  $( document ).trigger( 'slideshow.init' );  // fire init for addons
+ 
   this.addClicker();
-         
+  
+       
   // opera is the only browser currently supporting css projection mode 
   this.notOperaFix();
 
@@ -138,10 +138,10 @@ Slideshow.init = function( options ) {
   else if( this.settings.mode == 'autoplay' )
     this.toggleAutoplay();
       
-  $('html').bind( 'keyup', $.proxy( this, 'keys'));
+  $( document ).bind( 'keyup', $.proxy( Slideshow.keys, this ));
 } // end init() 
  
- 
+
   
 Slideshow.notOperaFix = function() {
    // 1) switch media type from projection to screen
@@ -226,10 +226,6 @@ Slideshow.showHide = function( action )
     }
 }   // end showHide
    
-Slideshow.updateCurrentSlideCounter = function()
-{ 
-  $( '#currentSlide' ).html( this.snum + '/' + this.smax );
-}
   
 Slideshow.updateJumpList = function()
 {
@@ -297,10 +293,9 @@ Slideshow.go = function( dir )
   }
   
   this.updateJumpList();
-  this.updateCurrentSlideCounter();
   this.updatePermaLink(); 
   
-  if( this.settings.change ) { this.settings.change(); }
+  $( document ).trigger( 'slideshow.change' );
 } // end go()
 
 
@@ -350,18 +345,16 @@ Slideshow.createControls = function()
      if( $( '.layout' ).length == 0 )
         $( 'body' ).append( "<div class='layout'></div>");
 
-     $( '.layout' )
-	    .append( "<div id='controls'>" )
-	    .append( "<div id='currentSlide'>" );
+     $( '.layout' ).append( "<div id='controls'>" );
  
       var $controls = $( '#controls' )
     
-   	 $controls.html(  '<div id="navLinks">' 
-	    + '<a accesskey="t" id="toggle" href="#">&#216;<\/a>' 
-	    + '<a accesskey="z" id="prev" href="#">&laquo;<\/a>' 
-	    + '<a accesskey="x" id="next" href="#">&raquo;<\/a>' 
-	    + '<div id="navList"><select id="jumplist" /><\/div>' 
-	    + '<\/div>' ); 
+   $controls.html(  '<div id="navLinks">' 
+     + '<a accesskey="t" id="toggle" href="#">&#216;<\/a>' 
+    + '<a accesskey="z" id="prev" href="#">&laquo;<\/a>' 
+    + '<a accesskey="x" id="next" href="#">&raquo;<\/a>' 
+    + '<div id="navList"><select id="jumplist" /><\/div>' 
+    + '<\/div>' ); 
       
       $controls.hover( function() { self.showHide('s') }, function() { self.showHide('h') });
       $('#toggle').click( function() { self.toggle(); } );
@@ -369,17 +362,10 @@ Slideshow.createControls = function()
       $('#next').click( function() { self.go(1); } );
        
       $('#jumplist').change( function() { self.goTo( parseInt( $( '#jumplist' ).val() )); } );
-  	
-      this.populateJumpList();     
-      this.updateCurrentSlideCounter();
-      this.updatePermaLink(); 
-} // end createControls()
 
-Slideshow.toggleSlideNumber = function()
-{
-  // toggle slide number/counter
-  $( '#currentSlide' ).toggle();
-}
+      this.populateJumpList();
+      this.updatePermaLink();
+} // end createControls()
   
 Slideshow.toggleFooter = function()
 {
@@ -440,13 +426,11 @@ Slideshow.keys = function( key )
       case 70: //f
         this.toggleFooter();
         break;
-      case 78: // n
-        this.toggleSlideNumber();
-        break;
       case 68: // d
         this.toggleDebug();
         break;
 		}
+		$( document ).trigger( 'slideshow.keys', key );
 	}
 } // end keys()
 
@@ -486,14 +470,16 @@ Slideshow.doDebug = function()
       $( '#header,header' ).css( 'background', '#FCC' );
       $( '#footer,footer' ).css( 'background', '#CCF' );
       $( '#controls' ).css( 'background', '#BBD' );
-      $( '#currentSlide' ).css( 'background', '#FFC' ); 
+			
+			$( document ).trigger( 'slideshow.debug.on' );
    }
    else
    {
       $( '#header,header' ).css( 'background', 'transparent' );
       $( '#footer,footer' ).css( 'background', 'transparent' );
       $( '#controls' ).css( 'background', 'transparent' );
-      $( '#currentSlide' ).css( 'background', 'transparent' );       
+			
+			$( document ).trigger( 'slideshow.debug.off' );
    }
 } // end doDebug()
 
@@ -603,7 +589,7 @@ Slideshow.addSlideIds = function() {
 
 
 Slideshow.addStyles = function() {
-  this.debug( 'add internal css via style elements' );
+  this.debug( 'add builtin css via inline style elements' );
 
      // add css styles for controls
   
@@ -652,22 +638,6 @@ Slideshow.addStyles = function() {
 " #controls #navLinks :visited {text-decoration: none; } \n"+
 "                                                \n"+
 " #controls #navList #jumplist { background: white; color: black; } \n"+
-"                                                \n"+
-"                                                \n"+
-" /*******                                       \n"+
-" /* format for currentSlide block ( e.g. 2/20 ) \n"+
-"  */                                            \n"+
-"                                                \n"+
-" #currentSlide { position: fixed;               \n"+
-"                 left: 45%; bottom: 1em;        \n"+
-"                width: 10%;                     \n"+
-"                z-index: 10;                    \n"+
-"                text-align: center;             \n"+
-"                font-size: 80%;                 \n"+
-"              }                                 \n"+
-"                                                \n"+
-" #currentSlide :link,                           \n"+
-" #currentSlide :visited {  text-decoration: none; } \n"+
 "                                                \n"+
 "</style>";
 
