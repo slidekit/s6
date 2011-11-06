@@ -96,7 +96,7 @@ Slideshow.init = function( options ) {
 
   $( document ).trigger( 'slideshow.start' );  // fire start for addons
       
-  $( document ).bind( 'keyup', $.proxy( Slideshow.keys, this ));
+  $( document ).on( 'keyup', $.proxy( Slideshow.keys, this ));
 } // end init() 
  
 
@@ -227,11 +227,12 @@ Slideshow.go = function( dir )
   if( !(cid == nid) ) {
     this.debug( "transition from " + cid + " to " + nid );
     this.transition( $( cid ), $( nid ) );
+
+    // only fire change event if slide changes
+    $( document ).trigger( 'slideshow.change', [$( cid ), $( nid )]);
   }
   
-  this.updatePermaLink(); 
-  
-  $( document ).trigger( 'slideshow.change' );
+  this.updatePermaLink();
 } // end go()
 
 
@@ -397,7 +398,7 @@ Slideshow.addClicker = function()
   });
    
    
-   $( this.settings.titleSelector, this.$slides ).bind('contextmenu', function() { 
+   $( this.settings.titleSelector, this.$slides ).on('contextmenu', function() { 
       if( !self.isProjection )  // suspend clicker in outline view (just slideshow view)
         return;
 

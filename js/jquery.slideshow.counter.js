@@ -28,13 +28,13 @@ Slideshow.counterInit = function()
 Slideshow.counterDebugOn = function()
 {
   this.debug( 'calling counterDebugOn()' );
-  $( '#counter' ).css( 'background', '#FFC' );
+  $( '#counter' ).addClass( 'debug' );
 }
 
 Slideshow.counterDebugOff = function()
 {
   this.debug( 'calling counterDebugOff()' );
-  $( '#counter' ).css( 'background', 'transparent' );
+  $( '#counter' ).removeClass( 'debug' );
 }
 
 Slideshow.counterKeys = function( event, key )
@@ -77,18 +77,20 @@ Slideshow.counterToggle = function()
 
 Slideshow.counterAddEvents = function()
 {
-  $( document ).bind( 'slideshow.init',      $.proxy( Slideshow.counterInit, this ));
-  $( document ).bind( 'slideshow.debug.on',  $.proxy( Slideshow.counterDebugOn, this ));
-  $( document ).bind( 'slideshow.debug.off', $.proxy( Slideshow.counterDebugOff, this ));
-  $( document ).bind( 'slideshow.keys',      $.proxy( Slideshow.counterKeys, this ));
-  $( document ).bind( 'slideshow.change',    $.proxy( Slideshow.counterChange, this ));
+  $( document ).on( 'slideshow.init',      $.proxy( Slideshow.counterInit, this ));
+  $( document ).on( 'slideshow.debug.on',  $.proxy( Slideshow.counterDebugOn, this ));
+  $( document ).on( 'slideshow.debug.off', $.proxy( Slideshow.counterDebugOff, this ));
+  $( document ).on( 'slideshow.keys',      $.proxy( Slideshow.counterKeys, this ));
+  $( document ).on( 'slideshow.change',    $.proxy( Slideshow.counterChange, this ));
 }
 
 Slideshow.counterAddStyles = function() {
   this.debug( 'add builtin counter css via inline style elements' );
-  
+
    var styleProjection =
 "<style media='screen,projection'>                   \n"+
+"                                                    \n"+
+" #counter.debug { background: #FFC; }               \n"+
 "                                                    \n"+
 " #counter      { position: fixed;                   \n"+
 "                 left: 45%; bottom: 1em;            \n"+

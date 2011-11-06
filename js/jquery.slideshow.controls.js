@@ -54,13 +54,13 @@ Slideshow.ctrlInit = function()
 Slideshow.ctrlDebugOn = function()
 {
   this.debug( 'calling ctrlDebugOn()' );
-  $( '#controls' ).css( 'background', '#BBD' );
+  $( '#controls' ).addClass( 'debug' );
 }
 
 Slideshow.ctrlDebugOff = function()
 {
   this.debug( 'calling ctrlDebugOff()' );
-  $( '#controls' ).css( 'background', 'transparent' );
+  $( '#controls' ).removeClass( 'debug' );
 }
 
 Slideshow.ctrlKeys = function( event, key )
@@ -125,11 +125,11 @@ Slideshow.ctrlToggle = function()
 
 Slideshow.ctrlAddEvents = function()
 {
-  $( document ).bind( 'slideshow.init',      $.proxy( Slideshow.ctrlInit, this ));
-  $( document ).bind( 'slideshow.debug.on',  $.proxy( Slideshow.ctrlDebugOn, this ));
-  $( document ).bind( 'slideshow.debug.off', $.proxy( Slideshow.ctrlDebugOff, this ));
-  $( document ).bind( 'slideshow.keys',      $.proxy( Slideshow.ctrlKeys, this ));
-  $( document ).bind( 'slideshow.change',    $.proxy( Slideshow.ctrlChange, this ));
+  $( document ).on( 'slideshow.init',      $.proxy( Slideshow.ctrlInit, this ));
+  $( document ).on( 'slideshow.debug.on',  $.proxy( Slideshow.ctrlDebugOn, this ));
+  $( document ).on( 'slideshow.debug.off', $.proxy( Slideshow.ctrlDebugOff, this ));
+  $( document ).on( 'slideshow.keys',      $.proxy( Slideshow.ctrlKeys, this ));
+  $( document ).on( 'slideshow.change',    $.proxy( Slideshow.ctrlChange, this ));
 }
 
 Slideshow.ctrlAddStyles = function() {
@@ -137,6 +137,9 @@ Slideshow.ctrlAddStyles = function() {
   
   var styleProjection =
 "<style media='screen,projection'>               \n"+
+"                                                \n"+
+" #controls.debug { background: #BBD; }          \n"+
+"                                                \n"+
 " #controls { position: fixed;                   \n"+
 "              left: 60%; bottom: 0;             \n"+
 "              width: 40%;                       \n"+

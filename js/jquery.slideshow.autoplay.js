@@ -83,9 +83,9 @@ Slideshow.playToggle = function()
 
 Slideshow.playAddEvents = function()
 {
-  $( document ).bind( 'slideshow.init',      $.proxy( Slideshow.playInit, this ));
-  $( document ).bind( 'slideshow.start',     $.proxy( Slideshow.playStart, this ));
-  $( document ).bind( 'slideshow.keys',      $.proxy( Slideshow.playKeys, this ));
+  $( document ).on( 'slideshow.init',      $.proxy( Slideshow.playInit, this ));
+  $( document ).on( 'slideshow.start',     $.proxy( Slideshow.playStart, this ));
+  $( document ).on( 'slideshow.keys',      $.proxy( Slideshow.playKeys, this ));
 }
 
 Slideshow.playAddEvents();
