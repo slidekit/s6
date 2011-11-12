@@ -4,17 +4,27 @@
 // (note: this is a less extendend css script, to learn more about less; see lesscss.org)
 
 @color:                  black;
-@step-hidden-color:      silver;
-@code-background-color:  azure;
+@color-step-hidden:      silver;
+
+@background-color-code:  azure;
 
 // -- gradient colors used for slides classified with cover | title
-@cover-background-gradient-color1: blue;
-@cover-background-gradient-color2: aqua;
+
+@background-gradient-color1-cover: blue;
+@background-gradient-color2-cover: aqua;
 
 // -- gradient colors for all other slides
+
 @background-gradient-color1: yellow;
 @background-gradient-color2: orange;
 
+// --- font size
+
+@font-size-h1:     245%;    // 30pt / 40px    (assuming 100% => 12pt / 16px)
+@font-size-h2:     230%;    // 28pt / 37px
+@font-size-h3:     200%;    // 24pt / 32px
+@font-size-text:   150%;    // 18pt / 24px
+@font-size-code:   140%;    // 16pt / 22px
 
 
 /////////////////////////////
@@ -29,8 +39,8 @@ a:visited { color: @color; }
 
   color: @color;
   
-  h1 { font-size: 30pt;
-       text-align: center;
+  h1 {   font-size: @font-size-h1;
+         text-align: center;
 
        &.fullscreen { position: absolute;
                       top: 40%;
@@ -40,75 +50,31 @@ a:visited { color: @color; }
        &.hidden     { display: none; }
       }
   
-  h2 { font-size: 28pt;  }
+  h2 { font-size: @font-size-h2; }
 
-  h3 { font-size: 25pt;  }
+  h3 { font-size: @font-size-h3; }
 
-  .stepcurrent { color: @color; }  
-  .step        { color: @step-hidden-color; }  // or hide next steps e.g. .step { visibility: hidden; } 
+  .stepcurrent { color: @color; }
+  .step        { color: @color-step-hidden; }  // or hide next steps e.g. .step { visibility: hidden; } 
 }
 
 
-
-/* todo: add special formating for .cover slide
-   lets you use h1(cover). for title/cover slide (a la S5 slide0) but more generic (not bound to 1st slide)
-*/
-
-.cover h1 { /* tbd */ }
-.cover h2 { /* tbd */ }
-
-/* todo: add special formating for h1, h2 in footer */
-
-#footer h1, footer h1 { /* tbd */ }
-#footer h2, footer h2 { /* tbd */ }
+ul { list-style-type: square; }
 
 
-p, li, dt, dd, td, th { font-size: 18pt; }
-
-ul { list-style-type: square; }    
-
-/**********************************/
-/* general text-alignment classes */
-
-.left   { text-align: left; }
-.center { text-align: center; }
-.right  { text-align: right;  }
-
-/*********************************
- * general font-size classes
- */
-
-.small { font-size: 97%; }
-
-.x-small,
-.smaller { font-size: 88%; }
-
-.xx-small,
-.smallest,
-.tiny      { font-size: 82%; }
+p, li, dt, dd, td, th { font-size: @font-size-text; }
 
 
-
-pre { font-size: 16pt;  }
+pre { font-size: @font-size-code; }
 
 .code { 
-        background-color: @code-background-color;
+        background-color: @background-color-code;
         padding: 5px;
       }
      
 .footnote a:first-of-type  { text-decoration: none; }
 
-
-p.small  { font-size: 97%; }
-
-p.x-small,
-p.smaller,  
 p.footnote { font-size: 88%; }
-
-p.xx-small,
-p.smallest,
-p.tiny     { font-size: 82%; }
-
 
 .help {
   p, td  { font-size: 88%; }
@@ -130,15 +96,15 @@ p.tiny     { font-size: 82%; }
                                               @background-gradient-color2);
                                               
   &.cover, &.title {
-   background-image: -webkit-linear-gradient(top, @cover-background-gradient-color1,
-                                                 @cover-background-gradient-color2,
-                                                 @cover-background-gradient-color1,
-                                                 @cover-background-gradient-color2);
+   background-image: -webkit-linear-gradient(top, @background-gradient-color1-cover,
+                                                 @background-gradient-color2-cover,
+                                                 @background-gradient-color1-cover,
+                                                 @background-gradient-color2-cover);
   
-   background-image: -moz-linear-gradient(top, @cover-background-gradient-color1,
-                                              @cover-background-gradient-color2,
-                                              @cover-background-gradient-color1,
-                                              @cover-background-gradient-color2);
+   background-image: -moz-linear-gradient(top, @background-gradient-color1-cover,
+                                              @background-gradient-color2-cover,
+                                              @background-gradient-color1-cover,
+                                              @background-gradient-color2-cover);
 
   }
 }
