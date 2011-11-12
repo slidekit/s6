@@ -32,7 +32,7 @@ Slideshow.transition = function( $from, $to ) {
 
 Slideshow.debug = function( msg ) {
   if( window.console && window.console.log  )
-      window.console.log( '[debug] ' + msg );
+       window.console.log( '[debug] ' + msg );
 }
 
 
@@ -43,7 +43,9 @@ Slideshow.init = function( options ) {
     titleSelector     : 'h1',      
     slideSelector     : '.slide',   // dummy (not yet working)
     stepSelector      : '.step',    // dummy (not yet working)
-    debug             :  false
+    debug             :  false,
+    normalize         :  true       // normalize selectors (that is, allow aliases
+                                    //  e.g. build,action,etc. for step and so on)
   }, options || {});
 
   this.isProjection = false; // are we in projection (slideshow) mode (in contrast to screen (outline) mode)?     
@@ -51,6 +53,9 @@ Slideshow.init = function( options ) {
   this.smax = 1;      // max number of slides 
   this.incpos = 0;    // current step in slide  
   this.steps  = null;
+
+  if( this.settings.normalize == true )
+    this.normalize();     
 
   this.$slides = $( '.slide' );
       
@@ -99,8 +104,23 @@ Slideshow.init = function( options ) {
   $( document ).on( 'keyup', $.proxy( Slideshow.keys, this ));
 } // end init() 
  
+ 
+Slideshow.normalize = function() {
 
-  
+  // check for .presentation aliases, that is, .deck
+  $( '.deck' ).addClass( 'presentation' );
+
+  // todo: scope with .slide?? e.g  .slide .incremental
+  // todo: make removing "old" class an option??
+
+  // check for .step aliases, that is, .incremental, .delayed, .action, .build
+  $( '.incremental, .delayed, .action, .build' ).addClass( 'step' );
+
+  // check for .notes aliases, that is, .note, .handout
+  $( '.note, .handout' ).addClass( 'notes' );
+
+}
+
 Slideshow.notOperaFix = function() {
    // 1) switch media type from projection to screen
 
@@ -424,10 +444,10 @@ Slideshow.addStyles = function() {
   this.debug( 'add builtin css via inline style elements' );
   
    var styleProjection =
-"<style media='screen,projection'>               \n"+
-" .slide { display: block;  }                    \n"+
-" .notes, .note, .handout { display: none;   }   \n"+
-" .layout { display: block; }                    \n"+
+"<style media='screen,projection'>           \n"+
+" .slide  { display: block;  }               \n"+
+" .notes  { display: none;   }               \n"+
+" .layout { display: block;  }               \n"+
 "</style>";
 
    var styleScreen =
@@ -437,31 +457,19 @@ Slideshow.addStyles = function() {
 " */                                             \n"+
 "                                                \n"+
 " .layout * { display: none; }                   \n"+
-"                                                \n"+
-" .projection { display: none; }                 \n"+
 "</style>";
 
    var stylePrint =
 "<style media='print'>                              \n"+
 "                                                   \n"+
 " .slide { display: block !important; }             \n"+
-" .projection { display: none; }                    \n"+
 " .layout, .layout * { display: none !important; }  \n"+
 "                                                   \n"+
-"/******                                    \n"+
-" * Turn on print-specific stuff/classes    \n"+
-" */                                        \n"+
-"                                           \n"+
-" .extra { background: transparent !important; }  \n"+
-" div.extra, pre.extra, .example { font-size: 10pt; color: #333; } \n"+
-" ul.extra a { font-weight: bold; }         \n"+
-"                                           \n"+
-"/*****                                     \n"+
-" * Turn off online (screen/projection)-specific stuff/classes \n"+
-" */                                        \n"+
-"                                           \n"+
-" p.example { display: none; }              \n"+
-"                                           \n"+
+"/******                                            \n"+
+" * Turn on print-specific stuff/classes            \n"+
+" */                                                \n"+
+"                                                   \n"+
+" .extra { display: block !important; }             \n"+
 "</style>";
 
     $( 'head' ).append( styleProjection );

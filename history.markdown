@@ -1,3 +1,10 @@
+### r2011-11-13
+
+* Add normalize css selector option; lets you use the following aliases
+  * presentation => deck
+  * step => incremental, delayed, action, build
+  * notes => note, handout
+
 ### r2011-11-05
 
 * Add chrome fix/workaround for inline styles (projection media needs to get set to screen,projection)
