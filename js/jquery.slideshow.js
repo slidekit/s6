@@ -107,8 +107,12 @@ Slideshow.init = function( options ) {
  
 Slideshow.normalize = function() {
 
-  // check for .presentation aliases, that is, .deck
-  $( '.deck' ).addClass( 'presentation' );
+  // check for .presentation aliases, that is, .deck, .slides
+  $( '.deck, .slides' ).addClass( 'presentation' );
+
+  // add slide class to immediate children
+  // todo: use autoslide option that lets you turn on/off option?
+  $( '.presentation' ).children().addClass( 'slide' );
 
   // todo: scope with .slide?? e.g  .slide .incremental
   // todo: make removing "old" class an option??
