@@ -12,12 +12,13 @@ function addScript( name )
   document.head.appendChild( el );
 }
 
-function addStyle( name )
+function addStyle( name, media )
 {
   var el = document.createElement( 'link' );
   el.rel = 'stylesheet';
   el.type = 'text/css';
   el.href = BASE_URL_PREFIX + name;
+  el.media = media;
 
   if(!document.head)  // fix for Firefox <4.0
     document.head = document.getElementsByTagName('head')[0];
@@ -29,7 +30,7 @@ function addStyleLess( name, media )
 {
   var el = document.createElement( 'link' );
   el.rel   = 'stylesheet/less';
-  /* el.type = 'text/css'; */
+  el.type = 'text/css';
   el.href  = BASE_URL_PREFIX + name;
   el.media = media;
 
@@ -42,19 +43,32 @@ function addStyleLess( name, media )
 
 function letsGo()
 {
+  var useLess = false;
+
   /*********
    * add style sheet links
    */
 
-  addStyleLess( 'css/projection.css.less', 'screen,projection' );
-  addStyleLess( 'css/screen.css.less',     'screen'            );
-  addStyleLess( 'css/print.css.less',      'print'             );
-
+  if( useLess )
+  {
+    addStyleLess( 'css/projection.css.less', 'screen,projection' );
+    addStyleLess( 'css/screen.css.less',     'screen'            );
+    addStyleLess( 'css/print.css.less',      'print'             );
+  }
+  else
+  {
+    addStyle( 'css/o/projection.css', 'screen,projection' );
+    addStyle( 'css/o/screen.css',     'screen'            );
+    addStyle( 'css/o/print.css',      'print'             );
+  }
+  
   /********
    * add js libs (less, jquery)
    */
 
-  addScript( 'js/less-1.1.4.min.js' );
+  if( useLess )
+    addScript( 'js/less-1.1.4.min.js' );
+
   addScript( 'js/jquery-1.7.min.js' );
 
   /********
