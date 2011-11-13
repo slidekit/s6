@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8"> 
+  <title>[your_title_here]</title>
+
+<!-- 
+   Notes on CSS media types used:
+ 
+   1) projection -> slideshow mode (display one slide at-a-time; hide all others)
+   2) screen     -> outline mode (display all slides-at-once on screen) 
+   3) print      -> print (and print preview)
+  
+   Note: toggle between projection/screen (that is, slideshow/outline) mode using t-key
+
+   Questions, comments?
+   - send them along to the mailinglist/forum online @ http://groups.google.com/group/webslideshow    
+-->
+
+<!-- styles  -->
+<style media="screen,projection">
+
+html,
+body,
+.presentation { margin: 0; padding: 0; }
+
+.slide { position: absolute;
+         top: 0; left: 0; 
+         margin: 0;
+         border: none;
+         padding: 2% 4% 0% 4%;         /* css note: order is => top right bottom left  */
+         -moz-box-sizing: border-box;
+         -webkit-box-sizing: border-box;
+         box-sizing: border-box;
+         width: 100%; height: 100%;    /* css note: lets use border-box; no need to add padding+border to get to 100% */
+         overflow-x: hidden; overflow-y: auto;
+         z-index: 2;
+       }
+       
+.slide .stepcurrent { color: black; }
+.slide .step        { color: silver; } /* or hide next steps e.g. .step { visibility: hidden; } */
+
+.slide {
+  background-image: -webkit-linear-gradient(top, blue, aqua, blue, aqua);
+  background-image: -moz-linear-gradient(top, blue, aqua, blue, aqua);
+}
+
+.layout #header {  position: fixed;
+                    top: 0; left: 0;
+                    width: 100%; height: 0.5em;
+                    z-index: 1;
+                }
+   
+.layout #footer {  position: fixed;
+                   top: auto; bottom: 0;
+                  padding: 1em 0;   /* css note: order is => 1st top,bottom; 2nd right,left */
+                  width: 100%; height: 1em;
+                  z-index: 5;
+                  font-size: 100%; font-weight: bold;
+                }
+
+.layout #footer h1 { display: block; margin: 0; padding: 0 1em; font-size: 50%; }
+.layout #footer h2 { display: block; margin: 0; padding: 0 1em; font-size: 50%; font-style: italic; }
+</style>
+
+<style media="screen">
+.slide             { border-top: 1px solid #888; }
+.slide:first-child { border: none;  }
+</style>
+
+<style media="print">
+.slide    { page-break-inside: avoid; }
+.slide h1 { page-break-after:  avoid; }
+.slide ul { page-break-inside: avoid; }
+</style>
+
+
+<!-- add js lib (jquery) -->
+<script src="js/jquery-1.7.min.js"></script>
+
+<!-- S6 JS -->
+<script src="js/jquery.slideshow.js"></script>
+<script src="js/jquery.slideshow.counter.js"></script>
+<script src="js/jquery.slideshow.controls.js"></script>
+<script src="js/jquery.slideshow.footer.js"></script>
+<script src="js/jquery.slideshow.autoplay.js"></script>
+<script>
+  $(document).ready( function() {
+    Slideshow.init();
+    
+    // Example 2: Start Off in Outline Mode
+    // Slideshow.init( { mode: 'outline' } );
+    
+    // Example 3: Use Custom Transition
+    // Slideshow.transition = transitionScrollUp;
+    // Slideshow.init();
+
+    // Example 4: Start Off in Autoplay Mode with Custom Transition
+    // Slideshow.transition = transitionScrollUp;
+    // Slideshow.init( { mode: 'autoplay' } );
+  } );
+</script>
+
+</head>
+<body>
+
+<div class="layout">
+  <div id="header"></div>
+  <div id="footer">
+    <h1>[your_footer_here]</h1>
+    <h2>[your_subfooter_here]</h2>
+  </div>
+</div>
+
+<div class="presentation">
+
+  <!-- add slides here; example -->
+  
+  <div class='slide cover'>
+    <h1>Your Slide Title Here</h1>
+    <ul>
+      <li>Item One Here</li>
+      <li>Item Two Here</li>
+    </ul>
+  </div>
+
+  <div class='slide'>
+    <h1>Steps Demos</h1>
+
+    <!-- mark list with class step to mark all items at once -->
+    <ul class='step'>
+      <li>Item 1.1 Here</li>
+      <li>Item 1.2 Here</li>
+    </ul>
+
+    <!-- or mark individual list items -->
+    <ul>
+      <li class='step'>Item 2.1 Here</li>
+      <li class='step'>Item 2.2 Here</li>
+    </ul>
+
+    <!-- or mark paragraphs, div blocks or whatever -->
+    <p class='step'>Another Step</p>
+
+  </div>
+
+  <div class='slide'>
+    <h1>Another Slide Title Here</h1>
+    <p>yada yada yada</p>
+  </div>
+
+</div> <!-- presentation -->
+</body>
+</html>
