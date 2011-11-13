@@ -1,4 +1,5 @@
-var BASE_URL_PREFIX = './';
+// var BASE_URL_PREFIX = './';  
+var BASE_URL_PREFIX = 'http://geraldb.github.com/s6/';
 
 function addScript( name )
 {
