@@ -24,7 +24,8 @@ html,
 body,
 .presentation { margin: 0; padding: 0; }
 
-.slide { position: absolute;
+.slide { display: none;
+         position: absolute;
          top: 0; left: 0; 
          margin: 0;
          border: none;
@@ -37,6 +38,8 @@ body,
          z-index: 2;
        }
        
+.slide.current { display: block; }  /* only display current slide in projection mode */
+       
 .slide .stepcurrent { color: black; }
 .slide .step        { color: silver; } /* or hide next steps e.g. .step { visibility: hidden; } */
 
@@ -44,23 +47,6 @@ body,
   background-image: -webkit-linear-gradient(top, blue, aqua, blue, aqua);
   background-image: -moz-linear-gradient(top, blue, aqua, blue, aqua);
 }
-
-.layout #header {  position: fixed;
-                    top: 0; left: 0;
-                    width: 100%; height: 0.5em;
-                    z-index: 1;
-                }
-   
-.layout #footer {  position: fixed;
-                   top: auto; bottom: 0;
-                  padding: 1em 0;   /* css note: order is => 1st top,bottom; 2nd right,left */
-                  width: 100%; height: 1em;
-                  z-index: 5;
-                  font-size: 100%; font-weight: bold;
-                }
-
-.layout #footer h1 { display: block; margin: 0; padding: 0 1em; font-size: 50%; }
-.layout #footer h2 { display: block; margin: 0; padding: 0 1em; font-size: 50%; font-style: italic; }
 </style>
 
 <style media="screen">
@@ -82,8 +68,6 @@ body,
 <script src="js/jquery.slideshow.js"></script>
 <script src="js/jquery.slideshow.counter.js"></script>
 <script src="js/jquery.slideshow.controls.js"></script>
-<script src="js/jquery.slideshow.footer.js"></script>
-<script src="js/jquery.slideshow.autoplay.js"></script>
 <script>
   $(document).ready( function() {
     Slideshow.init();
@@ -104,19 +88,11 @@ body,
 </head>
 <body>
 
-<div class="layout">
-  <div id="header"></div>
-  <div id="footer">
-    <h1>[your_footer_here]</h1>
-    <h2>[your_subfooter_here]</h2>
-  </div>
-</div>
-
 <div class="presentation">
 
   <!-- add slides here; example -->
   
-  <div class='slide cover'>
+  <div class='cover'>
     <h1>Your Slide Title Here</h1>
     <ul>
       <li>Item One Here</li>
@@ -124,7 +100,7 @@ body,
     </ul>
   </div>
 
-  <div class='slide'>
+  <div>
     <h1>Steps Demos</h1>
 
     <!-- mark list with class step to mark all items at once -->
@@ -144,7 +120,7 @@ body,
 
   </div>
 
-  <div class='slide'>
+  <div>
     <h1>Another Slide Title Here</h1>
     <p>yada yada yada</p>
   </div>

@@ -9,30 +9,62 @@
       * Add your styles here.
       */
      
+   body { font-size: 175%; }
+     
   .step  { color: silver; }  /* or hide next steps e.g. .step { visibility: hidden; } */
+    
+  .slide {
+    font-family: 'Open Sans', Arial, sans-serif;
+
+    color: rgb(102, 102, 102);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .1);
+  }
   
-  ul { list-style-type: square; }
+  .slide h1, .slide h2, .slide h3 {
+    color: rgb(51, 51, 51);
+  }
+  
+  .slide pre {
+   font-family: 'Droid Sans Mono', 'Courier New', monospace;
+   font-size: 80%;
+
+  padding: 5px 10px;
+  
+  margin-top: 40px;
+  margin-bottom: 40px;
+
+  color: black;
+  background: rgb(240, 240, 240);
+  border: 1px solid rgb(224, 224, 224);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, .1);
+  overflow: hidden;
+  }
+
+  .slide code {
+  font-family: 'Droid Sans Mono', 'Courier New', monospace;
+  color: black;
+  }
     </style>
   </head>
   <body>
 
-    <section class='presentation'>
+    <section class='slides'>
       <!-- Add your slides here. Delete or comment out the slides below. -->
       
-      <article class='slide'>
+      <article class='cover'>
         <h1>
           Title Goes Here Up
           <br>
           To Two Lines
         </h1>
         <p>
-          Carlos Freud
+          Carlos Ruby
           <br>
           November 11, 2011
         </p>
       </article>
       
-      <article class='slide'>
+      <article>
         <p>
           This is a slide with just text. This is a slide with just text.
           This is a slide with just text. This is a slide with just text.
@@ -43,7 +75,7 @@
         </p>
       </article>
 
-      <article class='slide'>
+      <article>
         <h3>
           Simple slide with header and text
         </h3>
@@ -57,7 +89,7 @@
         </p>
       </article>
 
-      <article class='slide smaller'>
+      <article class='smaller'>
         <h3>
           Simple slide with header and text (small font)
         </h3>
@@ -71,7 +103,7 @@
         </p>
       </article>
 
-      <article class='slide'>
+      <article>
         <h3>
           Slide with bullet points and a longer title, just because we
           can make it longer
@@ -81,20 +113,18 @@
             Use this template to create your presentation
           </li>
           <li>
-            Use the provided color palette, box and arrow graphics, and
-            chart styles
+            Another item here
           </li>
           <li>
-            Instructions are provided to assist you in using this
-            presentation template effectively
+            Another item here
           </li>
           <li>
-            At all times strive to maintain Google's corporate look and feel
+            Another item here
           </li>
         </ul>
       </article>
 
-      <article class='slide'>
+      <article>
         <h3>
           Slide with bullet points that builds
         </h3>
@@ -116,25 +146,27 @@
         </div>
       </article>
 
-      <article class='slide smaller'>
+      <article class='smaller'>
         <h3>
           Slide with bullet points (small font)
         </h3>
         <ul>
           <li>
             Use this template to create your presentation
+          </li>
           <li>
-            Use the provided color palette, box and arrow graphics, and
-            chart styles
+            Another item here
+          </li>
           <li>
-            Instructions are provided to assist you in using this
-            presentation template effectively
+            Another item here
+          </li>
           <li>
-            At all times strive to maintain Google's corporate look and feel
+            Another item here
+          </li>
         </ul>
       </article>
 
-      <article class='slide'>
+      <article>
         <h3>
           Slide with a table
         </h3>
@@ -158,7 +190,7 @@
         </table>
       </article>
       
-      <article class='slide smaller'>
+      <article class='smaller'>
         <h3>
           Slide with a table (smaller text)
         </h3>
@@ -182,13 +214,13 @@
         </table>
       </article>
       
-      <article class='slide'>
+      <article>
         <h2>
           Segue slide
         </h2>
       </article>
 
-      <article class='slide'>
+      <article>
         <h3>
           Slide with an image
         </h3>
@@ -196,11 +228,11 @@
           <img style='height: 500px' src='images/example-graph.png'>
         </p>
         <div class='source'>
-          Source: Carlos Freud
+          Source: Carlos Ruby
         </div>
       </article>
 
-      <article class='slide'>
+      <article>
         <h3>
           Slide with an image (centered)
         </h3>
@@ -208,11 +240,11 @@
           <img class='centered' style='height: 500px' src='images/example-graph.png'>
         </p>
         <div class='source'>
-          Source: Carlos Freud
+          Source: Carlos Ruby
         </div>
       </article>
 
-      <article class='slide fill'>
+      <article class='fill'>
         <h3>
           Image filling the slide (with optional header)
         </h3>
@@ -220,59 +252,63 @@
           <img src='images/example-cat.jpg'>
         </p>
         <div class='source white'>
-          Source: Carlos Freud
+          Source: Carlos Ruby
         </div>
       </article>
 
-      <article class='slide'>
+      <article>
         <h3>
           This slide has some code
         </h3>
         <section>
         <pre>
-&lt;script type='text/javascript'&gt;
-  // Say hello world until the user starts questioning
-  // the meaningfulness of their existence.
-  function helloWorld(world) {
-    for (var i = 42; --i &gt;= 0;) {
-      alert('Hello ' + String(world));
-    }
-  }
-&lt;/script&gt;
-&lt;style&gt;
-  p { color: pink }
-  b { color: blue }
-  u { color: 'umber' }
-&lt;/style&gt;
+# The Greeter class
+class Greeter
+  def initialize(name)
+    @name = name.capitalize
+  end
+ 
+  def salute
+    puts "Hello #{@name}!"
+  end
+end
+ 
+# Create a new object
+g = Greeter.new("world")
+ 
+# Output "Hello World!"
+g.salute
 </pre>
         </section>
       </article>
       
-      <article class='slide smaller'>
+      <article class='smaller'>
         <h3>
           This slide has some code (small font)
         </h3>
         <section>
         <pre>
-&lt;script type='text/javascript'&gt;
-  // Say hello world until the user starts questioning
-  // the meaningfulness of their existence.
-  function helloWorld(world) {
-    for (var i = 42; --i &gt;= 0;) {
-      alert('Hello ' + String(world));
-    }
-  }
-&lt;/script&gt;
-&lt;style&gt;
-  p { color: pink }
-  b { color: blue }
-  u { color: 'umber' }
-&lt;/style&gt;
+# The Greeter class
+class Greeter
+  def initialize(name)
+    @name = name.capitalize
+  end
+ 
+  def salute
+    puts "Hello #{@name}!"
+  end
+end
+ 
+# Create a new object
+g = Greeter.new("world")
+ 
+# Output "Hello World!"
+g.salute
 </pre>
         </section>
       </article>
       
-      <article class='slide'>
+      <article>
         <q>
           The best way to predict the future is to invent it.
         </q>
@@ -281,7 +317,7 @@
         </div>
       </article>
       
-      <article class='slide smaller'>
+      <article class='smaller'>
         <q>
           A distributed system is one in which the failure of a computer 
           you didn’t even know existed can render your own computer unusable.
@@ -291,26 +327,26 @@
         </div>
       </article>
       
-      <article class='slide nobackground'>
+      <article class='nobackground'>
         <h3>
           A slide with an embed + title
         </h3>
         
-        <iframe src='http://www.google.com/doodle4google/history.html'></iframe>
+        <iframe src='http://slideshow.rubyforge.org'></iframe>
       </article>
 
       <article class='slide nobackground'>
-        <iframe src='http://www.google.com/doodle4google/history.html'></iframe>
+        <iframe src='http://slideshow.rubyforge.org'></iframe>
       </article>
 
-      <article class='slide fill'>
+      <article class='fill'>
         <h3>
           Full-slide embed with (optional) slide title on top
         </h3>
-        <iframe src='http://www.google.com/doodle4google/history.html'></iframe>
+        <iframe src='http://slideshow.rubyforge.org'></iframe>
       </article>
       
-      <article class='slide'>
+      <article>
         <h3>
           Thank you!
         </h3>

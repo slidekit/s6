@@ -1,4 +1,9 @@
 
+function transition( $from, $to ) {
+  $from.hide();
+  $to.show();
+}
+
 function transitionSlideUpSlideDown( $from, $to ) {
   $from.slideUp( 500, function() { $to.slideDown( 1000 ); } );
 }

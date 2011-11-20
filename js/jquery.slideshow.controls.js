@@ -89,7 +89,33 @@ Slideshow.ctrlPopulateJumpList = function()
   var list = $('#jumplist').get(0);
     
   this.$slides.each( function(i) {
-    var text = $(this).find( self.settings.titleSelector ).text();
+    var text = "-";   // untitled slide
+    
+    // todo: use titleSelector if user set??
+    // $(this).find( self.settings.titleSelector ).text();
+    
+    var $h1 = $( 'h1', this );
+    if( $h1.length > 0 )
+    {
+      text = $h1.first().text();
+    }
+    else   // try h2 
+    {
+      var $h2 = $( 'h2', this );
+      if( $h2.length > 0 )
+      {
+        text = $h2.first().text();
+      }
+      else  // try h3
+      {
+        var $h3 = $( 'h3', this );
+        if( $h3.length > 0 )
+        {
+          text = $h3.first().text();
+        }
+      }
+    }  
+    
     list.options[list.length] = new Option( (i+1)+' : '+ text, (i+1) );
   });
 }

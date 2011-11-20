@@ -1,7 +1,6 @@
 
 var Slideshow = {
 
-  // variables
   settings: {},
 
   isProjection: false,   // are we in projection (slideshow) mode (in contrast to screen (outline) mode)?     
@@ -12,7 +11,9 @@ var Slideshow = {
 
   $slides: null,
   $stylesProjection: null,
-  $stylesScreen: null
+  $stylesScreen: null,
+
+  slideClasses: [ 'far-past', 'past', 'current', 'next', 'far-next' ]
 };
 
 
@@ -24,9 +25,7 @@ var Slideshow = {
  */
 
 Slideshow.transition = function( $from, $to ) {
-  
-  $from.hide();
-  $to.show();
+  // do nothing here; by default lets use css3 for transition effects
 }
 
 
@@ -63,7 +62,7 @@ Slideshow.init = function( options ) {
   
   this.addSlideIds();
   this.steps = this.collectSteps();
-     
+  this.updateSlides(); // mark slides w/ far-past,past,current,next,far-next
 
   // $stylesProjection  holds all styles (<link rel="stylesheet"> or <style> w/ media type projection)
   // $stylesScreen      holds all styles (<link rel="stylesheet"> or <style> w/ media type screen)
@@ -107,8 +106,12 @@ Slideshow.init = function( options ) {
  
 Slideshow.normalize = function() {
 
-  // check for .presentation aliases, that is, .deck
-  $( '.deck' ).addClass( 'presentation' );
+  // check for .presentation aliases, that is, .deck, .slides
+  $( '.deck, .slides' ).addClass( 'presentation' );
+
+  // add slide class to immediate children
+  // todo: use autoslide option that lets you turn on/off option?
+  $( '.presentation' ).children().addClass( 'slide' );
 
   // todo: scope with .slide?? e.g  .slide .incremental
   // todo: make removing "old" class an option??
@@ -172,7 +175,10 @@ Slideshow.toggle = function() {
      self.isProjection = styleScreen.disabled;
    });
   
-    
+/*
+ * note: code no longer needed; using (adding/removing) css classes hide/show)
+ *
+
   if( this.isProjection )
   {
     this.$slides.each( function(i) {
@@ -185,7 +191,8 @@ Slideshow.toggle = function() {
   else
   {
     this.$slides.show();
-  }  
+  }
+*/
 } // end toggle()
 
   
@@ -245,6 +252,8 @@ Slideshow.go = function( dir )
 	}	
 	
   if( !(cid == nid) ) {
+    this.updateSlides();
+
     this.debug( "transition from " + cid + " to " + nid );
     this.transition( $( cid ), $( nid ) );
 
@@ -254,6 +263,47 @@ Slideshow.go = function( dir )
   
   this.updatePermaLink();
 } // end go()
+
+
+Slideshow.updateSlideClass = function( $slide, className )
+{
+  if( className )
+    $slide.addClass( className );
+  
+  for( var i in this.slideClasses )
+  {
+    if( className != this.slideClasses[i] )
+      $slide.removeClass( this.slideClasses[i] );
+  }
+}
+
+Slideshow.updateSlides = function()
+{
+  var self = this;
+  this.$slides.each( function( i ) {
+    switch( i ) {
+      case (self.snum-1)-2:
+        self.updateSlideClass( $(this), 'far-past' );
+        break;
+      case (self.snum-1)-1:
+        self.updateSlideClass( $(this), 'past' );
+        break;
+      case (self.snum-1):
+        self.updateSlideClass( $(this), 'current' );
+        break;
+      case (self.snum-1)+1:
+        self.updateSlideClass( $(this), 'next' );
+        break;
+      case (self.snum-1)+2:
+        self.updateSlideClass( $(this), 'far-next' );
+        break;
+      default:
+        self.updateSlideClass( $(this) );
+        break;
+     }
+  });
+}
+
 
 
 Slideshow.subgo = function( dir )
@@ -472,9 +522,12 @@ Slideshow.addStyles = function() {
 " .extra { display: block !important; }             \n"+
 "</style>";
 
-    $( 'head' ).append( styleProjection );
-    $( 'head' ).append( styleScreen );
-    $( 'head' ).append( stylePrint );
+   // note: use prepend (not append) to make sure this
+   // styles come first (and do not overrule user supplied styles)
+
+    $( 'head' ).prepend( styleProjection );
+    $( 'head' ).prepend( styleScreen );
+    $( 'head' ).prepend( stylePrint );
 }
 
 Slideshow.addStyles();

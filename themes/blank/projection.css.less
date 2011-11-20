@@ -6,16 +6,19 @@
  * 3) print      -> print (and print preview)
  *
  * toggle between projection/screen (that is, slideshow/outline) mode using t-key
- *
- * (note: this is a less extendend css script, to learn more about less; see lesscss.org)
  */
+
+//////////////////////////////////////
+// note: this is a less extendend css script, to learn more about less; see lesscss.org) 
+
 
 html,
 body,
 .presentation { margin: 0; padding: 0; }
 
 
-.slide { position: absolute;
+.slide { display: none;   /* note: only display current slide in projection mode */
+         position: absolute;
          top: 0; left: 0; 
          margin: 0;
          padding: 2% 4% 0% 4%;         /* css note: order is => top right bottom left  */
@@ -26,6 +29,9 @@ body,
          overflow-x: hidden; overflow-y: auto;
          z-index: 2;
        }
+
+.slide.current { display: block; }  /* note: only display current slide in projection mode */
+
 
 /*****
  *  layout block structure:
