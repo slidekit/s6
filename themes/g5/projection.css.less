@@ -1,0 +1,134 @@
+/*********************************
+ * CSS @media projection rules (not print or screen)
+ *
+ * 1) projection -> slideshow mode (display one slide at-a-time; hide all others)
+ * 2) screen     -> outline mode (display all slides-at-once on screen) 
+ * 3) print      -> print (and print preview)
+ *
+ * toggle between projection/screen (that is, slideshow/outline) mode using t-key
+ */
+
+//////////////////////////////////////
+// note: this is a less extendend css script, to learn more about less; see lesscss.org) 
+
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  height: 100%;
+  min-height: 740px;
+  
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  background: rgb(215, 215, 215);
+  background: -o-radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));
+  background: -moz-radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));
+  background: -webkit-radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));
+}
+
+.presentation {
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  
+  position: absolute;
+}
+
+.slide {
+  display: block;
+
+  position: absolute;
+  overflow: hidden;
+
+  width: 900px;
+  height: 700px;
+
+  left: 50%;
+  top: 50%;
+
+  margin-left: -450px;
+  margin-top: -350px;
+  
+  padding: 40px 60px;
+
+  box-sizing: border-box;       /* css note: lets use border-box; no need to add padding+border to get to 100% */
+  -o-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+
+  border-radius: 10px;
+  -o-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+
+  background-color: white;
+
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
+  border: 1px solid rgba(0, 0, 0, .3);
+
+  transition: transform .3s ease-out;
+  -o-transition: -o-transform .3s ease-out;
+  -moz-transition: -moz-transform .3s ease-out;
+  -webkit-transition: -webkit-transform .3s ease-out;
+}
+
+
+.slide {
+  display: none;
+}
+
+.slide.far-past {
+  display: block;
+  transform: translate(-2040px);
+  -o-transform: translate(-2040px);
+  -moz-transform: translate(-2040px);
+  -webkit-transform: translate3d(-2040px, 0, 0);
+}
+.slide.past {
+  display: block;
+  transform: translate(-1020px);
+  -o-transform: translate(-1020px);
+  -moz-transform: translate(-1020px);
+  -webkit-transform: translate3d(-1020px, 0, 0);
+}
+
+.slide.current {
+  display: block;
+  transform: translate(0);
+  -o-transform: translate(0);
+  -moz-transform: translate(0);
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+.slide.next {
+  display: block;
+  transform: translate(1020px);
+  -o-transform: translate(1020px);
+  -moz-transform: translate(1020px);
+  -webkit-transform: translate3d(1020px, 0, 0);
+}
+
+.slide.far-next {
+  display: block;
+  transform: translate(2040px);
+  -o-transform: translate(2040px);
+  -moz-transform: translate(2040px);
+  -webkit-transform: translate3d(2040px, 0, 0);
+}
+
+
+
+/*********************************
+ * general text-alignment classes
+ */
+
+.left   { text-align: left;   }
+.center { text-align: center; }
+.right  { text-align: right;  }

@@ -43,7 +43,7 @@ function addStyleLess( name, media )
 
 function letsGo()
 {
-  var useLess = false;
+  var useLess = true;
 
   /*********
    * add style sheet links
@@ -51,15 +51,15 @@ function letsGo()
 
   if( useLess )
   {
-    addStyleLess( 'css/projection.css.less', 'screen,projection' );
-    addStyleLess( 'css/screen.css.less',     'screen'            );
-    addStyleLess( 'css/print.css.less',      'print'             );
+    addStyleLess( 'themes/g5/projection.css.less', 'screen,projection' );
+    addStyleLess( 'themes/g5/screen.css.less',     'screen'            );
+    addStyleLess( 'themes/g5/print.css.less',      'print'             );
   }
   else
   {
-    addStyle( 'css/o/projection.css', 'screen,projection' );
-    addStyle( 'css/o/screen.css',     'screen'            );
-    addStyle( 'css/o/print.css',      'print'             );
+    addStyle( 'themes/g5/o/projection.css', 'screen,projection' );
+    addStyle( 'themes/g5/o/screen.css',     'screen'            );
+    addStyle( 'themes/g5/o/print.css',      'print'             );
   }
   
   /********
