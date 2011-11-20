@@ -1,33 +1,0 @@
-/********************************* * CSS @media print rules (not projection or screen) * * (note: this is a less extendend css script, to learn more about less; see lesscss.org)  */body {
-  font-size: 12pt;
-}
-.slide {
-  page-break-inside: avoid;
-  /********************   * Extra styling for first slide (title/cover slide)   */
-}
-.slide h1 {
-  page-break-after: avoid;
-}
-.slide ul {
-  page-break-inside: avoid;
-}
-.slide h1 {
-  border-top: 2pt solid gray;
-  border-bottom: 1px dotted silver;
-}
-.slide:first-child {
-  margin-bottom: 3em;
-}
-.slide:first-child h1 {
-  font-size: 200%;
-  border: none;
-  margin: 0.5em 0 0.25em;
-}
-.slide:first-child h3 {
-  margin: 0;
-  padding: 0;
-}
-.slide:first-child h4 {
-  margin: 0 0 0.5em;
-  padding: 0;
-}
