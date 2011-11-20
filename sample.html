@@ -9,9 +9,41 @@
       * Add your styles here.
       */
      
+   body { font-size: 175%; }
+     
   .step  { color: silver; }  /* or hide next steps e.g. .step { visibility: hidden; } */
+    
+  .slide {
+    font-family: 'Open Sans', Arial, sans-serif;
+
+    color: rgb(102, 102, 102);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .1);
+  }
   
-  ul { list-style-type: square; }
+  .slide h1, .slide h2, .slide h3 {
+    color: rgb(51, 51, 51);
+  }
+  
+  .slide pre {
+   font-family: 'Droid Sans Mono', 'Courier New', monospace;
+   font-size: 80%;
+
+  padding: 5px 10px;
+  
+  margin-top: 40px;
+  margin-bottom: 40px;
+
+  color: black;
+  background: rgb(240, 240, 240);
+  border: 1px solid rgb(224, 224, 224);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, .1);
+  overflow: hidden;
+  }
+
+  .slide code {
+  font-family: 'Droid Sans Mono', 'Courier New', monospace;
+  color: black;
+  }
     </style>
   </head>
   <body>
@@ -26,7 +58,7 @@
           To Two Lines
         </h1>
         <p>
-          Carlos Freud
+          Carlos Ruby
           <br>
           November 11, 2011
         </p>
@@ -81,15 +113,13 @@
             Use this template to create your presentation
           </li>
           <li>
-            Use the provided color palette, box and arrow graphics, and
-            chart styles
+            Another item here
           </li>
           <li>
-            Instructions are provided to assist you in using this
-            presentation template effectively
+            Another item here
           </li>
           <li>
-            At all times strive to maintain Google's corporate look and feel
+            Another item here
           </li>
         </ul>
       </article>
@@ -123,14 +153,16 @@
         <ul>
           <li>
             Use this template to create your presentation
+          </li>
           <li>
-            Use the provided color palette, box and arrow graphics, and
-            chart styles
+            Another item here
+          </li>
           <li>
-            Instructions are provided to assist you in using this
-            presentation template effectively
+            Another item here
+          </li>
           <li>
-            At all times strive to maintain Google's corporate look and feel
+            Another item here
+          </li>
         </ul>
       </article>
 
@@ -196,7 +228,7 @@
           <img style='height: 500px' src='images/example-graph.png'>
         </p>
         <div class='source'>
-          Source: Carlos Freud
+          Source: Carlos Ruby
         </div>
       </article>
 
@@ -208,7 +240,7 @@
           <img class='centered' style='height: 500px' src='images/example-graph.png'>
         </p>
         <div class='source'>
-          Source: Carlos Freud
+          Source: Carlos Ruby
         </div>
       </article>
 
@@ -220,7 +252,7 @@
           <img src='images/example-cat.jpg'>
         </p>
         <div class='source white'>
-          Source: Carlos Freud
+          Source: Carlos Ruby
         </div>
       </article>
 
@@ -230,20 +262,22 @@
         </h3>
         <section>
         <pre>
-&lt;script type='text/javascript'&gt;
-  // Say hello world until the user starts questioning
-  // the meaningfulness of their existence.
-  function helloWorld(world) {
-    for (var i = 42; --i &gt;= 0;) {
-      alert('Hello ' + String(world));
-    }
-  }
-&lt;/script&gt;
-&lt;style&gt;
-  p { color: pink }
-  b { color: blue }
-  u { color: 'umber' }
-&lt;/style&gt;
+# The Greeter class
+class Greeter
+  def initialize(name)
+    @name = name.capitalize
+  end
+ 
+  def salute
+    puts "Hello #{@name}!"
+  end
+end
+ 
+# Create a new object
+g = Greeter.new("world")
+ 
+# Output "Hello World!"
+g.salute
 </pre>
         </section>
       </article>
@@ -254,20 +288,22 @@
         </h3>
         <section>
         <pre>
-&lt;script type='text/javascript'&gt;
-  // Say hello world until the user starts questioning
-  // the meaningfulness of their existence.
-  function helloWorld(world) {
-    for (var i = 42; --i &gt;= 0;) {
-      alert('Hello ' + String(world));
-    }
-  }
-&lt;/script&gt;
-&lt;style&gt;
-  p { color: pink }
-  b { color: blue }
-  u { color: 'umber' }
-&lt;/style&gt;
+# The Greeter class
+class Greeter
+  def initialize(name)
+    @name = name.capitalize
+  end
+ 
+  def salute
+    puts "Hello #{@name}!"
+  end
+end
+ 
+# Create a new object
+g = Greeter.new("world")
+ 
+# Output "Hello World!"
+g.salute
 </pre>
         </section>
       </article>
@@ -296,18 +332,18 @@
           A slide with an embed + title
         </h3>
         
-        <iframe src='http://www.google.com/doodle4google/history.html'></iframe>
+        <iframe src='http://slideshow.rubyforge.org'></iframe>
       </article>
 
       <article class='slide nobackground'>
-        <iframe src='http://www.google.com/doodle4google/history.html'></iframe>
+        <iframe src='http://slideshow.rubyforge.org'></iframe>
       </article>
 
       <article class='fill'>
         <h3>
           Full-slide embed with (optional) slide title on top
         </h3>
-        <iframe src='http://www.google.com/doodle4google/history.html'></iframe>
+        <iframe src='http://slideshow.rubyforge.org'></iframe>
       </article>
       
       <article>
