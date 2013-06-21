@@ -6,7 +6,7 @@ Simple Standards-based Slide Show System (S5) is Eric Meyer's (of CSS fame) publ
 (free, open source) slide show package inspired by Opera Show and others that works
 in all modern browsers without any plugin required
 because it includes its own slide show machinery in JavaScript.
-More [S5 Project Site &raquo;](http://meyerweb.com/eric/tools/s5)
+More [S5 Project Site »](http://meyerweb.com/eric/tools/s5)
 
 S6 started as a rewrite of Eric Meyer's S5 using the jQuery JavaScript library - offering
 easier to understand and easier to extend code. Add plugins, effects and more.
@@ -17,16 +17,18 @@ Contributions welcome!
 A Ruby gem that lets you create slide shows and author slides in plain text
 using a wiki-style markup language that's easy-to-write and easy-to-read
 and ships "out-of-the-gem" with S6 templates built-in.
-More [Slide Show (S9) Project Site &raquo;](http://slideshow-s9.github.io)
+More [Slide Show (S9) Project Site »](http://slideshow-s9.github.io)
+
 
 ## S6 in Action - Sample Slide Shows Online
 
 Try some slide show samples powered by S6:
 
 - [Slide Show (S9) 10-Minute Tutorial](http://slideshow-s9.github.io/tutorial.html)
-- [Prototype vs jQuery: To and from JavaScript Libraries](http://slideshow.rubyforge.org/jquery.html)
-- [Adding Semantics to Your Web Site / RDF, RDFa, Microformats / Web 3.0 in Action](http://slideshow.rubyforge.org/friends.html)
-- [Ruby 1.9: What to Expect](http://slideshow.rubyforge.org/ruby19.html)
+- [Prototype vs jQuery: To and from JavaScript Libraries](http://slideshow-s9.github.io/jquery.html)
+- [10 Things Every Java Programmer Should Know About Ruby](http://slideshow-s9.github.io/10things.html)
+- [Ruby 1.9: What to Expect](http://slideshow-s9.github.io/ruby19.html)
+- [`beer.db` - Using Open Beer & Brewery Data in Ruby](http://slideshow-s9.github.io/beer_db_intro.html)
 
 Keyboard controls:
 
@@ -36,8 +38,9 @@ Keyboard controls:
 | Go to previous slide                               | Left Arrow, Up Arrow, Page Up                               |
 | Go to first slide                                  | Home                                                        |
 | Go to last slide                                   | End                                                         |
-| Toggle between slideshow and outline view (&#216;) | T                                                           |
-| Show/hide slide controls (&#216; &laquo; &raquo;)  | C, Move mouse to bottom right corner                        |
+| Toggle between slideshow and outline view (Ø)      | T                                                           |
+| Show/hide slide controls (Ø « »)                   | C, Move mouse to bottom right corner                        |
+
 
 ## About, License - Questions? Comments?
 
