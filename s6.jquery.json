@@ -1,0 +1,27 @@
+{
+  "name": "s6",
+  "version": "0.0.1",
+  "title": "S6 Blank",
+  "description": "Another Slide Show Script",
+  "keywords": [
+    "s6",
+    "slideshow",
+    "presentation"
+  ],
+  "author": {
+    "name": "Gerald Bauer",
+    "url": "https://github.com/geraldb"
+  },
+  "licenses": [
+    {
+      "type": "Public Domain",
+      "url": "http://en.wikipedia.org/wiki/Public_domain"
+    }
+  ],
+  "dependencies": {
+    "jquery": ">=1.10"
+  },
+  "homepage": "https://github.com/geraldb/s6",
+  "docs": "https://github.com/geraldb/s6",
+  "download": "http://code.jquery.com/#s6"
+}
