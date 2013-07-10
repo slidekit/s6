@@ -1,4 +1,4 @@
-var BASE_URL_PREFIX = 'http://geraldb.github.com/s6/';
+var BASE_URL_PREFIX = './';
 
 function addScript( name )
 {
@@ -51,15 +51,15 @@ function letsGo()
 
   if( useLess )
   {
-    addStyleLess( 'themes/g5/projection.css.less', 'screen,projection' );
-    addStyleLess( 'themes/g5/screen.css.less',     'screen'            );
-    addStyleLess( 'themes/g5/print.css.less',      'print'             );
+    addStyleLess( 'themes/blank5/projection.css.less', 'screen,projection' );
+    addStyleLess( 'themes/blank5/screen.css.less',     'screen'            );
+    addStyleLess( 'themes/blank5/print.css.less',      'print'             );
   }
   else
   {
-    addStyle( 'themes/g5/o/projection.css', 'screen,projection' );
-    addStyle( 'themes/g5/o/screen.css',     'screen'            );
-    addStyle( 'themes/g5/o/print.css',      'print'             );
+    addStyle( 'themes/blank5/o/projection.css', 'screen,projection' );
+    addStyle( 'themes/blank5/o/screen.css',     'screen'            );
+    addStyle( 'themes/blank5/o/print.css',      'print'             );
   }
   
   /********

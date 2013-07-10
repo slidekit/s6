@@ -1,0 +1,307 @@
+/*********************************
+ * CSS @media projection rules (not print or screen)
+ *
+ * 1) projection -> slideshow mode (display one slide at-a-time; hide all others)
+ * 2) screen     -> outline mode (display all slides-at-once on screen) 
+ * 3) print      -> print (and print preview)
+ *
+ * toggle between projection/screen (that is, slideshow/outline) mode using t-key
+ */
+
+//////////////////////////////////////
+// note: this is a less extendend css script, to learn more about less; see lesscss.org) 
+
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  height: 100%;
+  min-height: 740px;
+  
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  background: rgb(215, 215, 215);
+  background: -o-radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));
+  background: -moz-radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));
+  background: -webkit-radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));
+}
+
+.presentation {
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  
+  position: absolute;
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+.slide {
+  display: block;
+
+  position: absolute;
+  overflow: hidden;
+
+  width: 900px;
+  height: 700px;
+
+  left: 50%;
+  top: 50%;
+
+  margin-left: -450px;
+  margin-top: -350px;
+  
+  padding: 40px 60px;
+
+  box-sizing: border-box;       /* css note: lets use border-box; no need to add padding+border to get to 100% */
+  -o-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+
+  border-radius: 10px;
+  -o-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+
+  background-color: white;
+
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
+  border: 1px solid rgba(0, 0, 0, .3);
+
+  transition: transform .3s ease-out;
+  -o-transition: -o-transform .3s ease-out;
+  -moz-transition: -moz-transform .3s ease-out;
+  -webkit-transition: -webkit-transform .3s ease-out;
+}
+
+
+.slide {
+  display: none;
+}
+
+.slide.far-past {
+  display: block;
+  transform: translate(-2040px);
+  -o-transform: translate(-2040px);
+  -moz-transform: translate(-2040px);
+  -webkit-transform: translate3d(-2040px, 0, 0);
+}
+.slide.past {
+  display: block;
+  transform: translate(-1020px);
+  -o-transform: translate(-1020px);
+  -moz-transform: translate(-1020px);
+  -webkit-transform: translate3d(-1020px, 0, 0);
+}
+
+.slide.current {
+  display: block;
+  transform: translate(0);
+  -o-transform: translate(0);
+  -moz-transform: translate(0);
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+.slide.next {
+  display: block;
+  transform: translate(1020px);
+  -o-transform: translate(1020px);
+  -moz-transform: translate(1020px);
+  -webkit-transform: translate3d(1020px, 0, 0);
+}
+
+.slide.far-next {
+  display: block;
+  transform: translate(2040px);
+  -o-transform: translate(2040px);
+  -moz-transform: translate(2040px);
+  -webkit-transform: translate3d(2040px, 0, 0);
+}
+
+
+/***********
+ * styles
+ */ 
+
+.slide h1 {          // use h1 for title 
+  margin-top: 200px;
+}
+
+
+.slide h2 {          // use h2 for section title/segue 
+  position: absolute;
+  bottom: 150px;
+}
+
+.slide.fill h3 {
+  background: rgba(255, 255, 255, .75);
+  padding-top: .2em;
+  padding-bottom: .3em;
+  margin-top: -.2em;
+  margin-left: -60px;
+  padding-left: 60px;
+  margin-right: -60px;
+  padding-right: 60px;
+}
+
+.slide iframe {
+  width: 100%;
+
+  height: 620px;
+
+  background: white;
+  border: 1px solid rgb(192, 192, 192);
+  margin: -1px;
+  /*box-shadow: inset 0 2px 6px rgba(0, 0, 0, .1);*/
+  
+  overflow: hidden;
+}
+
+.slide h3 + iframe {
+  margin-top: 40px;
+  height: 540px;
+}
+
+.slide.fill iframe {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+  border: 0;
+  margin: 0;
+
+  border-radius: 10px;
+  -o-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+
+  z-index: -1;
+}
+
+.slide.fill img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  min-width: 100%;
+  min-height: 100%;
+
+  border-radius: 10px;
+  -o-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+
+  z-index: -1;
+}
+
+
+.slide img.centered {
+  margin: 0 auto;
+  display: block;
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left; 
+}
+
+td,
+th {
+  border: 1px solid rgb(224, 224, 224);
+  padding: 5px 10px;
+  vertical-align: top;
+}
+
+ul {
+  list-style-type: square;
+}
+
+.source {
+  position: absolute;
+  left: 60px;
+  top: 644px;
+  padding-right: 175px;
+  
+  font-size: 15px;
+  letter-spacing: 0;
+  line-height: 18px;
+}
+
+q {
+  font-size: 300%;  // 60px
+  display: block;
+  margin-left: 1em;
+}
+
+q::before {
+  content: '“';
+  color: rgb(192, 192, 192);
+  position: absolute;
+  display: inline-block;
+  margin-left: -1.1em;
+  width: 1em;
+  text-align: right;
+}
+
+q::after {
+  content: '”';
+  color: rgb(192, 192, 192);
+}
+
+
+div.author {
+  text-align: right;
+  
+  margin-top: 20px;
+  margin-right: 150px;
+  
+  font-size: 200%; // 40px; 
+}
+
+div.author::before {
+  content: '—';
+}
+
+
+/***********
+ * smaller
+ */
+ 
+.slide.smaller {
+
+  p, ul, table {  font-size: 80%; }    // 20px 
+
+  pre          {  font-size: 60%; }    // 15px
+
+  q            {  font-size: 200%; }   // 40px 
+}
+
+
+
+
+/*********************************
+ * general text-alignment classes
+ */
+
+.left   { text-align: left;   }
+.center { text-align: center; }
+.right  { text-align: right;  }
+
+
+/*********************************
+ * general color classes
+ */
+
+.white {  color: white; }

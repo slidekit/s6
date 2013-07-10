@@ -1,138 +1,364 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset='utf-8'>
-  <title>[your_title_here]</title>
+  <head>
+    <meta charset='utf-8'>
+    <title>Sample S6 Presentation</title>
+    <script src='slides.js'></script>
+    <style media='screen,projection'>
+     /****
+      * Add your styles here.
+      */
+     
+   body { font-size: 175%; }
+     
+  .step  { color: silver; }  /* or hide next steps e.g. .step { visibility: hidden; } */
+    
+  .slide {
+    font-family: 'Open Sans', Arial, sans-serif;
 
-<!-- more semantic version; using new html5 semantic tags
-     such as header,footer,article,section,nav,etc.
--->
+    color: rgb(102, 102, 102);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .1);
+  }
+  
+  .slide h1, .slide h2, .slide h3 {
+    color: rgb(51, 51, 51);
+  }
+  
+  .slide pre {
+   font-family: 'Droid Sans Mono', 'Courier New', monospace;
+   font-size: 80%;
 
-<!-- 
-   Notes on CSS media types used:
+  padding: 5px 10px;
+  
+  margin-top: 40px;
+  margin-bottom: 40px;
+
+  color: black;
+  background: rgb(240, 240, 240);
+  border: 1px solid rgb(224, 224, 224);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, .1);
+  overflow: hidden;
+  }
+
+  .slide code {
+  font-family: 'Droid Sans Mono', 'Courier New', monospace;
+  color: black;
+  }
+    </style>
+  </head>
+  <body>
+
+    <section class='slides'>
+      <!-- Add your slides here. Delete or comment out the slides below. -->
+      
+      <article class='cover'>
+        <h1>
+          Title Goes Here Up
+          <br>
+          To Two Lines
+        </h1>
+        <p>
+          Carlos Ruby
+          <br>
+          November 11, 2011
+        </p>
+      </article>
+      
+      <article>
+        <p>
+          This is a slide with just text. This is a slide with just text.
+          This is a slide with just text. This is a slide with just text.
+          This is a slide with just text. This is a slide with just text.
+        </p>
+        <p>
+          There is more text just underneath.
+        </p>
+      </article>
+
+      <article>
+        <h3>
+          Simple slide with header and text
+        </h3>
+        <p>
+          This is a slide with just text. This is a slide with just text.
+          This is a slide with just text. This is a slide with just text.
+          This is a slide with just text. This is a slide with just text.
+        </p>
+        <p>
+          There is more text just underneath with a <code>code sample: 5px</code>.
+        </p>
+      </article>
+
+      <article class='smaller'>
+        <h3>
+          Simple slide with header and text (small font)
+        </h3>
+        <p>
+          This is a slide with just text. This is a slide with just text.
+          This is a slide with just text. This is a slide with just text.
+          This is a slide with just text. This is a slide with just text.
+        </p>
+        <p>
+          There is more text just underneath with a <code>code sample: 5px</code>.
+        </p>
+      </article>
+
+      <article>
+        <h3>
+          Slide with bullet points and a longer title, just because we
+          can make it longer
+        </h3>
+        <ul>
+          <li>
+            Use this template to create your presentation
+          </li>
+          <li>
+            Another item here
+          </li>
+          <li>
+            Another item here
+          </li>
+          <li>
+            Another item here
+          </li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>
+          Slide with bullet points that builds
+        </h3>
+        <ul class="build">
+          <li>
+            This is an example of a list
+          </li>
+          <li>
+            The list items fade in
+          </li>
+          <li>
+            Last one!
+          </li>
+        </ul>
+
+        <div class="build">
+          <p>Any element with child nodes can build.</p>
+          <p>It doesn't have to be a list.</p>
+        </div>
+      </article>
+
+      <article class='smaller'>
+        <h3>
+          Slide with bullet points (small font)
+        </h3>
+        <ul>
+          <li>
+            Use this template to create your presentation
+          </li>
+          <li>
+            Another item here
+          </li>
+          <li>
+            Another item here
+          </li>
+          <li>
+            Another item here
+          </li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>
+          Slide with a table
+        </h3>
+        
+        <table>
+          <tr>
+            <th>
+              Name
+            <th>
+              Occupation
+          <tr>
+            <td>
+              Luke Mahé
+            <td>
+              V.P. of Keepin’ It Real
+          <tr>
+            <td>
+              Marcin Wichary
+            <td>
+              The Michael Bay of Doodles
+        </table>
+      </article>
+      
+      <article class='smaller'>
+        <h3>
+          Slide with a table (smaller text)
+        </h3>
+        
+        <table>
+          <tr>
+            <th>
+              Name
+            <th>
+              Occupation
+          <tr>
+            <td>
+              Luke Mahé
+            <td>
+              V.P. of Keepin’ It Real
+          <tr>
+            <td>
+              Marcin Wichary
+            <td>
+              The Michael Bay of Doodles
+        </table>
+      </article>
+      
+      <article>
+        <h2>
+          Segue slide
+        </h2>
+      </article>
+
+      <article>
+        <h3>
+          Slide with an image
+        </h3>
+        <p>
+          <img style='height: 500px' src='images/example-graph.png'>
+        </p>
+        <div class='source'>
+          Source: Carlos Ruby
+        </div>
+      </article>
+
+      <article>
+        <h3>
+          Slide with an image (centered)
+        </h3>
+        <p>
+          <img class='centered' style='height: 500px' src='images/example-graph.png'>
+        </p>
+        <div class='source'>
+          Source: Carlos Ruby
+        </div>
+      </article>
+
+      <article class='fill'>
+        <h3>
+          Image filling the slide (with optional header)
+        </h3>
+        <p>
+          <img src='images/example-cat.jpg'>
+        </p>
+        <div class='source white'>
+          Source: Carlos Ruby
+        </div>
+      </article>
+
+      <article>
+        <h3>
+          This slide has some code
+        </h3>
+        <section>
+        <pre>
+# The Greeter class
+class Greeter
+  def initialize(name)
+    @name = name.capitalize
+  end
  
-   1) projection -> slideshow mode (display one slide at-a-time; hide all others)
-   2) screen     -> outline mode (display all slides-at-once on screen) 
-   3) print      -> print (and print preview)
-  
-   Note: toggle between projection/screen (that is, slideshow/outline) mode using t-key
+  def salute
+    puts "Hello #{@name}!"
+  end
+end
+ 
+# Create a new object
+g = Greeter.new("world")
+ 
+# Output "Hello World!"
+g.salute
+</pre>
+        </section>
+      </article>
+      
+      <article class='smaller'>
+        <h3>
+          This slide has some code (small font)
+        </h3>
+        <section>
+        <pre>
+# The Greeter class
+class Greeter
+  def initialize(name)
+    @name = name.capitalize
+  end
+ 
+  def salute
+    puts "Hello #{@name}!"
+  end
+end
+ 
+# Create a new object
+g = Greeter.new("world")
+ 
+# Output "Hello World!"
+g.salute
+</pre>
+        </section>
+      </article>
+      
+      <article>
+        <q>
+          The best way to predict the future is to invent it.
+        </q>
+        <div class='author'>
+          Alan Kay
+        </div>
+      </article>
+      
+      <article class='smaller'>
+        <q>
+          A distributed system is one in which the failure of a computer 
+          you didn’t even know existed can render your own computer unusable.
+        </q>
+        <div class='author'>
+          Leslie Lamport
+        </div>
+      </article>
+      
+      <article class='nobackground'>
+        <h3>
+          A slide with an embed + title
+        </h3>
+        
+        <iframe src='http://slideshow.rubyforge.org'></iframe>
+      </article>
 
-   Questions, comments?
-   - send them along to the mailinglist/forum online @ http://groups.google.com/group/webslideshow    
--->
+      <article class='slide nobackground'>
+        <iframe src='http://slideshow.rubyforge.org'></iframe>
+      </article>
 
-<!-- style sheet links -->
-<link rel="stylesheet/less" href="themes/blank/projection.css.less"  media="screen,projection">
-<link rel="stylesheet/less" href="themes/blank/screen.css.less"      media="screen">
-<link rel="stylesheet/less" href="themes/blank/print.css.less"       media="print">
+      <article class='fill'>
+        <h3>
+          Full-slide embed with (optional) slide title on top
+        </h3>
+        <iframe src='http://slideshow.rubyforge.org'></iframe>
+      </article>
+      
+      <article>
+        <h3>
+          Thank you!
+        </h3>
+        
+        <ul>
+          <li>
+            <a href='http://www.example.com'>example.com</a>
+          </li>
+        </ul>
+      </article>
 
-<link rel="stylesheet/less" href="blank.css.less"    media="screen,projection">
+    </section>
 
-<!-- Notes about less css support
-     - all less stylesheets (*.css.less) need to get listed/loaded first (before the less.js script)
-     - find more info about less.js online @ http://lesscss.org
-
-    ***** NOTE:
-   less.js browser script currently won’t work if you’re using Google Chrome
-    and the path to your page starts with "file:///" due to a known Chrome issue.
-   (In the developer/js console you will see:
-     XMLHttpRequest cannot load file:///../s6/shared/projection.css.less.
-     Cross origin requests are only supported for HTTP.)
-  -->
-
-<!-- add js libs (less, jquery) -->
-<script src="js/less-1.1.4.min.js"></script>
-<script src="js/jquery-1.7.min.js"></script>
-
-<!-- S6 JS -->
-<script src="js/jquery.slideshow.js"></script>
-<script src="js/jquery.slideshow.counter.js"></script>
-<script src="js/jquery.slideshow.controls.js"></script>
-<script src="js/jquery.slideshow.footer.js"></script>
-<script src="js/jquery.slideshow.autoplay.js"></script>
-<script>
-  $(document).ready( function() {
-    Slideshow.init();
-    
-    // Example 2: Start Off in Outline Mode
-    // Slideshow.init( { mode: 'outline' } );
-    
-    // Example 3: Use Custom Transition
-    // Slideshow.transition = transitionScrollUp;
-    // Slideshow.init();
-
-    // Example 4: Start Off in Autoplay Mode with Custom Transition
-    // Slideshow.transition = transitionScrollUp;
-    // Slideshow.init( { mode: 'autoplay' } );
-  } );
-</script>
-
-<!-- Better Browser Banner for Microsoft Internet Explorer (IE) -->
-<!--[if IE]>
-<script src="js/jquery.microsoft.js"></script>
-<![endif]-->
-
-</head>
-<body>
-
-<div class="layout">
-  <header></header>
-  <footer>
-    <hgroup>
-      <h1>[your_footer_here]</h1>
-      <h2>[your_subfooter_here]</h2>
-    </hgroup>
-  </footer>
-</div>
-
-<article class="presentation">
-
-  <!-- add slides here; example -->
-  
-  <section class='slide cover'>
-    <h1>Your Slide Title Here</h1>
-    <ul>
-      <li>Item One Here</li>
-      <li>Item Two Here</li>
-    </ul>
-  </section>
-
-  <section class='slide'>
-    <h1>Steps Demos</h1>
-
-    <!-- mark list with class step to mark all items at once -->
-    <ul class='step'>
-      <li>Item 1.1 Here</li>
-      <li>Item 1.2 Here</li>
-    </ul>
-
-    <!-- or mark individual list items -->
-    <ul>
-      <li class='step'>Item 2.1 Here</li>
-      <li class='step'>Item 2.2 Here</li>
-    </ul>
-
-    <!-- or mark paragraphs, div blocks or whatever -->
-    <p class='step'>Another Step</p>
-
-  </section>
-
-  <section class='slide'>
-    <h1>Another Slide Title Here</h1>
-    <p>yada yada yada</p>
-  </section>
-
-  <!-- h1.fullscreen => use only centered heading with no content/body -->
-  <section class='slide'>
-    <h1 class='fullscreen'>Another Slide - Using Fullscreen Heading</h1>
-  </section>
-
-  <!-- h1.hidden => use heading just for table of contents (toc) -->
-  <section class='slide'>
-    <h1 class='hidden'>Another Slide - Using Hidden Heading</h1>
-    <p>Add Your Centered Image Here or Whatever</p>
-   </section>
-
-</article> <!-- presentation -->
-</body>
+  </body>
 </html>

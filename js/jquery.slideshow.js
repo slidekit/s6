@@ -1,7 +1,9 @@
 
 var Slideshow = {
 
-  settings: {},
+  settings: {
+    debug: true
+  },
 
   isProjection: false,   // are we in projection (slideshow) mode (in contrast to screen (outline) mode)?     
   snum:   1,             // current slide # (non-zero based index e.g. starting with 1)
@@ -30,7 +32,7 @@ Slideshow.transition = function( $from, $to ) {
 
 
 Slideshow.debug = function( msg ) {
-  if( window.console && window.console.log  )
+  if( this.settings.debug && window.console && window.console.log  )
        window.console.log( '[debug] ' + msg );
 }
 
