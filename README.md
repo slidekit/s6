@@ -1,6 +1,6 @@
 # S6 Blank/Boilerplate
 
-Slide Show Templates Using HTML, CSS & JavaScript (w/ jQuery)
+Slide Show Templates Using HTML5, CSS3 & JavaScript (w/ jQuery)
 
 ## Templates
 
