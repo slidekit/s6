@@ -4,21 +4,21 @@ Slide Show Templates Using HTML5, CSS3 & JavaScript (w/ jQuery)
 
 ## Templates
 
-- [`blank.html`](http://geraldb.github.io/s6/blank.html)
-- [`blank5.html`](http://geraldb.github.io/s6/blank5.html)
-- [`minimalistic.html`](http://geraldb.github.io/s6/minimalistic.html)
-- [`sample.html`](http://geraldb.github.io/s6/sample.html)
+- [`blank.html`](http://slidekit.github.io/s6/blank.html)
+- [`blank5.html`](http://slidekit.github.io/s6/blank5.html)
+- [`minimalistic.html`](http://slidekit.github.io/s6/minimalistic.html)
+- [`sample.html`](http://slidekit.github.io/s6/sample.html)
 
 
 ## S6 in Action - Sample Slide Shows Online
 
 Try some slide show samples powered by S6:
 
-- [Slide Show (S9) 10-Minute Tutorial](http://slideshow-s9.github.io/tutorial.html)
-- [Prototype vs jQuery: To and from JavaScript Libraries](http://slideshow-s9.github.io/jquery.html)
-- [10 Things Every Java Programmer Should Know About Ruby](http://slideshow-s9.github.io/10things.html)
-- [Ruby 1.9: What to Expect](http://slideshow-s9.github.io/ruby19.html)
-- [`beer.db` - Using Open Beer & Brewery Data in Ruby](http://slideshow-s9.github.io/beer_db_intro.html)
+- [Slide Show (S9) 10-Minute Tutorial](http://slideshow-s9.github.io/demos/tutorial.html)
+- [Prototype vs jQuery: To and from JavaScript Libraries](http://slideshow-s9.github.io/demos/jquery.html)
+- [10 Things Every Java Programmer Should Know About Ruby](http://slideshow-s9.github.io/demos/10things.html)
+- [Ruby 1.9: What to Expect](http://slideshow-s9.github.io/demos/ruby19.html)
+- [`beer.db` - Using Open Beer & Brewery Data in Ruby](http://slideshow-s9.github.io/demos/beer_db_intro.html)
 
 Keyboard controls:
 
