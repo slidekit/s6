@@ -1,0 +1,23 @@
+/*********************************
+ * CSS @media screen (NOT projection or print)
+ *
+ * 1) projection -> slideshow mode (display one slide at-a-time; hide all others)
+ * 2) outline (screen) -> outline mode (display all slides-at-once on screen) 
+ * 3) print      -> print (and print preview)
+ *
+ * toggle between projection/screen (that is, slideshow/outline) mode using t-key
+ */
+.slide {
+  display: block !important;
+  margin: 1.5em 0 0;
+  border-top: 1px solid #888; }
+  .slide h1 {
+    border-bottom: 1px solid #AAA; }
+  .slide:first-child {
+    margin: 0;
+    border: none; }
+    .slide:first-child h1 {
+      border: none;
+      padding-top: 1.5em; }
+
+/*# sourceMappingURL=outline.css.map */

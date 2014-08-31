@@ -1,4 +1,5 @@
-# Komodo Project Files
+##########################
+#  sass cache
 
-*.kpf
-*.komodoproject
+css/.sass-cache/
+themes/.sass-cache/
