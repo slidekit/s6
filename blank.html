@@ -7,38 +7,31 @@
 <!-- 
    Notes on CSS media types used:
  
-   1) projection -> slideshow mode (display one slide at-a-time; hide all others)
-   2) screen     -> outline mode (display all slides-at-once on screen) 
-   3) print      -> print (and print preview)
-  
+   1) projection     -> slideshow mode (display one slide at-a-time; hide all others)
+   2) outline/screen -> outline mode (display all slides-at-once on screen) 
+   3) print          -> print (and print preview)
+
    Note: toggle between projection/screen (that is, slideshow/outline) mode using t-key
 
    Questions, comments?
    - send them along to the mailinglist/forum online @ http://groups.google.com/group/webslideshow    
 -->
 
-<!-- style sheet links -->
-<link rel="stylesheet/less" href="themes/blank/projection.css.less"  media="screen,projection">
-<link rel="stylesheet/less" href="themes/blank/screen.css.less"      media="screen">
-<link rel="stylesheet/less" href="themes/blank/print.css.less"       media="print">
+<!-- style sheet links -
+      note: add workaround for chrome
+        use screen,projection instead of projection
+        (without projection inline style tag gets not parsed into a styleSheet accesible via JavaScript)
+-->
 
-<link rel="stylesheet/less" href="blank.css.less"    media="screen,projection">
+<link rel="stylesheet" href="themes/o/blank.css"  media="screen,projection">
+<link rel="stylesheet" href="css/o/outline.css"   media="screen">
+<link rel="stylesheet" href="css/o/print.css"     media="print">
 
-<!-- Notes about less css support
-     - all less stylesheets (*.css.less) need to get listed/loaded first (before the less.js script)
-     - find more info about less.js online @ http://lesscss.org
+<link rel="stylesheet" href="o/blank.css"         media="screen,projection">
 
-    ***** NOTE:
-   less.js browser script currently won’t work if you’re using Google Chrome
-    and the path to your page starts with "file:///" due to a known Chrome issue.
-   (In the developer/js console you will see:
-     XMLHttpRequest cannot load file:///../s6/shared/projection.css.less.
-     Cross origin requests are only supported for HTTP.)
-  -->
 
 <!-- add js libs (less, jquery) -->
-<script src="js/less-1.1.4.min.js"></script>
-<script src="js/jquery-1.7.min.js"></script>
+<script src="js/jquery-2.1.1.min.js"></script>
 
 <!-- S6 JS -->
 <script src="js/jquery.slideshow.js"></script>

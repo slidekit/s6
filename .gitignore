@@ -1,5 +1,4 @@
 ##########################
 #  sass cache
 
-css/.sass-cache/
-themes/.sass-cache/
+.sass-cache/
