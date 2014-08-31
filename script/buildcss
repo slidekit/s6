@@ -1,4 +1,4 @@
-sass blank.css.scss o/blank.css
-sass css/outline.css.scss o/css/outline.css
-sass css/print.css.scss o/css/print.css
-sass themes/blank.css.scss o/themes/blank.css
+sass blank.css.scss blank.css
+sass scss/outline.css.scss css/outline.css
+sass scss/print.css.scss  css/print.css
+sass themes/blank.css.scss css/themes/blank.css
