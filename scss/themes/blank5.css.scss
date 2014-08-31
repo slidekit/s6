@@ -1,15 +1,16 @@
 /*********************************
- * CSS @media projection rules (not print or screen)
+ * CSS @media projection rules (NOT print or screen)
  *
  * 1) projection -> slideshow mode (display one slide at-a-time; hide all others)
- * 2) screen     -> outline mode (display all slides-at-once on screen) 
+ * 2) outline/screen  -> outline mode (display all slides-at-once on screen) 
  * 3) print      -> print (and print preview)
  *
  * toggle between projection/screen (that is, slideshow/outline) mode using t-key
  */
 
 //////////////////////////////////////
-// note: this is a less extendend css script, to learn more about less; see lesscss.org) 
+// note: this is a sass/scss extendend css script,
+//         to learn more about sass; see sass-lang.org) 
 
 
 html {
