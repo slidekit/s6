@@ -1,11 +1,12 @@
 # S6 Blank/Boilerplate
 
-Slide Show Template Using HTML5, CSS3 'n' JavaScript (w/ jQuery)
+Slide Show Templates Using HTML5, CSS3 'n' JavaScript (w/ jQuery). More [S6 Project Site](http://slidekit.github.io) »
+
+
+## Templates
 
 - [`blank.html`](http://slidekit.github.io/s6/blank.html)
 
-
-More [S6 Project Site](http://slidekit.github.io) »
 
 ## License
 
