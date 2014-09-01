@@ -1,6 +1,6 @@
 sass blank.css.scss blank.css
 
-sass scss/outline.css.scss css/outline.css
+sass scss/screen.css.scss  css/screen.css
 sass scss/print.css.scss  css/print.css
 
 sass scss/themes/blank.css.scss css/themes/blank.css

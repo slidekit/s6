@@ -1,7 +1,7 @@
 {
 "version": 3,
 "mappings": ";;;;;;;;;AAcA,MACA;EACE,OAAO,EAAE,gBAAgB;EACzB,MAAM,EAAE,SAAS;EACjB,UAAU,EAAE,cAAc;EAE1B,SAAG;IAAE,aAAa,EAAE,cAAc;EAGlC,kBAAc;IACZ,MAAM,EAAE,CAAC;IACT,MAAM,EAAE,IAAI;IAEZ,qBAAG;MACD,MAAM,EAAE,IAAI;MACZ,WAAW,EAAE,KAAK",
-"sources": ["../scss/outline.css.scss"],
+"sources": ["../scss/screen.css.scss"],
 "names": [],
-"file": "outline.css"
+"file": "screen.css"
 }
