@@ -1,3 +1,10 @@
+/***
+   fix/todo:
+   change jquery plugin json to
+   node npm package json
+   - include jquery via  npm - why? why not?
+  ***/
+
 {
   "name": "s6",
   "version": "0.0.1",
@@ -21,7 +28,7 @@
   "dependencies": {
     "jquery": ">=1.10"
   },
-  "homepage": "https://github.com/geraldb/s6",
-  "docs": "https://github.com/geraldb/s6",
+  "homepage": "https://github.com/slidekit/s6",
+  "docs": "https://github.com/slidekit/s6",
   "download": "http://code.jquery.com/#s6"
 }
