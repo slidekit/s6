@@ -1,34 +1,23 @@
-/***
-   fix/todo:
-   change jquery plugin json to
-   node npm package json
-   - include jquery via  npm - why? why not?
-  ***/
-
 {
   "name": "s6",
-  "version": "0.0.1",
-  "title": "S6 Blank",
-  "description": "Another Slide Show Script",
-  "keywords": [
-    "s6",
-    "slideshow",
-    "presentation"
-  ],
-  "author": {
-    "name": "Gerald Bauer",
-    "url": "https://github.com/geraldb"
+  "version": "1.0.0",
+  "description": "Slide Show Templates Using HTML5, CSS3 'n' JavaScript.\r Find more info 'n' docu @ [S6 Project Site »](http://slidekit.github.io)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "licenses": [
-    {
-      "type": "Public Domain",
-      "url": "http://en.wikipedia.org/wiki/Public_domain"
-    }
-  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slidekit/s6.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/slidekit/s6/issues"
+  },
+  "homepage": "https://github.com/slidekit/s6#readme",
   "dependencies": {
-    "jquery": ">=1.10"
-  },
-  "homepage": "https://github.com/slidekit/s6",
-  "docs": "https://github.com/slidekit/s6",
-  "download": "http://code.jquery.com/#s6"
+    "jquery": "^3.1.1"
+  }
 }
