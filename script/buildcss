@@ -1,8 +1,0 @@
-sass blank.css.scss blank.css
-
-sass scss/screen.css.scss  css/screen.css
-sass scss/print.css.scss  css/print.css
-
-sass scss/themes/blank.css.scss css/themes/blank.css
-sass scss/themes/blank5.css.scss css/themes/blank5.css
-sass scss/themes/g5.css.scss css/themes/g5.css
