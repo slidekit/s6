@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Hello, S6 Blank!</title>
+  <link rel="stylesheet"  href="css/screen.css">
+</head>
+<body>
+
+  <article id="presentation">
+    <section>Slide 1</section>
+    <section>
+       <h1>Heading 1</h1>
+       <h2>Heading 2</h2>
+       <h3>Heading 3</h3>
+       <p>Paragraph</p>
+    </section>
+    <section>Slide 3</section>
+    <section>
+       <h1>Heading 1</h1>
+       <h2>Heading 2</h2>
+       <h3>Heading 3</h3>
+       <p>Paragraph</p>
+       <h1>Heading 1</h1>
+       <h2>Heading 2</h2>
+       <h3>Heading 3</h3>
+       <p>Paragraph</p>
+       <h1>Heading 1</h1>
+       <h2>Heading 2</h2>
+       <h3>Heading 3</h3>
+       <p>Paragraph</p>
+    </section>
+    <section>Slide 5</section>
+  </article>
+
+
+  <script src="js/slides.keys.js"></script>
+  <script src="js/slides.progress.js"></script>
+  <script src="js/slides.classes.js"></script>
+  <script src="js/slides.engine.js"></script>
+  <script>
+     const {Deck, classes, keys, progress} = S6;
+     const deck = Deck.from( "#presentation", [classes(), keys(), progress()] );
+     deck.next();
+     deck.prev();
+     deck.next();
+  </script>
+</body>
+</html>

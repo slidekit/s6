@@ -1,0 +1,82 @@
+@media screen {
+  .bespoke-parent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+
+  background-color: #eee;
+  font-size: 2em;
+  /* text-align: center;  */
+  /* background-position: 50% 50%; -- check -- needed?? why? why not? just for animations? */
+}
+
+/* fix: h1 inside article gets display in normal text size on chrome */
+h1 { font-size: 180%; }
+
+
+.bespoke-slide {
+  box-sizing: border-box;
+  position: absolute;
+  width:  940px;
+  height: 480px;
+  top: 50%;
+  left: 50%;
+  margin-left: -470px;  /* calc((940px/2)*-1);  -($width / 2); */
+  margin-top:  -240px;  /* calc((480px/2)*-1);  -($height / 2); */
+  z-index: 1;
+
+  background-color: white;
+
+  border-radius: 4px;
+  box-shadow: 0 6px 2px -4px rgba(0,0,0,.2),
+              0 6px 2px -4px rgba(0,0,0,.14),
+              0 2px 10px 0 rgba(0,0,0,.12);
+
+  padding: 20px;
+
+  overflow: auto;
+}
+
+/* make scrollbar invisible, works for chrome
+    firefox too??? why? why not?
+ */
+::-webkit-scrollbar {
+  width: 0px;  /* remove scrollbar space */
+  background: transparent;  /* optional: just make scrollbar invisible */
+}
+
+
+
+.bespoke-active {
+}
+
+.bespoke-inactive {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/****
+   add progress bar
+*****/
+
+.bespoke-progress-parent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: .3vw;
+  z-index: 1;
+}
+
+.bespoke-progress-bar {
+  background-color: #0089f3;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  transition: width 1s ease;
+}
+} /* @media screen */
