@@ -12,7 +12,7 @@ Find more info 'n' docu @ [S6 Project Site »](http://slidekit.github.io)
 
 ## Samples
 
-- [`samples/bespoke.js/slides.html`](http://slidekit.github.io/s6/samples/bespoke.js/slides.html)  - DIY Presentations with Bespoke.js
+- [`samples/bespoke.js`](http://slidekit.github.io/s6/samples/bespoke.js)  - DIY Presentations with Bespoke.js
 
 
 
