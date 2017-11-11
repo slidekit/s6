@@ -1,0 +1,163 @@
+
+
+
+///
+// split in partials
+//
+//   reveal
+//   clean ???
+//   one partial for every effect
+//   - concave etc.
+
+
+
+//
+// font-face cleanup  -- just use woff for now!!!!
+
+
+
+@font-face {
+  font-family: 'League Gothic';
+  src: url("../font/league_gothic-webfont.eot");
+  src: url("../font/league_gothic-webfont.eot?#iefix") format("embedded-opentype"),
+       url("../font/league_gothic-webfont.woff") format("woff"),
+       url("../font/league_gothic-webfont.ttf") format("truetype"),
+       url("../font/league_gothic-webfont.svg#LeagueGothicRegular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	box-sizing: border-box;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+body {
+	overflow: hidden;
+}
+
+article {
+	overflow: hidden;
+	background-color: white;
+	perspective: 600px;
+	position: absolute;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	section {
+		transform-style: preserve-3d;
+		width: 800px;
+		height: 600px;
+		position: absolute;
+		left: 50%;
+		margin-left: -400px;
+		top: 50%;
+		margin-top: -300px;
+		opacity: 0;
+		text-align: center;
+
+		&.bespoke-active {
+		  opacity: 1;
+		}
+	}
+
+	h2 {
+		white-space: nowrap;
+	}
+
+	pre {
+		color: #808080;
+		text-align: left;
+		font-family: monaco, monospace;
+		font-size: 20px;
+		padding: 0 74px 40px;
+		margin: 0 auto;
+
+		.class, .function {
+			color: #1859FF;
+		}
+
+		.css-property, .numeric, .unit, .keyword, .constant {
+			color: #303030;
+		}
+
+		.css-value, .string {
+			color: #FF349D;
+		}
+	}
+
+	h2+pre, h2+pre+pre {
+		font-size: 18px;
+		line-height: 24px;
+		width: 460px;
+		margin: 0 auto 0;
+		padding-bottom: 24px;
+	}
+	h2+pre {
+		margin-top: 18px;
+	}
+
+	img {
+		width: 150px;
+		height: 150px;
+		border-radius: 12px;
+		margin-bottom: 36px;
+	}
+
+  // check if it works inside (nested) article ????
+  @import 'theme_reveal';
+
+
+
+	&.reveal,
+  &.clean .reveal {
+		font-family: 'Lato', Times, 'Times New Roman', serif;
+		font-size: 36px;
+		font-weight: 200;
+		letter-spacing: -0.02em;
+		color: #eee;
+
+		h1 { font-size: 3.77em; }
+		h2 { font-size: 2.11em;	}
+		h3 { font-size: 1.55em;	}
+		h4 { font-size: 1em; }
+
+		h1, h2, h3, h4, h5, h6 {
+			margin: 0 0 20px 0;
+			color: #EEE;
+			font-family: "League Gothic", Impact, sans-serif;
+			line-height: 0.9em;
+			letter-spacing: 0.02em;
+			text-transform: uppercase;
+			text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
+		}
+
+		h1 {
+			text-shadow: 0 1px 0 #CCC, 0 2px 0 #C9C9C9, 0 3px 0 #BBB, 0 4px 0 #B9B9B9, 0 5px 0 #AAA, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 20px 20px rgba(0, 0, 0, 0.15);
+		}
+
+		ul {
+			display: inline-block;
+			text-align: left;
+			margin: 0 0 0 1em;
+			list-style-type: disc;
+		}
+	}
+
+  @import 'theme_clean';
+
+} // article

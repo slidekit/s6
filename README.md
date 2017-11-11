@@ -1,6 +1,6 @@
 # S6 Blank Template / Boilerplate
 
-Slide Show Templates Using HTML5, CSS3 'n' JavaScript.
+Slideshow Templates Using HTML 5, CSS 3 'n' JavaScript 2017+.
 Find more info 'n' docu @ [S6 Project Site »](http://slidekit.github.io)
 
 
@@ -9,11 +9,18 @@ Find more info 'n' docu @ [S6 Project Site »](http://slidekit.github.io)
 - [`blank.html`](http://slidekit.github.io/s6/blank.html)
 
 
+
+## Samples
+
+- [`samples/bespoke.js/slides.html`](http://slidekit.github.io/s6/samples/bespoke.js/slides.html)  - DIY Presentations with Bespoke.js
+
+
+
 ## License
 
 ![](https://publicdomainworks.github.io/buttons/zero88x31.png)
 
-The slide show (S6) scripts and templates are dedicated
+The slideshow (S6) scripts and templates are dedicated
 to the public domain. Use it as you please with no restrictions whatsoever.
 
 ## Questions? Comments?

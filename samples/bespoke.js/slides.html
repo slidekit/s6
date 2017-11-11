@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>DIY Presentations with Bespoke.js</title>
+  <link rel='stylesheet' href='css/style.css'>
+  <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic'>
+</head>
+<body>
+
+
+  <article class='reveal'>
+
+   <section data-bespoke-state='reveal'>
+      <h3>DIY Presentations With</h3>
+      <h1>Bespoke.js</h1>
+   </section>
+
+   <section data-bespoke-state='reveal'>
+      <h2>DIY Presentation
+          <br>
+          Micro-Framework</h2>
+   </section>
+
+   <section data-bespoke-state='reveal'>
+      <h2> &lt;1KB, no dependencies</h2>
+   </section>
+
+
+  <section data-bespoke-state='reveal'>
+        <h2 data-bespoke-bullet>Lightweight but powerful</h2>
+        <ul>
+          <li data-bespoke-bullet>Harnesses CSS transitions</li>
+          <li data-bespoke-bullet>Control API</li>
+          <li data-bespoke-bullet>Events</li>
+        </ul>
+  </section>
+
+  <section data-bespoke-state='reveal'>
+        <h1>Plugins!</h1>
+  </section>
+
+  <section data-bespoke-state='reveal'>
+        <ul>
+          <li data-bespoke-bullet>bespoke-vcr</li>
+          <li data-bespoke-bullet>bespoke-hash</li>
+          <li data-bespoke-bullet>bespoke-bullets</li>
+          <li data-bespoke-bullet>bespoke-loop</li>
+          <li data-bespoke-bullet>bespoke-spotlight<br>(by @mobz)</li>
+   </section>
+
+   <section class='reveal' data-bespoke-state='reveal'>
+        <h2>...déjà vu?</h2>
+   </section>
+
+
+  <section data-bespoke-state='pre-progress clean'>
+  </section>
+
+  <section data-bespoke-state='pre-progress clean'>
+      <h2>Let's start from scratch.</h2>
+  </section>
+
+
+  <section class='font no-color' data-bespoke-state='pre-progress clean'>
+        <h2 data-bespoke-bullet>Let's pick a font...</h2>
+        <pre class='font' data-bespoke-bullet><code data-language='css'>
+body {
+   font-family: helvetica;
+}
+</code></pre>
+  </section>
+
+
+  <section class='font' data-bespoke-state='pre-progress clean color'>
+        <h2 data-bespoke-bullet>Let's add some style...</h2>
+        <pre class='font' data-bespoke-bullet><code data-language='css'>
+.bespoke-parent {
+    background: #ccc;
+    color: #06f;
+}
+</code></pre>
+        <pre class='font' data-bespoke-bullet><code data-language='css'>
+.bespoke-slide {
+    background: white;
+}
+</code></pre>
+  </section>
+
+
+  <section class='font' data-bespoke-state='pre-progress clean color'>
+        <h2 class='threedee'>Let's make it 3D!</h2>
+  </section>
+
+
+  <section class='font classes' data-bespoke-state='pre-progress clean color'>
+        <h2 data-bespoke-bullet>Bespoke.js Classes</h2>
+        <ul>
+          <li data-bespoke-bullet>bespoke-active</li>
+          <li data-bespoke-bullet>bespoke-inactive</li>
+          <li data-bespoke-bullet>bespoke-before</li>
+          <li data-bespoke-bullet>bespoke-before-n</li>
+          <li data-bespoke-bullet>bespoke-after</li>
+          <li data-bespoke-bullet>bespoke-after-n</li>
+        </ul>
+  </section>
+
+<!--
+      section.font(data-bespoke-state='pre-progress clean color')
+        pre(data-bespoke-bullet)
+          code(data-language='css')
+            | .bespoke-slide {
+            |     transition: all .8s ease;
+            |     transform-origin: 50% 50% -400px;
+            | }
+        pre(data-bespoke-bullet)
+          code(data-language='css')
+            | .bespoke-inactive {
+            |     opacity: 0;
+            | }
+        pre(data-bespoke-bullet)
+          code(data-language='css')
+            | .bespoke-before {
+            |     transform: rotateY(-90deg);
+            | }
+        pre(data-bespoke-bullet)
+          code(data-language='css')
+            | .bespoke-after {
+            |     transform: rotateY(90deg);
+            | }
+
+      section.font(data-bespoke-state='pre-progress clean color simple')
+        h2 1.
+
+      section.font(data-bespoke-state='pre-progress clean color simple')
+        h2 2.
+
+      section.font(data-bespoke-state='pre-progress clean color simple')
+        h2 3.
+
+      section.font(data-bespoke-state='pre-progress clean color simple')
+        h2 Simple.
+
+      section.font(data-bespoke-state='pre-progress clean color simple')
+        h2 More?
+
+      section.font(data-bespoke-state='pre-progress clean color cards')
+        h2 How about...
+
+      section.font(data-bespoke-state='pre-progress clean color cards')
+        h2 Cards?
+
+      section.font(data-bespoke-state='pre-progress clean color cards')
+        h2 Or...
+
+      section.font(data-bespoke-state='pre-progress clean color concave')
+        h2 How about...
+
+      section.font(data-bespoke-state='pre-progress clean color concave')
+        h2 Concave?
+
+      section.font(data-bespoke-state='pre-progress clean color concave')
+        h2 Or...
+
+      section.font(data-bespoke-state='pre-progress clean color coverflow')
+        h2 How about...
+
+      section.font(data-bespoke-state='pre-progress clean color coverflow')
+        h2 Coverflow?
+
+      section.font(data-bespoke-state='pre-progress clean color coverflow')
+        h2 Simple.
+
+      section.font(data-bespoke-state='pre-progress clean color simple')
+        h2 Let's make a progress bar...
+
+      section.font(data-bespoke-state='pre-progress clean color simple')
+        pre
+          code(data-language='javascript')
+            | bespoke.plugins.progress = function(deck) {
+            |
+            |   var progress = document.querySelector('#progress');
+            |
+            |   deck.on('activate', function(event) {
+            |     progress.style.width = (
+            |         (event.index * 100) /
+            |         (deck.slides.length - 1)
+            |       ) + '%';
+            |   });
+            |
+            | };
+
+      section.font(data-bespoke-state='clean color simple progress')
+        h2 Whoosh.
+
+      section.font(data-bespoke-state='clean color simple progress')
+        h2(data-bespoke-bullet) Bespoke.js Events
+        ul
+          li(data-bespoke-bullet) activate
+          li(data-bespoke-bullet) deactivate
+          li(data-bespoke-bullet) next
+          li(data-bespoke-bullet) prev
+          li(data-bespoke-bullet) slide
+
+      section.font(data-bespoke-state='clean color simple progress')
+        h2(data-bespoke-bullet) Robust Plugin System
+        ul
+          li(data-bespoke-bullet) Return false to cancel events
+          li(data-bespoke-bullet) Write intercepting plugins
+
+      section.font(data-bespoke-state='clean color simple progress')
+        h2 Lessons
+
+      section.font(data-bespoke-state='clean color simple progress')
+        h2(data-bespoke-bullet) Writing a library?
+        ul
+          li(data-bespoke-bullet) Tiny, extendable core
+          li(data-bespoke-bullet) Plugins, even for common functionality
+          li(data-bespoke-bullet) Modern browser features + polyfills
+
+      section.font(data-bespoke-state='clean color simple progress')
+        h2(data-bespoke-bullet) Making a presentation?
+        h3(data-bespoke-bullet) Do it yourself.
+
+      section.font(data-bespoke-state='clean color simple progress')
+        img(src='img/profile.jpg')
+        h2 @markdalgleish
+        h3 bit.ly/diyslides
+-->
+
+  </article>
+
+
+<!--
+    script(src='js/bespoke.js')
+    script(src='js/bespoke-plugins.js')
+    script(src='js/prefixfree.min.js')
+    script(src='js/rainbow.min.js')
+    script(src='js/js.js')
+-->
+
+
+  <script src='../../js/slides.keys.js'></script>
+  <script src='../../js/slides.progress.js'></script>
+  <script src='../../js/slides.classes.js'></script>
+  <script src='../../js/slides.state.js'></script>
+  <script src='../../js/slides.engine.js'></script>
+
+  <script src='js/bespoke.controls.js'></script>
+  <script src='js/bespoke.center.js'></script>
+
+  <script>
+     const {Deck, classes, keys, progress, state} = S6;
+     const deck = Deck.from( '.reveal', [classes(), keys(), progress(), center(), state(), controls()] );
+     // deck.step( 1 );
+  </script>
+</body>
+</html>
