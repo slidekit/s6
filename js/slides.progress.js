@@ -18,3 +18,12 @@ class DeckProgressPlugin {
     );
   }
 } // class DeckProgressPlugin
+
+
+
+//////////////////////////////
+// add global S6 "export"
+//   e.g. lets you call progress( options ) for plugins array config
+
+var S6 = S6 || {};
+S6.progress = options => deck => new DeckProgressPlugin( deck, options );

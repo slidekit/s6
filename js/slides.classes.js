@@ -47,3 +47,11 @@ class DeckClassesPlugin {
       ['inactive', offsetClass, `${offsetClass}-${Math.abs(offset)}`].forEach( cls => this.addClass( el, cls ) );
   }
 } // class DeckClassesPlugin
+
+
+//////////////////////////////
+// add global S6 "export"
+//   e.g. lets you call classes( options ) for plugins array config
+
+var S6 = S6 || {};
+S6.classes = options => deck => new DeckClassesPlugin( deck, options );

@@ -121,19 +121,15 @@ class DeckEngine {
     this.fire( offset > 0 ? 'next' : 'prev', this.createEventData(this.activeSlide, customData)) && this.activate(slideIndex, customData);
   }
 
-  next() { this.step( 1 ) }
-  prev() { this.step( -1 ) }
+  next() { this.step( 1 ); }
+  prev() { this.step( -1 ); }
 } // class DeckEngine
 
 
 
 
-var S6 = {
-  Deck    : DeckEngine,                   // e.g. use like S6.Deck or S6.Classes
-  // Classes  : DeckClassesPlugin,
-  // Keys     : DeckKeysPlugin,
-  // Progress : DeckProgressPlugin,
-  classes  : options => deck => new DeckClassesPlugin( deck, options ),
-  keys     : options => deck => new DeckKeysPlugin( deck, options ),
-  progress : options => deck => new DeckProgressPlugin( deck, options ),
-}
+//////////////////////////////
+// add global S6 "export"
+
+var S6 = S6 || {};
+S6.Deck = DeckEngine;
