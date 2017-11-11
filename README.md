@@ -1,7 +1,9 @@
 # S6 Blank Template / Boilerplate
 
-Slideshow Templates Using HTML 5, CSS 3 'n' JavaScript 2017+.
+Slideshow templates using HTML 5, CSS 3 'n' JavaScript 2017+
+w/ Bespoke.js-compatible "microkernel".
 Find more info 'n' docu @ [S6 Project Site »](http://slidekit.github.io)
+
 
 
 ## Templates
