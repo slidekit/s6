@@ -155,45 +155,9 @@
 			}
 		}
 
-		&.simple {
-			section {
-				&.bespoke-slide {
-					transform-origin: 50% 50% -400px;
-				}
 
-				&.bespoke-inactive {
-					opacity: 0;
-				}
+    @import 'transition_simple';
 
-				&.bespoke-before {
-					transform: rotateY(-90deg);
-				}
+    @import 'transition_cards';
 
-				&.bespoke-after {
-					transform: rotateY(90deg);
-				}
-			}
-		}
-
-		&.cards {
-			section {
-				&.bespoke-slide {
-					transform-origin: 0 100% 0;
-				}
-
-				&.bespoke-inactive {
-					opacity: 0;
-				}
-
-				&.bespoke-before {
-					transform: translateZ(40px) rotateY(-60deg) translateX(-400px) rotateZ(120deg);
-				}
-
-				&.bespoke-after {
-					transform: translate3d(50px, 0, -100px);
-				}
-			}
-		}
-
-
-	}
+	}  // .clean

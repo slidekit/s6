@@ -1,0 +1,19 @@
+&.simple {
+  section {
+    &.bespoke-slide {
+      transform-origin: 50% 50% -400px;
+    }
+
+    &.bespoke-inactive {
+      opacity: 0;
+    }
+
+    &.bespoke-before {
+      transform: rotateY(-90deg);
+    }
+
+    &.bespoke-after {
+      transform: rotateY(90deg);
+    }
+  }
+}

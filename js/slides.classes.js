@@ -18,12 +18,12 @@ class S6_Plugin_Classes {
 
 
   addClass( el, cls ) {
-    console.log( "[S6.Plugin.Classes] addClass >" + cls + "<" )
+    console.log( "[S6.Plugin.Classes] addClass >" + cls + "<" );
     el.classList.add( 'bespoke-' + cls );
   }
 
   removeClass( el, cls ) {
-    console.log( "[S6.Plugin.Classes] removeClass >" + cls + "<" )
+    console.log( "[S6.Plugin.Classes] removeClass >" + cls + "<" );
     el.className = el.className
           .replace( new RegExp('bespoke-' + cls +'(\\s|$)', 'g'), ' ' )
           .trim();
@@ -34,7 +34,7 @@ class S6_Plugin_Classes {
           offset      = index - this.deck.slideIndex,
           offsetClass = offset > 0 ? 'after' : 'before';
 
-    console.log( "[S6.Plugin.Classes] deactivate index=" + index + ",offset=" + offset )
+    console.log( "[S6.Plugin.Classes] deactivate index=" + index + ",offset=" + offset );
     console.log( el );
 
     ['before(-\\d+)?',
