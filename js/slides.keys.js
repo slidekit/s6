@@ -3,7 +3,7 @@
 //   S6.Plugins.Keys  or S6.DeckKeysPlugin for now ???
 
 
-class DeckKeysPlugin {
+class S6_Plugin_Keys {
 
    constructor( deck, options ) {
 
@@ -21,7 +21,7 @@ class DeckKeysPlugin {
          ) deck.prev();
     });
   }
-} // class DeckKeysPlugin
+} // class S6_Plugin_Keys
 
 
 
@@ -30,4 +30,4 @@ class DeckKeysPlugin {
 //   e.g. lets you call keys( options ) for plugins array config
 
 var S6 = S6 || {};
-S6.keys = options => deck => new DeckKeysPlugin( deck, options );
+S6.keys = options => deck => new S6_Plugin_Keys( deck, options );

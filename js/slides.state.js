@@ -1,13 +1,13 @@
 
 
-class DeckStatePlugin {
+class S6_Plugin_State {
 
   constructor( deck, options ) {
 
-    console.log( "[DeckProgressPlugin] ctor");
+    console.log( "[S6.Plugin.State] ctor");
 
     const updateState = (method, ev) => {
-      console.log( "[DeckProgressPlugin] updateState method="+method );
+      console.log( "[S6.Plugin.State] updateState method="+method );
 
       const attr = ev.slide.getAttribute( 'data-bespoke-state' );
 
@@ -18,7 +18,7 @@ class DeckStatePlugin {
     deck.on( 'activate',   ev => updateState( 'add',    ev ));
     deck.on( 'deactivate', ev => updateState( 'remove', ev ));
   }
-}  // class DeckStatePlugin
+}  // class S6_Plugin_State
 
 
 
@@ -27,4 +27,4 @@ class DeckStatePlugin {
 //   e.g. lets you call state( options ) for plugins array config
 
 var S6 = S6 || {};
-S6.state = options => deck => new DeckStatePlugin( deck, options );
+S6.state = options => deck => new S6_Plugin_State( deck, options );

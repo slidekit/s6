@@ -1,5 +1,6 @@
 # Todos and Ideas
 
+
 ## Theming
 
 * add some themes;  
@@ -12,10 +13,14 @@
 
 ## JavaScript cleanup
 
+- []  use class expression e.g. S6.Kernel = class {} - why? why not?
+
+
+
 * use prototype for functions
 * use _ (underscore) for properties e.g. this.smax becomes this._smax
-* add a Slide class ?? 
-* add a slide.js script that includes everything (including css) for easy use 
+* add a Slide class ??
+* add a slide.js script that includes everything (including css) for easy use
 
 ## More
 

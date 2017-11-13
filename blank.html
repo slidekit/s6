@@ -37,10 +37,11 @@
   <script src="js/slides.keys.js"></script>
   <script src="js/slides.progress.js"></script>
   <script src="js/slides.classes.js"></script>
-  <script src="js/slides.engine.js"></script>
+  <script src="js/slides.kernel.js"></script>
   <script>
      const {Deck, classes, keys, progress} = S6;
-     const deck = Deck.from( "#presentation", [classes(), keys(), progress()] );
+     const deck = new Deck( { parent: "#presentation",
+                              plugins: [classes(), keys(), progress()] });
      deck.next();
      deck.prev();
      deck.next();

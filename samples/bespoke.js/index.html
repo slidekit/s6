@@ -244,14 +244,15 @@ body {
   <script src='../../js/slides.progress.js'></script>
   <script src='../../js/slides.classes.js'></script>
   <script src='../../js/slides.state.js'></script>
-  <script src='../../js/slides.engine.js'></script>
+  <script src='../../js/slides.kernel.js'></script>
 
   <script src='js/bespoke.controls.js'></script>
   <script src='js/bespoke.center.js'></script>
 
   <script>
      const {Deck, classes, keys, progress, state} = S6;
-     const deck = Deck.from( '.reveal', [classes(), keys(), progress(), center(), state(), controls()] );
+     const deck = new Deck( {parent:  'article',
+                             plugins: [classes(), keys(), progress(), center(), state(), controls()] });
      // deck.step( 1 );
   </script>
 </body>
