@@ -168,92 +168,101 @@ body {
 </section>
 
 
-<!--
-      section.font(data-bespoke-state='pre-progress clean color concave')
-        h2 How about...
+<section class='font' data-bespoke-state='pre-progress clean color concave'>
+    <h2>How about...</h2>
+</section>
 
-      section.font(data-bespoke-state='pre-progress clean color concave')
-        h2 Concave?
+<section class='font' data-bespoke-state='pre-progress clean color concave'>
+    <h2>Concave?</h2>
+</section>
 
-      section.font(data-bespoke-state='pre-progress clean color concave')
-        h2 Or...
+<section class='font' data-bespoke-state='pre-progress clean color concave'>
+    <h2>Or...</h2>
+</section>
 
-      section.font(data-bespoke-state='pre-progress clean color coverflow')
-        h2 How about...
+<section class='font' data-bespoke-state='pre-progress clean color coverflow'>
+    <h2>How about...</h2>
+</section>
 
-      section.font(data-bespoke-state='pre-progress clean color coverflow')
-        h2 Coverflow?
+<section class='font' data-bespoke-state='pre-progress clean color coverflow'>
+    <h2>Coverflow?</h2>
+</section>
 
-      section.font(data-bespoke-state='pre-progress clean color coverflow')
-        h2 Simple.
+<section class='font' data-bespoke-state='pre-progress clean color coverflow'>
+    <h2>Simple.</h2>
+</section>
 
-      section.font(data-bespoke-state='pre-progress clean color simple')
-        h2 Let's make a progress bar...
+<section class='font' data-bespoke-state='pre-progress clean color simple'>
+    <h2>Let's make a progress bar...</h2>
+</section>
 
-      section.font(data-bespoke-state='pre-progress clean color simple')
-        pre
-          code(data-language='javascript')
-            | bespoke.plugins.progress = function(deck) {
-            |
-            |   var progress = document.querySelector('#progress');
-            |
-            |   deck.on('activate', function(event) {
-            |     progress.style.width = (
-            |         (event.index * 100) /
-            |         (deck.slides.length - 1)
-            |       ) + '%';
-            |   });
-            |
-            | };
+<section class='font' data-bespoke-state='pre-progress clean color simple'>
+   <pre><code data-language='javascript'>
+bespoke.plugins.progress = function(deck) {
 
-      section.font(data-bespoke-state='clean color simple progress')
-        h2 Whoosh.
+ var progress = document.querySelector('#progress');
 
-      section.font(data-bespoke-state='clean color simple progress')
-        h2(data-bespoke-bullet) Bespoke.js Events
-        ul
-          li(data-bespoke-bullet) activate
-          li(data-bespoke-bullet) deactivate
-          li(data-bespoke-bullet) next
-          li(data-bespoke-bullet) prev
-          li(data-bespoke-bullet) slide
+  deck.on('activate', function(event) {
+    progress.style.width = (
+        (event.index * 100) /
+        (deck.slides.length - 1)
+      ) + '%';
+  });
 
-      section.font(data-bespoke-state='clean color simple progress')
-        h2(data-bespoke-bullet) Robust Plugin System
-        ul
-          li(data-bespoke-bullet) Return false to cancel events
-          li(data-bespoke-bullet) Write intercepting plugins
+};
+</code></pre>
+</section>
 
-      section.font(data-bespoke-state='clean color simple progress')
-        h2 Lessons
+<section class='font' data-bespoke-state='clean color simple progress'>
+  <h2>Whoosh.</h2>
+</section>
 
-      section.font(data-bespoke-state='clean color simple progress')
-        h2(data-bespoke-bullet) Writing a library?
-        ul
-          li(data-bespoke-bullet) Tiny, extendable core
-          li(data-bespoke-bullet) Plugins, even for common functionality
-          li(data-bespoke-bullet) Modern browser features + polyfills
+<section class='font' data-bespoke-state='clean color simple progress'>
+  <h2 data-bespoke-bullet>Bespoke.js Events</h2>
+  <ul>
+    <li data-bespoke-bullet>activate</li>
+    <li data-bespoke-bullet>deactivate</li>
+    <li data-bespoke-bullet>next</li>
+    <li data-bespoke-bullet>prev</li>
+    <li data-bespoke-bullet>slide</li>
+  </ul>
+</section>
 
-      section.font(data-bespoke-state='clean color simple progress')
-        h2(data-bespoke-bullet) Making a presentation?
-        h3(data-bespoke-bullet) Do it yourself.
+<section class='font' data-bespoke-state='clean color simple progress'>
+    <h2 data-bespoke-bullet>Robust Plugin System</h2>
+    <ul>
+      <li data-bespoke-bullet>Return false to cancel events</li>
+      <li data-bespoke-bullet>Write intercepting plugins</li>
+    </ul>
+</section>
 
-      section.font(data-bespoke-state='clean color simple progress')
-        img(src='img/profile.jpg')
-        h2 @markdalgleish
-        h3 bit.ly/diyslides
--->
+<section class='font' data-bespoke-state='clean color simple progress'>
+    <h2>Lessons</h2>
+</section>
+
+<section class='font' data-bespoke-state='clean color simple progress'>
+    <h2 data-bespoke-bullet>Writing a library?</h2>
+    <ul>
+      <li data-bespoke-bullet>Tiny, extendable core</li>
+      <li data-bespoke-bullet>Plugins, even for common functionality</li>
+      <li data-bespoke-bullet>Modern browser features + polyfills</li>
+    </ul>
+</section>
+
+<section class='font' data-bespoke-state='clean color simple progress'>
+  <h2 data-bespoke-bullet>Making a presentation?</h2>
+  <h3 data-bespoke-bullet>Do it yourself.</h3>
+</section>
+
+<section class='font' data-bespoke-state='clean color simple progress'>
+   <img src='img/profile.jpg'>
+   <h2>@markdalgleish</h2>
+   <h3>bit.ly/diyslides</h3>
+</section>
 
   </article>
 
 
-<!--
-    script(src='js/bespoke.js')
-    script(src='js/bespoke-plugins.js')
-    script(src='js/prefixfree.min.js')
-    script(src='js/rainbow.min.js')
-    script(src='js/js.js')
--->
 
 
   <script src='../../js/slides.keys.js'></script>
@@ -262,6 +271,11 @@ body {
   <script src='../../js/slides.state.js'></script>
   <script src='../../js/slides.kernel.js'></script>
 
+<!--
+   todo/fix: add missing syntax highlighter rainbow.js - why? why not?
+    script(src='js/rainbow.min.js')
+-->
+
   <script src='js/bespoke.controls.js'></script>
   <script src='js/bespoke.center.js'></script>
 
@@ -269,7 +283,6 @@ body {
      const {Deck, classes, keys, progress, state} = S6;
      const deck = new Deck( {parent:  'article',
                              plugins: [classes(), keys(), progress(), center(), state(), controls()] });
-     // deck.step( 1 );
   </script>
 </body>
 </html>
