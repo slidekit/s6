@@ -2,38 +2,38 @@
 
 		&.coverflow {
 			section {
-				offset = 240px;
-				gap = 20px;
-				scale = 0.4;
+				$offset: 240px;
+				$gap:    20px;
+				$scale:  0.4;
 
 				&.bespoke-before {
-					transform: translateX(((offset * -1) + (gap * -3))) rotateY(45deg) scale(scale);
+					transform: translateX((($offset * -1) + ($gap * -3))) rotateY(45deg) scale($scale);
 				}
 				&.bespoke-before-3 {
-					transform: translateX(((offset * -1) + (gap * -2))) rotateY(45deg) scale(scale);
+					transform: translateX((($offset * -1) + ($gap * -2))) rotateY(45deg) scale($scale);
 					opacity: 0.1;
 				}
 				&.bespoke-before-2 {
-					transform: translateX(((offset * -1) + (gap * -1))) rotateY(45deg) scale(scale);
+					transform: translateX((($offset * -1) + ($gap * -1))) rotateY(45deg) scale($scale);
 					opacity: 0.25;
 				}
 				&.bespoke-before-1 {
-					transform: translateX((offset * -1)) rotateY(45deg) scale(scale);
+					transform: translateX(($offset * -1)) rotateY(45deg) scale($scale);
 					opacity: 0.4;
 				}
 				&.bespoke-after {
-					transform: translateX(((offset * 1) + (gap * 3))) rotateY(-45deg) scale(scale);
+					transform: translateX((($offset * 1) + ($gap * 3))) rotateY(-45deg) scale($scale);
 				}
 				&.bespoke-after-1 {
-					transform: translateX((offset * 1)) rotateY(-45deg) scale(scale);
+					transform: translateX(($offset * 1)) rotateY(-45deg) scale($scale);
 					opacity: 0.4;
 				}
 				&.bespoke-after-2 {
-					transform: translateX(((offset * 1) + (gap * 1))) rotateY(-45deg) scale(scale);
+					transform: translateX((($offset * 1) + ($gap * 1))) rotateY(-45deg) scale($scale);
 					opacity: 0.25;
 				}
 				&.bespoke-after-3 {
-					transform: translateX(((offset * 1) + (gap * 2))) rotateY(-45deg) scale(scale);
+					transform: translateX((($offset * 1) + ($gap * 2))) rotateY(-45deg) scale($scale);
 					opacity: 0.1;
 				}
 			}

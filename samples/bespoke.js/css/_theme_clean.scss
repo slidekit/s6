@@ -137,6 +137,10 @@
 			background-color: #d0d0d0;
 			transition: all .8s cubic-bezier(0.260, 0.860, 0.440, 0.985);
 
+
+      // note: new progress plugin uses
+			//   .bespoke-progress-parent and .bespoke-progress-bar classes
+
 			.bespoke-progress {
 				display: block;
 			}
@@ -159,5 +163,9 @@
     @import 'transition_simple';
 
     @import 'transition_cards';
+
+    @import 'transition_concave';
+
+    @import 'transition_coverflow';
 
 	}  // .clean
